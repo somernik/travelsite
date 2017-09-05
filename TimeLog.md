@@ -1,5 +1,5 @@
 # Time Log
-| Date      | Hours | Task  | Task  | Description  |
+| Date      | Hours | Task  | Week  | Description  |
 | ------    |:-----:| -----:| ----: | ------------:|
 | 8/29/2017 | 2     | Setup | Week 0 | Setting Windows environment with Intellij, MySQL Server, Apache Tomee |
 | 9/4/2017  | 2     | Videos | Week 1 |  |
