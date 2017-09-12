@@ -10,4 +10,6 @@
 | 9/7/2017  | 0.75     | Planning | Week 2 | Create project plan |
 | 9/7/2017  | 0.5     | Research | Week 2 | Initial Machine Learning research |
 | 9/9/2017  | 0.25     | Exercise | Week 2 | Finishing touches |
-| 9/9/2017  | 0.5     | Videos | Week 3 |  |
+| 9/9/2017  | 0.5     | Videos | Week 2 |  |
+| 9/10/2017  | 2     | Screen Designs | Week 2 |  |
+| 9/12/2017  | 1     | Activities | Week 3 | Week 3 Activity 1 |
