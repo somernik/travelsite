@@ -12,5 +12,5 @@ Sometimes you just dont know what activities to plan for a given location and ti
 * AWS
 * JUnit
 
-[Time Log](/TimeLog.md)
-[Weekly Plan](/weeklyPlan.md)
+### [Time Log](/TimeLog.md)
+### [Weekly Plan](/weeklyPlan.md)
