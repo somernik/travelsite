@@ -112,7 +112,7 @@ Recurring Items:
     Add logs
     Add testing
 
-##Week 10
+## Week 10
     Implement multithreading
 
     Recurring Items:
@@ -130,7 +130,7 @@ Recurring Items:
     Add logs
     Add testing
 
-##Week 12
+## Week 12
     Implement independant research functionality (Jenkins?)
 
     Recurring Items:
