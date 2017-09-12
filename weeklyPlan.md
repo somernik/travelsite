@@ -1,43 +1,43 @@
-###Project Plan
+### Project Plan
 
-##Week 1
-    Create project repository on GitHub
-    Complete Problem Statement
+## Week 1
+* Create project repository on GitHub
+* Complete Problem Statement
 
-    Recurring Items:
-    Start Time log entries
+Recurring Items:
+* Start Time log entries
    
-##Week 2
-    Begin project plan
-    Determine possible Web Services or APIs to use
-    List technologies and how they will be used
-    Document application flow
-    Complete screen design (on paper)
-    Create project structure in IntelliJ
-    Add Maven
-    Add project to repository
-    Machine Learning Initial research & tutorials
-    Create class diagram
+## Week 2
+* Begin project plan
+* Determine possible Web Services or APIs to use
+* List technologies and how they will be used
+* Document application flow
+* Complete screen design (on paper)
+* Create project structure in IntelliJ
+* Add Maven
+* Add project to repository
+* Machine Learning Initial research & tutorials
+* Create class diagram
 
-    Recurring Items:
-    Time Log entries
+Recurring Items:
+* Time Log entries
 
-##Week 3
-    Finalize project plan
-    Define ML problem
-    Complete database design
-    Create database structure
-    Begin JSP templates
-    Create entities for user & other DB objects
-    Implement logging
-    Implement initial unit testing
-    Determine independant research topic**
+## Week 3
+* Finalize project plan
+* Define ML problem
+* Complete database design
+* Create database structure
+* Begin JSP templates
+* Create entities for user & other DB objects
+* Implement logging
+* Implement initial unit testing
+* Determine independant research topic**
 
-    Recurring Items:
-    Time Log entries
-    ML research
+Recurring Items:
+* Time Log entries
+* ML research
 
-##Week 4
+## Week 4
     Define required fields for ML data & collect it
     Complete JSPs
     Add bootstrap (or another CSS framework)
@@ -53,7 +53,7 @@
     Add logs
     Add testing
 
-##Week 5
+## Week 5
     Deploy to AWS
     Analyze ML data to ensure it is good
     Feature processing ML data as necessary
@@ -68,7 +68,7 @@
     Add logs
     Add testing
 
-##Week 6
+## Week 6
     Add security authentication - is this just login/sign up?
     Start training ML model
     Refine design based on Design Review
@@ -79,7 +79,7 @@
     Add logs
     Add testing
 
-##Week 7
+## Week 7
     Integrate Google maps API
     Create location search functionality
     Create activity search functionality
@@ -92,7 +92,7 @@
     Add logs
     Add testing
 
-##Week 8
+## Week 8
     Finish Google maps implementation
     Finish search functionality
 
@@ -102,7 +102,7 @@
     Add logs
     Add testing
 
-##Week 9
+## Week 9
     Implement paging of search results
     Create admin crud functionality
 
@@ -121,7 +121,7 @@
     Add logs
     Add testing
 
-##Week 11
+## Week 11
     Finish multithreading
 
     Recurring Items:
@@ -139,7 +139,7 @@
     Add logs
     Add testing
 
-##Week 13
+## Week 13
     Implement Asynchronous Messaging
     Continue ML model & predictions
 
@@ -149,7 +149,7 @@
     Add logs
     Add testing
 
-##Week 14
+## Week 14
     Start presentation
     Work on bugs
     Refine desgin
@@ -160,7 +160,7 @@
     Add logs
     Add testing
 
-##Week 15
+## Week 15
     Finish presentation
     Work on bugs
     Finish ML
@@ -170,7 +170,7 @@
     Add logs
     Add testing
 
-##Week 16
+## Week 16
     Ensure JavaDoc is complete
 
     Recurring Items:
