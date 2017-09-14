@@ -73,7 +73,7 @@ Recurring Items:
 - [ ] Start training ML model
 - [ ] Refine design based on Design Review
 
-- [ ] Recurring Items:
+Recurring Items:
 - [ ] Time Log entries
 - [ ] ML research
 - [ ] Add logs
