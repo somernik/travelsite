@@ -3,30 +3,43 @@
 <html>
 <%@include file="templates/head.jsp" %>
 <body>
-<nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">WWW Travel</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
-
-        <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-</nav>
+<%@include file="templates/nav.jsp" %>
 
 <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
+
+            <div id="login" class="modal">
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+
+                </div>
+                <div class="modal-content"><%@include file="login.jsp" %></div>
+
+            </div>
+
+            <div id="signup" class="modal">
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+                <div class="modal-content"><%@include file="signup.jsp" %></div>
+
+            </div>
+
             <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
             <div class="row center">
                 <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
             </div>
             <div class="row center">
-                <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                    <a href="#" class="btn-large waves-effect waves-light teal lighten-1">Search</a>
+                </form>
             </div>
             <br><br>
 
@@ -36,112 +49,7 @@
 </div>
 
 
-<div class="container">
-    <div class="section">
-
-        <!--   Icon Section   -->
-        <!--
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
-                    <h5 class="center">Speeds up development</h5>
-
-                    <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">group</i></h2>
-                    <h5 class="center">User Experience Focused</h5>
-
-                    <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-                    <h5 class="center">Easy to work with</h5>
-
-                    <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-                </div>
-            </div>
-        </div>-->
-
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="card sticky-action">
-                    <div class="card-image">
-                        <img src="images/background1.jpg">
-                        <span class="card-title">Card Title</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                    </div>
-                    <div class="card-content">
-                        <span class="activator grey-text text-darken-4"><i class="material-icons right">more_vert</i>
-                        I am a very simple card.</span>
-                    </div>
-
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card sticky-action">
-                    <div class="card-image">
-                        <img src="images/background1.jpg">
-                        <span class="card-title">Card Title</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                    </div>
-                    <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
-
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card sticky-action">
-                    <div class="card-image">
-                        <img src="images/background1.jpg">
-                        <span class="card-title">Card Title</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                    </div>
-                    <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
-
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
+<%@include file="cards_code.jsp" %>
 
 <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
@@ -152,6 +60,19 @@
         </div>
     </div>
     <div class="parallax"><img src="images/background2.jpg" alt="Unsplashed background img 2"></div>
+</div>
+
+<%@include file="cards_code.jsp" %>
+
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="row center">
+                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"><img src="images/background3.jpg" alt="Unsplashed background img 3"></div>
 </div>
 
 <div class="container">
@@ -168,17 +89,6 @@
     </div>
 </div>
 
-
-<div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <div class="row center">
-                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-            </div>
-        </div>
-    </div>
-    <div class="parallax"><img src="images/background3.jpg" alt="Unsplashed background img 3"></div>
-</div>
 
 <footer class="page-footer teal">
     <div class="container">
