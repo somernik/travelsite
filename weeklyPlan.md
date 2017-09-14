@@ -54,126 +54,126 @@ Recurring Items:
 - [ ] Add testing
 
 ## Week 5
-- [ ] eploy to AWS
-- [ ] nalyze ML data to ensure it is good
-- [ ] eature processing ML data as necessary
-- [ ] tart creating ML model?
-- [ ] reate other crud DAOs (based on entities determined in class diagram)
-- [ ] reate activity tag ranking functionality
-- [ ] reate user comments functionality
+- [ ] Deploy to AWS
+- [ ] Analyze ML data to ensure it is good
+- [ ] Feature processing ML data as necessary
+- [ ] Start creating ML model?
+- [ ] Create other crud DAOs (based on entities determined in class diagram)
+- [ ] Create activity tag ranking functionality
+- [ ] Create user comments functionality
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 6
-- [ ] dd security authentication - is this just login/sign up?
-- [ ] tart training ML model
-- [ ] efine design based on Design Review
+- [ ] Add security authentication - is this just login/sign up?
+- [ ] Start training ML model
+- [ ] Refine design based on Design Review
 
-- [ ] ecurring Items:
-- [ ] ime Log entries
-- [ ] L research
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Recurring Items:
+- [ ] Time Log entries
+- [ ] ML research
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 7
-- [ ] ntegrate Google maps API
-- [ ] reate location search functionality
-- [ ] reate activity search functionality
-- [ ] reate time search functionality
-- [ ] reate save location functionality
+- [ ] Integrate Google maps API
+- [ ] Create location search functionality
+- [ ] Create activity search functionality
+- [ ] Create time search functionality
+- [ ] Create save location functionality
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research, model & predictions
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research, model & predictions
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 8
-- [ ] inish Google maps implementation
-- [ ] inish search functionality
+- [ ] Finish Google maps implementation
+- [ ] Finish search functionality
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research, model & predictions
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research, model & predictions
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 9
-- [ ] mplement paging of search results
-- [ ] reate admin crud functionality
+- [ ] Implement paging of search results
+- [ ] Create admin crud functionality
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research, model & predictions
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research, model & predictions
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 10
-- [ ] mplement multithreading
+- [ ] Continue add jsp functionality
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research, model & predictions
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research, model & predictions
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 11
-- [ ] inish multithreading
+- [ ] Start implementing independent research functionality (Jenkins?)
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research, model & predictions
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research, model & predictions
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 12
-- [ ] mplement independent research functionality (Jenkins?)
+- [ ] Implement independent research functionality (Jenkins?)
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 13
-- [ ] mplement Asynchronous Messaging
-- [ ] ontinue ML model & predictions
+- [ ] Implement Asynchronous Messaging
+- [ ] Continue ML model & predictions
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research
-- [ ] dd logs
-- [ ] dd testing
+- [ ] Time Log entries
+- [ ] ML research
+- [ ] Add logs
+- [ ] Add testing
 
 ## Week 14
-- [ ] tart presentation
-- [ ] ork on bugs
-- [ ] efine design
+- [ ]Start presentation
+- [ ]Work on bugs
+- [ ]Refine design
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] L research, model & predictions
-- [ ] dd logs
-- [ ] dd testing
+- [ ]Time Log entries
+- [ ]ML research, model & predictions
+- [ ]Add logs
+- [ ]Add testing
 
 ## Week 15
-- [ ] inish presentation
-- [ ] ork on bugs
-- [ ] inish ML
+- [ ]Finish presentation
+- [ ]Work on bugs
+- [ ]Finish ML
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] dd logs
-- [ ] dd testing
+- [ ]Time Log entries
+- [ ]Add logs
+- [ ]Add testing
 
 ## Week 16
-- [ ] nsure JavaDoc is complete
+- [ ]Ensure JavaDoc is complete
 
 Recurring Items:
-- [ ] ime Log entries
-- [ ] dd logs
-- [ ] dd testing
+- [ ]Time Log entries
+- [ ]Add logs
+- [ ]Add testing
