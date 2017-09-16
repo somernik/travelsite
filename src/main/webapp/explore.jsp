@@ -10,16 +10,44 @@
         <div class="container">
             <br><br>
             <a class="waves-effect waves-light btn modal-trigger" href="#new_review">New Review</a>
-            <!--
+
             <div id="new_review" class="modal">
-                <div class="modal-footer">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                <!--<div class="modal-footer">
+                <div>
+                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 
+
+                </div>-->
+                <div class="modal-content">
+                    <a href="#!" class="modal-action modal-close">
+                        <i class="material-icons right">close</i></a>
+                    <%@include file="new_review.jsp" %>
                 </div>
-                <div class="modal-content">new review here</div>
 
-            </div>-->
-            <%@include file="new_review.jsp" %>
+            </div>
+
+
+            <div id="login" class="modal">
+
+                <div class="modal-content">
+                    <div class="row">
+                    <a href="#!" class="modal-action modal-close">
+                        <i class="material-icons right">close</i></a></div>
+                    <%@include file="login.jsp" %>
+                </div>
+
+            </div>
+
+            <div id="signup" class="modal">
+                <div class="modal-content">
+                    <div class="row">
+                    <a href="#!" class="modal-action modal-close">
+                        <i class="material-icons right">close</i></a></div>
+                    <%@include file="signup.jsp" %>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

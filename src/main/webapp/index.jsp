@@ -11,19 +11,21 @@
             <br><br>
 
             <div id="login" class="modal">
-                <div class="modal-footer">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 
+                <div class="modal-content">
+                    <a href="#!" class="modal-action modal-close">
+                        <i class="material-icons right">close</i></a>
+                    <%@include file="login.jsp" %>
                 </div>
-                <div class="modal-content"><%@include file="login.jsp" %></div>
 
             </div>
 
             <div id="signup" class="modal">
-                <div class="modal-footer">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                <div class="modal-content">
+                    <a href="#!" class="modal-action modal-close">
+                        <i class="material-icons right">close</i></a>
+                    <%@include file="signup.jsp" %>
                 </div>
-                <div class="modal-content"><%@include file="signup.jsp" %></div>
 
             </div>
 

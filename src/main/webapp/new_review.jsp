@@ -8,15 +8,32 @@
 
 <div class="row">
     <form class="col s12">
-        <div class="chips chips-placeholder" id="good"></div>
-        <div class="chips chips-placeholder" id="bad"></div>
-        <div class="input-field col s12">
-            <input id="date" type="text" class="datepicker">
-            <label for="date">Date Visited</label>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <div class="chips chips-placeholder" id="good"></div>
+                <label for="good">Good Tags</label>
+            </div>
         </div>
-        <textarea>test</textarea>
+        <div class="row">
+            <div class="input-field col s12">
+                <div class="chips chips-placeholder" id="bad"></div>
+                <label for="bad">Bad Tags</label>
+            </div>
+        </div>
 
-
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="date" type="text" class="datepicker">
+                <label for="date">Date Visited</label>
+            </div>
+        </div>
+        <div class="row"><!-- TODO fix text area issue -->
+            <div class="input-field col s12">
+                <textarea id="review" class="materialize-textarea" data-length="120">test</textarea>
+                <label for="review">Review</label>
+            </div>
+        </div>
         <button class="btn waves-effect waves-light" type="">Cancel</button>
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit <i class="material-icons right">send</i></button>
     </form>
@@ -28,9 +45,8 @@
     });
     */
 
-
     $('.chips-placeholder').material_chip({
-        placeholder: 'Enter a tag',
+        //placeholder: 'Enter a tag',
         secondaryPlaceholder: '+Tag',
     });
 

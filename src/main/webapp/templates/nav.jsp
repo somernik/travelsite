@@ -16,9 +16,19 @@
     </div>
 
 </nav>
-<!-- TODO add to css page -->
+<!-- TODO add to css page
+below css used to make forms in modals look nice with spacing and no scroll bar
+-->
 <style>
     form {
         color: black;
+        margin-bottom: 0em;
+    }
+    .modal-content .row {
+        margin-bottom: 0em;
+    }
+
+    .modal {
+        max-height: 80%;
     }
 </style>
