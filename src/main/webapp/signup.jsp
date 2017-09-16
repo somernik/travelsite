@@ -26,7 +26,7 @@
     <div class="row">
         <div class="input-field col s12">
             <input id="passwordCheck" type="password" class="validate">
-            <label data-error="Does Not Match Password" data-success="Matches Password!" for="passwordCheck">Confirm Password</label>
+            <label for="passwordCheck">Confirm Password</label>
         </div>
     </div>
     <div class="row">

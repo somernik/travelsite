@@ -1,7 +1,7 @@
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
         <ul class="left hide-on-med-and-down">
-            <li><a href="#"><i class="material-icons">search</i></a></li>
+            <li><a href="explore.jsp"><i class="material-icons">search</i></a></li>
         </ul>
         <a id="logo-container" href="#" class="brand-logo center">WWW Travel</a>
         <ul class="right hide-on-med-and-down">
@@ -16,3 +16,9 @@
     </div>
 
 </nav>
+<!-- TODO add to css page -->
+<style>
+    form {
+        color: black;
+    }
+</style>
