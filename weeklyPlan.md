@@ -23,12 +23,12 @@ Recurring Items:
 - [X] Time Log entries
 
 ## Week 3
-- [ ] Finalize project plan
-- [ ] Define ML problem
+- [X] Finalize project plan
+- [X] Define ML problem
 - [X] Complete database design
-- [ ] Create database structure
-- [ ] Begin JSP templates
-- [ ] Create entities for user & other DB objects
+- [X] Create database structure
+- [X] Begin JSP templates
+- [X] Create entities for user
 - [ ] Implement logging
 - [ ] Implement initial unit testing
 - [ ] Determine independent research topic
@@ -38,6 +38,7 @@ Recurring Items:
 - [X] ML research
 
 ## Week 4
+- [ ] Create other entities
 - [ ] Define required fields for ML data & collect it
 - [ ] Complete JSPs
 - [ ] Add bootstrap (or another CSS framework)

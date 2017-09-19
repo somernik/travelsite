@@ -16,3 +16,4 @@
 | 9/14/2017  | 1     | Exercises | Week 3 | Week 3 Exercise 1 |
 | 9/16/2017  | 2     | Create JSPs | Week 3 | Home Page |
 | 9/17/2017  | 2     | Create JSPs | Week 3 | Login, Sign Up, New Review forms |
+| 9/18/2017  | 1.5     | Videos | Week 4 | Week 4 videos |
