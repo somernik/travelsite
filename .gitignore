@@ -50,3 +50,6 @@ fabric.properties
 
 # IML file
 *.iml
+
+.idea/
+*.properties
