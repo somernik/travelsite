@@ -27,9 +27,9 @@
     <h2>Search Results: </h2>
     <c:if test="${empty users}"><p>No Results!</p></c:if>
     <table>
-        <tr><th>Id</th><th>First Name</th><th>Last Name</th><th>Age</th></tr>
+        <tr><th>Id</th><th>First Name</th><th>Last Name</th></tr>
         <c:forEach var="user" items="${users}">
-            <tr><td>${user.userid}</td><td>${user.firstName}</td><td>${user.lastName}</td><td>${ages[user.userid]}</td></tr>
+            <tr><td>${user.userid}</td><td>${user.firstName}</td><td>${user.lastName}</td></tr>
         </c:forEach>
     </table>
     <p><a href="<c:url value="/" />">Search Again!</a></p>

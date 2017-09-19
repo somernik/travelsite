@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,16 +29,21 @@ public class SearchUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> users = searchUsers(req);
-        req.setAttribute("users", users);
+        // old way List<User> users = searchUsers(req);
+        //req.setAttribute("users", users);
+        //logger.info(users);
 
-        UserDao userDao = new UserDao();
+        //List<User> users = searchUsers(req);
+        //req.setAttribute("users", users);
 
-        List<User> hibernateUsers = userDao.getAllUsers();
-        logger.info(hibernateUsers);
-        logger.info(users);
-
+        List<User> users = new ArrayList<User>();
         if (req.getParameter("searchValue") != null) {
+            if (req.getParameter("searchType").equals("id")) {
+                User user = searchUserById(req);
+                users.add(user);
+
+            }
+
             String type;
             String operator;
 
@@ -59,28 +65,21 @@ public class SearchUser extends HttpServlet {
             req.setAttribute("value", req.getParameter("searchValue"));
             req.setAttribute("operator", operator);
         }
-
+        logger.info(users);
+        req.setAttribute("users", users);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
         dispatcher.forward(req, resp);
     }
 
-    private List<User> searchUsers(HttpServletRequest req) {
-        List<User> users;
-        UserDaoOld userData = new UserDaoOld();
+    private User searchUserById(HttpServletRequest req) {
 
+        User user;
+        UserDao userDao = new UserDao();
 
+        user = userDao.getUserById(Integer.parseInt(req.getParameter("searchValue"))); // TODO check inputs
 
-        if (req.getParameter("searchValue") != null) {
-            users = userData.getSpecificUsers(req.getParameter("searchType"), req.getParameter("searchValue"), req.getParameter("searchOperator"));
-            //User user = userData.getSingleUser(req.getParameter("searchType"), req.getParameter("searchValue"), req.getParameter("searchOperator"));
-            //System.out.println(user.toString());
-            logger.info("Some message you want logged");
-        } else {
-
-        }
-        users = userData.getAllUsers();
-        logger.debug(users);
-        return users;
+        logger.debug(user);
+        return user;
     }
 
 }

@@ -28,6 +28,7 @@ public class AddUser extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // TODO validate password check
+        // TODO validate all user input
         UserDao userDao = new UserDao();
         User newUser = new User(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("email"), req.getParameter("password"), req.getParameter("username")); // pass in params
         userDao.insert(newUser);
