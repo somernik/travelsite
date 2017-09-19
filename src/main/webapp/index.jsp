@@ -10,24 +10,7 @@
         <div class="container">
             <br><br>
 
-            <div id="login" class="modal">
-
-                <div class="modal-content">
-                    <a href="#!" class="modal-action modal-close">
-                        <i class="material-icons right">close</i></a>
-                    <%@include file="login.jsp" %>
-                </div>
-
-            </div>
-
-            <div id="signup" class="modal">
-                <div class="modal-content">
-                    <a href="#!" class="modal-action modal-close">
-                        <i class="material-icons right">close</i></a>
-                    <%@include file="signup.jsp" %>
-                </div>
-
-            </div>
+            <%@include file="templates/form_modals.jsp" %>
 
             <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
             <div class="row center">

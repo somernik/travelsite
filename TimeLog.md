@@ -14,3 +14,5 @@
 | 9/10/2017  | 2     | Screen Designs | Week 2 |  |
 | 9/12/2017  | 1     | Activities | Week 3 | Week 3 Activity 1 |
 | 9/14/2017  | 1     | Exercises | Week 3 | Week 3 Exercise 1 |
+| 9/16/2017  | 2     | Create JSPs | Week 3 | Home Page |
+| 9/17/2017  | 2     | Create JSPs | Week 3 | Login, Sign Up, New Review forms |
