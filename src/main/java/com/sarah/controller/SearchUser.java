@@ -2,6 +2,7 @@ package com.sarah.controller;
 
 import com.sarah.entity.User;
 import com.sarah.persistence.UserDao;
+import com.sarah.persistence.UserDaoOld;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * A simple servlet to welcome the user.
@@ -31,7 +30,12 @@ public class SearchUser extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> users = searchUsers(req);
         req.setAttribute("users", users);
-        req.setAttribute("ages", getUserAges(users));
+
+        UserDao userDao = new UserDao();
+
+        List<User> hibernateUsers = userDao.getAllUsers();
+        logger.info(hibernateUsers);
+        logger.info(users);
 
         if (req.getParameter("searchValue") != null) {
             String type;
@@ -62,7 +66,7 @@ public class SearchUser extends HttpServlet {
 
     private List<User> searchUsers(HttpServletRequest req) {
         List<User> users;
-        UserDao userData = new UserDao();
+        UserDaoOld userData = new UserDaoOld();
 
 
 
@@ -72,17 +76,11 @@ public class SearchUser extends HttpServlet {
             //System.out.println(user.toString());
             logger.info("Some message you want logged");
         } else {
-            users = userData.getAllUsers();
-        }
 
+        }
+        users = userData.getAllUsers();
+        logger.debug(users);
         return users;
     }
 
-    private Map<String, Integer> getUserAges(List<User> users) {
-        Map<String, Integer> userAges = new TreeMap<String, Integer>();
-        for (User user: users) {
-            userAges.put(user.getUserid(), user.calculateAge(user.getBirthDate()));
-        }
-        return userAges;
-    }
 }

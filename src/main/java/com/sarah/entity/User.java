@@ -1,19 +1,38 @@
 package com.sarah.entity;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 /**
  * A class to represent a user.
  *
  * @author somernik
  */
+@Entity
+@Table(name = "user")
 public class User {
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
-    private String userid;
-    private Date birthDate;
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name="increment", strategy="increment")
+    @Column(name = "id")
+    private int userid;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "user_name")
+    private String userName;
 
 
     /**
@@ -23,18 +42,35 @@ public class User {
     }
 
     /**
+     * Instantiates a new User no id
+     *
+     * @param firstName the first name
+     * @param lastName  the last name
+     */
+    public User(String firstName, String lastName, String email, String password, String userName) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userName = userName;
+    }
+
+    /**
      * Instantiates a new User.
      *
      * @param firstName the first name
      * @param lastName  the last name
      * @param userid    the userid
-     * @param birthDate the birthdate
      */
-    public User(String firstName, String lastName, String userid, Date birthDate) {
+    public User(String firstName, String lastName, int userid, String email, String password, String userName) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.userid = userid;
-        this.birthDate = birthDate;
+        this.email = email;
+        this.password = password;
+        this.userName = userName;
     }
 
 
@@ -79,7 +115,7 @@ public class User {
      *
      * @return the userid
      */
-    public String getUserid() {
+    public int getUserid() {
         return userid;
     }
 
@@ -88,35 +124,32 @@ public class User {
      *
      * @param userid the userid
      */
-    public void setUserid(String userid) {
+    public void setUserid(int userid) {
         this.userid = userid;
     }
 
-    /**
-     * Gets birthDate.
-     *
-     * @return the birthDate
-     */
-    public Date getBirthDate() {
-        return birthDate;
+    public String getPassword() {
+        return password;
     }
 
-    /**
-     * Sets birthDate.
-     *
-     * @param birthDate the birthDate
-     */
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public int calculateAge(Date birthDate) {
-        DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+    public String getUserName() {
+        return userName;
+    }
 
-        // LocalDate now  = LocalDate.now();
-        // long age = ChronoUnit.YEARS.between(dateOfBirth, now);
-        // (int) age;
-        return (Integer.parseInt(formatter.format(new Date())) - Integer.parseInt(formatter.format(birthDate))) / 10000;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -125,10 +158,10 @@ public class User {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userid='" + userid + '\'' +
-                ", brithdate='" + birthDate + '\'' +
-                ", age='" + calculateAge(birthDate) + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
-
 
 }

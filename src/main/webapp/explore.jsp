@@ -22,16 +22,17 @@
 </div>
 
 <div id="not_side_nav">
-    <div class="section no-pad-bot">
+    <div class="section no-pad-bot" id="filterDiv">
 
         <div id="filters">
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s3"><a href="#test1">Test 1</a></li>
-                        <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>
-                        <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>
-                        <li class="tab col s3"><a href="#test4">Test 4</a></li>
+                        <li class="tab col s2 disabled"><a href="#test3">Filters</a></li>
+                        <li class="tab col s2"><a href="#test1">Activities</a></li>
+                        <li class="tab col s2"><a class="active" href="#test2">Locations</a></li>
+                        <li class="tab col s2"><a href="#test3">Month</a></li>
+                        <li class="tab col s2"><a href="#test4">Rating</a></li>
                     </ul>
                 </div>
                 <div id="test1" class="col s12">Test 1</div>
@@ -40,12 +41,8 @@
                 <div id="test4" class="col s12">Test 4</div>
             </div>
         </div>
-
-
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
         <!-- Modals -->
-        <a class="waves-effect waves-light btn modal-trigger" href="#new_review">New Review</a>
+
         <div id="new_review" class="modal">
 
             <div class="modal-content">
@@ -62,6 +59,17 @@
         <%@include file="templates/form_modals.jsp" %>
 
     </div>
+    <div class="section no-pad-bot no-pad-top">
+
+            <div class="row">
+            <img src="images/demo.png" style="height:20em"/>
+
+            </div>
+    </div>
+
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    <a class="waves-effect waves-light btn modal-trigger" href="#new_review">New Review</a>
+    <a class="waves-effect waves-light btn modal-trigger" href="#">Location Details</a>
 </div>
 
 
@@ -100,6 +108,10 @@
 
     .tabs .tab a:hover, .tabs .tab a.active {
         color: #26a69a;
+    }
+
+    #filterDiv {
+        padding-top: 3px;
     }
 
 </style>

@@ -1,6 +1,10 @@
 package com.sarah.persistence;
 
 import com.sarah.entity.User;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,101 +20,60 @@ import java.util.List;
  */
 public class UserDao {
 
+    private final Logger log = Logger.getLogger(this.getClass());
+
+    /** Return a list of all users
+     *
+     * @return All users
+     */
     public List<User> getAllUsers() {
-        Database database = Database.getInstance();
-
-        String sql = "SELECT * FROM users";
-
-        return getUserItems(database, sql);
-    }
-
-    private List<User> getUserItems(Database database, String sql) {
         List<User> users = new ArrayList<User>();
-        Connection connection = null;
-
+        Session session = null;
         try {
-            database.connect();
-            connection = database.getConnection();
-            Statement selectStatement = connection.createStatement();
-            ResultSet results = selectStatement.executeQuery(sql);
-            loopOverResultSet(users, results);
-            database.disconnect();
-        } catch (SQLException e) {
-            System.out.println("SearchUser.getUserItems()...SQL Exception: " + e);
-        } catch (Exception e) {
-            System.out.println("SearchUser.getUserItems()...Exception: " + e);
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            users = session.createCriteria(User.class).list();
+        } catch (HibernateException he) {
+            log.error("Error getting all users", he);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
-
         return users;
     }
 
-    private void loopOverResultSet(List<User> users, ResultSet results) throws SQLException {
-        while (results.next()) {
-            User employee = createUserFromResults(results);
-            users.add(employee);
-        }
-    }
-
-    //TODO add a method or methods to return a single user based on search criteria - DONE
-    public User getSingleUser(String searchType, String searchValue, String searchOperator) {
-        Database database = Database.getInstance();
-        Connection connection = null;
-        User employee = new User();
-
-        String sql = buildSQLStatement(searchType, searchValue, searchOperator);
+    /** save new user
+     * @param user user to insert
+     * @return id of the inserted user
+     */
+    public int insert(User user) {
+        int id = 0;
+        Transaction transaction = null;
+        Session session = null;
 
         try {
-            database.connect();
-            connection = database.getConnection();
-            Statement selectStatement = connection.createStatement();
-            ResultSet results = selectStatement.executeQuery(sql);
-            if (results.next()) {
-                employee = createUserFromResults(results);
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            id = (Integer) session.save(user);
+            log.info(id + " transaction: " + transaction);
+            transaction.commit();
+        } catch (HibernateException he) {
+            log.error("Starting roll back: " + user, he);
+            if (transaction != null) {
+                try {
+
+                    transaction.rollback();
+                } catch (HibernateException he2) {
+                    log.error("Error rolling back user insert: " + user, he2);
+                }
             }
-            database.disconnect();
-        } catch (SQLException e) {
-            System.out.println("SearchUser.getSingleUser()...SQL Exception: " + e);
-        } catch (Exception e) {
-            System.out.println("SearchUser.getSingleUser()...Exception: " + e);
+        } finally {
+            log.info("Finally insert");
+            if (session != null) {
+                session.close();
+            }
         }
 
-        return employee;
+        return id;
     }
-
-    public List<User> getSpecificUsers(String searchType, String searchValue, String searchOperator) {
-        Database database = Database.getInstance();
-
-        String sql = buildSQLStatement(searchType, searchValue, searchOperator);
-
-        return getUserItems(database, sql);
-    }
-
-    private String buildSQLStatement(String searchType, String searchValue, String searchOperator) {
-
-        if(searchType.equals("f_name")) {
-            searchType = "first_name";
-        } else if (searchType.equals("l_name")) {
-            searchType = "last_name";
-        }
-
-        String sql ="SELECT * FROM users WHERE " + searchType + " ";
-
-        if (searchOperator.equals("=")) {
-             sql += searchOperator + " '" + searchValue + "'";
-        } else if (searchOperator.equals("LIKE")) {
-            sql += searchOperator + " '%" + searchValue + "%'";
-        }
-
-        return sql;
-    }
-
-    private User createUserFromResults(ResultSet results) throws SQLException {
-        User user = new User();
-        user.setLastName(results.getString("last_name"));
-        user.setFirstName(results.getString("first_name"));
-        user.setUserid(results.getString("id"));
-        user.setBirthDate(results.getDate("date_of_birth"));
-        return user;
-    }
-
 }
