@@ -156,7 +156,6 @@ public class UserDao {
         }
     }
 
-    // TODO test
     /** Delete  user
      * @param user user to update
      */

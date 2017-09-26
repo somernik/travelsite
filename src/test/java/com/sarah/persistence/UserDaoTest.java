@@ -84,9 +84,10 @@ public class UserDaoTest {
     @Test
     @Transactional
     public void getUserById() throws Exception {
+        userDao.insert(firstUser);
+        User testUser = userDao.getUserById(firstUser.getUserid());
 
-        User testUser = userDao.getUserById(1);
-        //Assert.assertEquals("Users did not match", testUser, firstUser);
+        assertNotNull(testUser);
         Assert.assertEquals("Ids did not match", testUser.getUserid(), firstUser.getUserid());
         Assert.assertEquals("First Name did not match", testUser.getFirstName(), firstUser.getFirstName());
         Assert.assertEquals("Last Name did not match", testUser.getLastName(), firstUser.getLastName());
@@ -96,17 +97,6 @@ public class UserDaoTest {
 
     }
 
-    @Test
-    public void getUsersByUsername() throws Exception {
-        List<User> expectedUsers = userDao.getUsersByUsername(firstUser.getUserName());
-        log.info(userDao.getAllUsers());
-        for (int i = 0; i < expectedUsers.size(); i++) {
-            Assert.assertEquals("User name did not match", expectedUsers.get(i).getUserName(), firstUser.getUserName());
-
-        }
-
-        Assert.assertEquals("Array sizes do not match", expectedUsers.size(), 1);
-    }
 
     @Test
     public void update() throws Exception {
