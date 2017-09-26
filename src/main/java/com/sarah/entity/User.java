@@ -34,7 +34,6 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
-
     /**
      * Instantiates a new User.
      */

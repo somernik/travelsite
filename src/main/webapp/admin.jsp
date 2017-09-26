@@ -1,61 +1,69 @@
 <%@include file="templates/taglib.jsp"%>
 <html>
 <%@include file="templates/head.jsp"%>
-<style>
-    form {
-        width: 60%;
-        margin: 2em;
-    }
-
-    input[type=text], select {
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type=text]:focus {
-        background-color: lightblue;
-    }
-
-    input[type=submit] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-    div {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-</style>
 <body>
+
+<style>
+
+</style>
 <h2>Admin</h2>
-<form action="/searchUser">
+<div id="search">
     <h3>Search Users</h3>
-    <select id="searchType" name="searchType">
-        <option value="id">ID</option>
-        <option value="f_name">First Name</option>
-        <option value="l_name">Last Name</option>
-    </select>
-    <select id="searchOperator" name="searchOperator">
-        <option value="=">=</option>
-        <option value="LIKE">contains</option>
-    </select>
-    <input name="searchValue" id="searchValue" type="text" required />
-    <input type="submit" value="Search" />
-</form>
-<a href = "searchUser">See all users</a>
+    <form action="/searchUser">
+
+        <select id="searchType" name="searchType">
+            <option value="id">ID</option>
+            <option value="f_name">First Name</option>
+            <option value="l_name">Last Name</option>
+        </select>
+        <select id="searchOperator" name="searchOperator">
+            <option value="=">=</option>
+            <option value="LIKE">contains</option>
+        </select>
+        <input name="searchValue" id="searchValue" type="text" required />
+        <input type="submit" value="Search" />
+    </form>
+    <a href = "searchUser">See all users</a>
+</div>
+<div id="privileges">
+
+    <h3>Grant Privileges</h3>
+    <form class="col s12 m6 offset-m3" action="/updateUser">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="id" type="text" name="id" class="validate">
+                <label for="id">User Id</label>
+            </div>
+
+            <div class="input-field col s12">
+                <input id="username" type="text" name="username" class="validate">
+                <label for="username">Username</label>
+            </div>
+
+            <div class="input-field col s12">
+                <input id="newUsername" type="text" name="newUsername" class="validate">
+                <label for="newUsername">New Username</label>
+            </div>
+        </div>
+
+        <input type="submit" value="Save Changes" />
+        <label for="admin">Grant Admin Privileges</label>
+        <input type="checkbox" id="admin" name="admin" style="opacity: initial; pointer-events: auto"  />
+    </form>
+
+    <h3>Delete Account</h3>
+    <form class="col s12 m6 offset-m3" action="/deleteUser">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="id" type="text" name="id" class="validate">
+                <label for="id">User Id</label>
+            </div>
+        </div>
+
+        <input type="submit" value="Delete Account" />
+    </form>
+
+</div>
+
 </body>
 </html>

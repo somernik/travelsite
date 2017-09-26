@@ -13,32 +13,28 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * A simple servlet to add the user.
- * @author somernik
+ * Updates User
+ * Created by sarah on 9/21/2017.
  */
 
 @WebServlet(
-        urlPatterns = {"/addUser"}
+        urlPatterns = {"/deleteUser"}
 )
-
-public class AddUser extends HttpServlet {
+public class DeleteUser extends HttpServlet {
     private final Logger logger = Logger.getLogger(this.getClass());
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO validate password check
         // TODO validate all user input
         UserDao userDao = new UserDao();
-        User newUser = new User(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("email"), req.getParameter("password"), req.getParameter("username")); // pass in params
-        userDao.insert(newUser);
-        logger.info(newUser);
+        User userToDelete = userDao.getUserById(Integer.parseInt(req.getParameter("id")));
+        logger.info("Current: " + userToDelete);
 
+        userDao.delete(userToDelete); // TODO get from session
+        logger.info("Deleted: " + userToDelete);
 
-        req.setAttribute("user", newUser); // TODO add user to session
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
     }
-
 }

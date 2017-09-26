@@ -2,14 +2,12 @@ package com.sarah.persistence;
 
 import com.sarah.entity.User;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,6 +99,34 @@ public class UserDao {
         return user;
     }
 
+    /** Get a single user for the given id
+     *
+     * @param username user's username
+     * @return User
+     */
+    public List<User> getUsersByUsername(String username) {
+
+        List<User> users = new ArrayList<User>();
+        Session session = null;
+
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(User.class);
+            criteria.add(Restrictions.eq("user_name", username));
+            users = criteria.list();
+
+        } catch (HibernateException he) {
+            log.error("Error getting user with username: " + username, he);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return users;
+    }
+
     /** Update  user
      * @param user user to update
      */
@@ -130,5 +156,34 @@ public class UserDao {
         }
     }
 
-    // TODO add delete
+    // TODO test
+    /** Delete  user
+     * @param user user to update
+     */
+    public void delete(User user) {
+        Transaction transaction = null;
+        Session session = null;
+
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.delete(user);
+            transaction.commit();
+        } catch(HibernateException he) {
+            log.error("Hibernate Exception: ", he);
+            if (transaction != null) {
+
+                try {
+                    transaction.rollback();
+                } catch (HibernateException he2) {
+                    log.error("Error rolling back delete of user: " + user, he2);
+                }
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
 }
