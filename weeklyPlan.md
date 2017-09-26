@@ -29,9 +29,9 @@ Recurring Items:
 - [X] Create database structure
 - [X] Begin JSP templates
 - [X] Create entities for user
-- [ ] Implement logging
-- [ ] Implement initial unit testing
-- [ ] Determine independent research topic
+- [X] Implement logging
+- [X] Implement initial unit testing
+- [X] Determine independent research topic
 
 Recurring Items:
 - [X] Time Log entries
@@ -40,24 +40,23 @@ Recurring Items:
 ## Week 4
 - [ ] Create other entities
 - [ ] Define required fields for ML data & collect it
-- [ ] Complete JSPs
-- [ ] Add bootstrap (or another CSS framework)
+- [X] Continue JSPs
+- [X] Add bootstrap (or another CSS framework)
 - [ ] Add custom tags?
-- [ ] Implement Hibernate
-- [ ] Add DAOs for user crud
+- [X] Implement Hibernate
+- [X] Add DAOs for user crud
 - [ ] Add user login
-- [ ] Add user sign up
+- [X] Add user sign up
 
 Recurring Items:
 - [ ] Time Log entries
-- [ ] ML research
-- [ ] Add logs
-- [ ] Add testing
+- [X] ML research
+- [X] Add logs
+- [X] Add testing
 
 ## Week 5
 - [ ] Deploy to AWS
-- [ ] Analyze ML data to ensure it is good
-- [ ] Feature processing ML data as necessary
+- [ ] Use web scraper to get ML Data
 - [ ] Start creating ML model?
 - [ ] Create other crud DAOs (based on entities determined in class diagram)
 - [ ] Create activity tag ranking functionality
