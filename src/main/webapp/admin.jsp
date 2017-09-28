@@ -1,11 +1,13 @@
-<%@include file="templates/taglib.jsp"%>
+<%@include file="templates/taglib.jsp" %>
+<c:set var = "title" value = "WWW Travel | Admin"/>
 <html>
-<%@include file="templates/head.jsp"%>
+<%@include file="templates/head.jsp" %>
 <body>
+<%@include file="templates/nav.jsp" %>
 
-<style>
-
-</style>
+<div id="index-banner">
+    <div class="section no-pad-bot">
+        <div class="container">
 <h2>Admin</h2>
 <div id="search">
     <h3>Search Users</h3>
@@ -64,6 +66,6 @@
     </form>
 
 </div>
-
+        </div></div></div>
 </body>
 </html>
