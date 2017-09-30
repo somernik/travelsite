@@ -22,6 +22,8 @@
 
         <!-- List the annotated entity class/es -->
         <mapping class="com.sarah.entity.User"/>
+        <mapping class="com.sarah.entity.ReviewEntity"/>
+        <mapping class="com.sarah.entity.LocationEntity"/>
 
     </session-factory>
 

@@ -10,7 +10,20 @@ import javax.persistence.*;
 public class LocationEntity {
     private int id;
     private String name;
-    private int googleId;
+    private String googleId;
+
+    public LocationEntity() {}
+
+    public LocationEntity(String name, String googleId) {
+        this.name = name;
+        this.googleId = googleId;
+    }
+
+    public LocationEntity(int id, String name, String googleId) {
+        this.id = id;
+        this.name = name;
+        this.googleId = googleId;
+    }
 
     @Id
     @Column(name = "id")
@@ -34,11 +47,11 @@ public class LocationEntity {
 
     @Basic
     @Column(name = "googleId")
-    public int getGoogleId() {
+    public String getGoogleId() {
         return googleId;
     }
 
-    public void setGoogleId(int googleId) {
+    public void setGoogleId(String googleId) {
         this.googleId = googleId;
     }
 
@@ -56,11 +69,4 @@ public class LocationEntity {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + googleId;
-        return result;
-    }
 }

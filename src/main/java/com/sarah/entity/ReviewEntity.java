@@ -3,7 +3,7 @@ package com.sarah.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * Created by sarah on 9/26/2017.
@@ -13,13 +13,28 @@ import java.sql.Timestamp;
 public class ReviewEntity {
     private int id;
     private String body;
-    private Timestamp date;
+    private LocalDateTime date;
 
-
-    //private int userId;
-    //private int locationId;
     private User user;
     private LocationEntity location;
+
+    public ReviewEntity(){
+    }
+
+    public ReviewEntity(String body, LocalDateTime date, User user, LocationEntity location) {
+        this.body = body;
+        this.date = date;
+        this.user = user;
+        this.location = location;
+    }
+
+    public ReviewEntity(int reviewId, String body, LocalDateTime date, User user, LocationEntity location) {
+        this.id = reviewId;
+        this.body = body;
+        this.date = date;
+        this.user = user;
+        this.location = location;
+    }
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -45,11 +60,11 @@ public class ReviewEntity {
 
     @Basic
     @Column(name = "date")
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
