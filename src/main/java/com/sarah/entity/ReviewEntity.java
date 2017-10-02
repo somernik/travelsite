@@ -1,19 +1,21 @@
 package com.sarah.entity;
 
+import com.sarah.utility.LocalDateAttributeConverter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * Created by sarah on 9/26/2017.
  */
 @Entity
-@Table(name = "review", schema = "travelsite", catalog = "")
+@Table(name = "review")
 public class ReviewEntity {
     private int id;
     private String body;
-    private LocalDateTime date;
+    private LocalDate date;
 
     private User user;
     private LocationEntity location;
@@ -21,14 +23,14 @@ public class ReviewEntity {
     public ReviewEntity(){
     }
 
-    public ReviewEntity(String body, LocalDateTime date, User user, LocationEntity location) {
+    public ReviewEntity(String body, LocalDate date, User user, LocationEntity location) {
         this.body = body;
         this.date = date;
         this.user = user;
         this.location = location;
     }
 
-    public ReviewEntity(int reviewId, String body, LocalDateTime date, User user, LocationEntity location) {
+    public ReviewEntity(int reviewId, String body, LocalDate date, User user, LocationEntity location) {
         this.id = reviewId;
         this.body = body;
         this.date = date;
@@ -60,11 +62,12 @@ public class ReviewEntity {
 
     @Basic
     @Column(name = "date")
-    public LocalDateTime getDate() {
+    @Convert(converter = LocalDateAttributeConverter.class)
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -1,16 +1,22 @@
 package com.sarah.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by sarah on 9/26/2017.
  */
 @Entity
-@Table(name = "location", schema = "travelsite", catalog = "")
+@Table(name = "location")
 public class LocationEntity {
     private int id;
     private String name;
     private String googleId;
+    private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
+    private Set<User> users = new HashSet<User>();
 
     public LocationEntity() {}
 
@@ -25,8 +31,25 @@ public class LocationEntity {
         this.googleId = googleId;
     }
 
+    public LocationEntity(String name, String googleId, Set<ReviewEntity> reviews, Set<User> users) {
+        this.name = name;
+        this.googleId = googleId;
+        this.reviews = reviews;
+        this.users = users;
+    }
+
+    public LocationEntity(int id, String name, String googleId, Set<ReviewEntity> reviews, Set<User> users) {
+        this.id = id;
+        this.name = name;
+        this.googleId = googleId;
+        this.reviews = reviews;
+        this.users = users;
+    }
+
     @Id
-    @Column(name = "id")
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name="increment", strategy="increment")
+    @Column(name = "id", unique = true)
     public int getId() {
         return id;
     }
@@ -55,6 +78,24 @@ public class LocationEntity {
         this.googleId = googleId;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
+    public Set<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<ReviewEntity> reviews) {
+        this.reviews = reviews;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "locations")
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,4 +110,14 @@ public class LocationEntity {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "LocationEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", googleId='" + googleId + '\'' +
+                ", reviews=" + reviews +
+                ", users=" + users +
+                '}';
+    }
 }

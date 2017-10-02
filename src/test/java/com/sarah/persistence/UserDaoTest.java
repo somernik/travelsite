@@ -1,5 +1,6 @@
 package com.sarah.persistence;
 
+import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
@@ -11,7 +12,9 @@ import org.junit.Test;
 import javax.transaction.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -35,8 +38,6 @@ public class UserDaoTest {
     @After
     public void tearDown() throws Exception {
 
-        //userDao.delete(firstUser);
-        //userDao.delete(secondUser);
         Session session = SessionFactoryProvider.getSessionFactory().openSession();
 
         // clear entries
@@ -78,6 +79,22 @@ public class UserDaoTest {
     public void insert() throws Exception {
         int firstUserId = userDao.insert(firstUser);
         Assert.assertEquals("Ids dont match", firstUserId, firstUser.getUserid());
+
+    }
+
+
+    @Test
+    public void insertUserWithLocations() throws Exception {
+        LocationEntity location1 = new LocationEntity("test", "test id");
+        Set<LocationEntity> locations = new HashSet<LocationEntity>();
+        locations.add(location1);
+
+        User user = new User("Test", "Locations", "email@email.com", "password", "username");
+        user.setLocations(locations);
+
+        int id = userDao.insert(user);
+
+        Assert.assertEquals("ids dont match", 3, id);
 
     }
 

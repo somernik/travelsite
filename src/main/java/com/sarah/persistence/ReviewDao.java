@@ -74,4 +74,30 @@ public class ReviewDao {
         return id;
     }
 
+    /** Get a single reviewEntity for the given id
+     *
+     * @param id reviewEntity's id
+     * @return ReviewEntity
+     */
+    public ReviewEntity getReviewById(int id) {
+
+        ReviewEntity review = null;
+        Session session = null;
+
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            review = (ReviewEntity) session.get(ReviewEntity.class, id);
+
+        } catch (HibernateException he) {
+            log.error("Error getting review with id: " + id, he);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return review;
+    }
+
 }

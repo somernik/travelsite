@@ -3,6 +3,8 @@ package com.sarah.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A class to represent a user.
@@ -33,6 +35,17 @@ public class User {
 
     @Column(name = "user_name")
     private String userName;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name="userlocation", joinColumns = {
+            @JoinColumn(name="User_id")},
+            inverseJoinColumns = {
+            @JoinColumn(name="Location_id")
+            })
+    private Set<LocationEntity> locations = new HashSet<LocationEntity>();
 
     /**
      * Instantiates a new User.
@@ -72,6 +85,15 @@ public class User {
         this.userName = userName;
     }
 
+    public User(String firstName, String lastName, String email, String password, String userName, Set<ReviewEntity> reviews) {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userName = userName;
+        this.reviews = reviews;
+    }
 
     /**
      * Gets first name.
@@ -149,6 +171,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<ReviewEntity> reviews) {
+        this.reviews = reviews;
+    }
+
+    public Set<LocationEntity> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(Set<LocationEntity> locations) {
+        this.locations = locations;
     }
 
     @Override

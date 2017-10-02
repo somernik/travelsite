@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>0861d0e4-3592-43b6-8c49-622bd536c120</OriginalElement>
+  <nodes>
+    <node x="768.0" y="576.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.userlocation</node>
+    <node x="718.0" y="0.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.location</node>
+    <node x="527.0" y="539.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.review</node>
+    <node x="230.5" y="246.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.taglocation</node>
+    <node x="200.25" y="18.5">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.tag</node>
+    <node x="0.0" y="283.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.privelege</node>
+    <node x="296.06730769230774" y="576.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.taglocationuser</node>
+    <node x="969.0" y="557.5">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.photo</node>
+    <node x="18.75" y="595.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.userprivelege</node>
+    <node x="451.5" y="209.0">0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.user</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.photo" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.user">
+      <point x="-50.25" y="-98.0" />
+      <point x="1019.25" y="499.0" />
+      <point x="668.4" y="499.0" />
+      <point x="96.39999999999998" y="135.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.userprivelege" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.user">
+      <point x="61.75" y="-60.5" />
+      <point x="204.0" y="509.0" />
+      <point x="475.6" y="509.0" />
+      <point x="-96.39999999999998" y="135.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.taglocationuser" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.taglocation">
+      <point x="-45.25" y="-79.5" />
+      <point x="341.31730769230774" y="499.0" />
+      <point x="331.0" y="499.0" />
+      <point x="0.0" y="98.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.userlocation" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.user">
+      <point x="-45.25" y="-79.5" />
+      <point x="813.25" y="509.0" />
+      <point x="620.2" y="509.0" />
+      <point x="48.200000000000045" y="135.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.review" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.user">
+      <point x="-55.25" y="-116.5" />
+      <point x="582.25" y="519.0" />
+      <point x="572.0" y="519.0" />
+      <point x="0.0" y="135.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.userlocation" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.location">
+      <point x="45.24999999999997" y="-79.5" />
+      <point x="903.75" y="189.0" />
+      <point x="831.125" y="189.0" />
+      <point x="22.625" y="79.5" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.taglocationuser" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.user">
+      <point x="45.25" y="-79.5" />
+      <point x="431.81730769230774" y="519.0" />
+      <point x="523.8" y="519.0" />
+      <point x="-48.200000000000045" y="135.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.taglocation" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.location">
+      <point x="50.25" y="-98.0" />
+      <point x="381.25" y="179.0" />
+      <point x="740.625" y="179.0" />
+      <point x="-67.875" y="79.5" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.taglocation" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.tag">
+      <point x="-50.25" y="-98.0" />
+      <point x="0.0" y="61.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.photo" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.location">
+      <point x="50.25" y="-98.0" />
+      <point x="1119.75" y="179.0" />
+      <point x="876.375" y="179.0" />
+      <point x="67.87499999999997" y="79.5" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.userprivelege" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.privelege">
+      <point x="-61.75" y="-60.5" />
+      <point x="0.0" y="61.0" />
+    </edge>
+    <edge source="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.review" target="0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.location">
+      <point x="55.25" y="-116.5" />
+      <point x="692.75" y="519.0" />
+      <point x="703.0" y="519.0" />
+      <point x="703.0" y="189.0" />
+      <point x="785.875" y="189.0" />
+      <point x="-22.625" y="79.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6578282828282829" x="1173.299424184261" y="569.1785028790787" />
+  <SelectedNodes>
+    <node>0861d0e4-3592-43b6-8c49-622bd536c120.TABLE:travelsite.user</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
