@@ -2,6 +2,7 @@ package com.sarah.persistence;
 
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
+import com.sarah.utility.DatabaseCleaner;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.junit.After;
@@ -38,22 +39,8 @@ public class UserDaoTest {
     @After
     public void tearDown() throws Exception {
 
-        //userDao.delete(firstUser);
-        //userDao.delete(secondUser);
-        /*
-        Session session = SessionFactoryProvider.getSessionFactory().openSession();
-
-        // clear entries
-        String sql = "DELETE FROM user";
-        SQLQuery query = session.createSQLQuery(sql);
-        query.executeUpdate();
-
-        // reset ids
-        String alterSql = "ALTER TABLE user AUTO_INCREMENT = 1";
-        SQLQuery alterQuery = session.createSQLQuery(alterSql);
-        alterQuery.executeUpdate();*/
-
-        //session.getTransaction().commit();
+        DatabaseCleaner cleaner = new DatabaseCleaner();
+        cleaner.run();
 
     }
 
