@@ -11,7 +11,7 @@
 <h2>Admin</h2>
 <div id="search">
     <h3>Search Users</h3>
-    <form action="/searchUser">
+    <form action="searchUser">
 
         <select id="searchType" name="searchType">
             <option value="id">ID</option>

@@ -38,39 +38,38 @@ Recurring Items:
 - [X] ML research
 
 ## Week 4
-- [ ] Create other entities
+- [X] Create other entities
 - [ ] Define required fields for ML data & collect it
 - [X] Continue JSPs
 - [X] Add bootstrap (or another CSS framework)
-- [ ] Add custom tags?
 - [X] Implement Hibernate
 - [X] Add DAOs for user crud
-- [ ] Add user login
 - [X] Add user sign up
 
 Recurring Items:
-- [ ] Time Log entries
+- [X] Time Log entries
 - [X] ML research
 - [X] Add logs
 - [X] Add testing
 
 ## Week 5
-- [ ] Deploy to AWS
-- [ ] Use web scraper to get ML Data
-- [ ] Start creating ML model?
-- [ ] Create other crud DAOs (based on entities determined in class diagram)
-- [ ] Create activity tag ranking functionality
-- [ ] Create user comments functionality
+- [X] Deploy to AWS
+- [X] Start creating other crud DAOs (based on entities determined in class diagram)
+
 
 Recurring Items:
-- [ ] Time Log entries
+- [X] Time Log entries
 - [ ] ML research
-- [ ] Add logs
-- [ ] Add testing
+- [X] Add logs
+- [X] Add testing
 
 ## Week 6
+- [ ] Continue adding crud functionality
+- [ ] Create activity tag ranking functionality
+- [ ] Create user comments functionality
 - [ ] Add security authentication - is this just login/sign up?
-- [ ] Start training ML model
+- [ ] Use web scraper to get ML Data
+- [ ] Start creating ML model?
 - [ ] Refine design based on Design Review
 
 Recurring Items:
@@ -85,6 +84,7 @@ Recurring Items:
 - [ ] Create activity search functionality
 - [ ] Create time search functionality
 - [ ] Create save location functionality
+- [ ] Add user login
 
 Recurring Items:
 - [ ] Time Log entries
