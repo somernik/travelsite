@@ -8,8 +8,8 @@
 <form class="col s12 m6 offset-m3">
     <div class="row">
         <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
+            <input id="username" type="email" class="validate">
+            <label for="username">Username</label>
         </div>
     </div>
 
