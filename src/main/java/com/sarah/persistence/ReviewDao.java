@@ -3,10 +3,7 @@ package com.sarah.persistence;
 import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ public class ReviewDao {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             reviews = session.createCriteria(ReviewEntity.class).list();
+
         } catch (HibernateException he) {
             log.error("Error getting all reviews", he);
         } finally {
@@ -87,7 +85,8 @@ public class ReviewDao {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             review = (ReviewEntity) session.get(ReviewEntity.class, id);
-
+            Hibernate.initialize(review.getLocation());
+            Hibernate.initialize(review.getUser());
         } catch (HibernateException he) {
             log.error("Error getting review with id: " + id, he);
 

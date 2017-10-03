@@ -3,15 +3,15 @@ package com.sarah.persistence;
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
+import com.sarah.utility.DatabaseCleaner;
 import javafx.util.converter.LocalDateStringConverter;
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -21,86 +21,107 @@ import static org.junit.Assert.*;
  */
 public class ReviewDaoTest {
     private final Logger log = Logger.getLogger(this.getClass());
+    private LocalDateStringConverter dateConverter = new LocalDateStringConverter();
+    // for more info on default formats for the converter
+    // see https://docs.oracle.com/javase/tutorial/i18n/format/dateFormat.html
 
     private ReviewDao reviewDao = new ReviewDao();
 
+    private ReviewEntity firstReview = new ReviewEntity();
+    private ReviewEntity secondReview = new ReviewEntity();
+    User testUser = new User("testy", "mctest", "tester@test.com", "testpassword", "tester");
+    LocationEntity location = new LocationEntity("test", "test id");
+
+    private List<ReviewEntity> allReviews = new ArrayList<ReviewEntity>();
+
     @Before
     public void setUp() throws Exception {
+        // Prepare user
+        UserDao userDao = new UserDao();
+        userDao.insert(testUser);
 
+        // Prepare location
+        LocationDao locationDao = new LocationDao();
+        locationDao.insertLocation(location);
+
+        firstReview = new ReviewEntity(1, "This is great!", dateConverter.fromString("10/01/17"), testUser, location);
+        secondReview = new ReviewEntity(2, "This is not great :(", dateConverter.fromString("10/02/17"), testUser, location);
+
+        reviewDao.insertReview(firstReview);
+        reviewDao.insertReview(secondReview);
+
+        allReviews.add(firstReview);
+        allReviews.add(secondReview);
     }
 
     @After
     public void tearDown() throws Exception {
 
+        DatabaseCleaner cleaner = new DatabaseCleaner();
+        cleaner.run();
+
     }
 
     @Test
     public void getAllReviews() throws Exception {
-        List<ReviewEntity> allReviews = reviewDao.getAllReviews();
+        List<ReviewEntity> testReviews = reviewDao.getAllReviews();
 
-        //Assert.assertEquals("Incorrect number of reviews", allReviews.size(),0);
+        Assert.assertEquals("Incorrect number of reviews", testReviews.size(), allReviews.size());
+
+        for (int i = 0; i < testReviews.size(); i ++) {
+            Assert.assertEquals("Body is incorrect", testReviews.get(i).getBody(), allReviews.get(i).getBody());
+            Assert.assertEquals("Date is incorrect", testReviews.get(i).getDate(), allReviews.get(i).getDate());
+            //Assert.assertEquals("User's username is incorrect", testReviews.get(i).getUser().getUserName(), allReviews.get(i).getUser().getUserName());
+            //Assert.assertEquals("Location's google id is incorrect", testReviews.get(i).getLocation().getGoogleId(), allReviews.get(i).getLocation().getGoogleId());
+        }
+
     }
 
     @Test
     public void insertReview() throws Exception {
 
-        LocalDateStringConverter dateConverter = new LocalDateStringConverter();
-        // for more info on default formats for the converter
-        // see https://docs.oracle.com/javase/tutorial/i18n/format/dateFormat.html
+        ReviewEntity newReview = new ReviewEntity(3,"This is meh", dateConverter.fromString("10/01/17"), testUser, location);
 
-        //User user = new User("Test", "User", "test@gmail.com", "password", "testUser");
+        int newId = reviewDao.insertReview(newReview);
 
-        UserDao userDao = new UserDao();
-        User testUser = userDao.getUserById(1);
-
-        LocationDao locationDao = new LocationDao();
-        LocationEntity location  = locationDao.getLocationById(1);
-
-        log.info(testUser);
-        log.info(location);
-
-        ReviewEntity newEntity = new ReviewEntity("This is great!", dateConverter.fromString("10/01/17"), testUser, location);
-
-        int newId = 1;//reviewDao.insertReview(newEntity);
-
-        LocationEntity afterInsert = locationDao.getLocationById(1);
-        log.info("here");
-
-        for (ReviewEntity review : afterInsert.getReviews()) {
-            log.info(review.getBody());
-        }
-        log.info("here");
-
-        Assert.assertEquals("Id no matches", newId,1);
+        Assert.assertEquals("Id no matches", newReview.getId(),newId);
     }
 
     @Test
     public void getReviewById() throws Exception {
 
-        LocalDateStringConverter dateConverter = new LocalDateStringConverter();
-
-        User user = new User("Test", "User", "test@gmail.com", "password", "testUser");
-        LocationEntity location = new LocationEntity();
-
-        ReviewEntity review = new ReviewEntity("This is my review", dateConverter.fromString("10/01/17"), user, location);
-        int id = reviewDao.insertReview(review);
-
-        ReviewEntity returnedReview = reviewDao.getReviewById(id);
-        Assert.assertEquals("Id does not match", returnedReview.getId(), review.getId());
-        Assert.assertEquals("Body does not match", returnedReview.getBody(), review.getBody());
-        Assert.assertEquals("Date does not match", returnedReview.getDate(), review.getDate());
-        Assert.assertEquals("User does not match", returnedReview.getUser(), review.getUser());
-        Assert.assertEquals("Location does not match", returnedReview.getLocation(), review.getLocation());
+        ReviewEntity returnedReview = reviewDao.getReviewById(secondReview.getId());
+        Assert.assertEquals("Id does not match", secondReview.getId(), returnedReview.getId());
+        Assert.assertEquals("Body does not match", secondReview.getBody(), returnedReview.getBody());
+        Assert.assertEquals("Date does not match", secondReview.getDate(), returnedReview.getDate());
+        Assert.assertEquals("User does not match", secondReview.getUser().getUserName(), returnedReview.getUser().getUserName());
+        Assert.assertEquals("Location does not match", secondReview.getLocation().getGoogleId(), returnedReview.getLocation().getGoogleId());
     }
 
     @Test
     public void updateReview() throws Exception {
-        //TODO write this
+        secondReview.setBody("This was awesome");
+        reviewDao.updateReview(secondReview);
+
+        ReviewEntity returnedReview = reviewDao.getReviewById(secondReview.getId());
+        Assert.assertEquals("Id does not match", secondReview.getId(), returnedReview.getId());
+        Assert.assertEquals("Body does not match", secondReview.getBody(), returnedReview.getBody());
+        Assert.assertEquals("Date does not match", secondReview.getDate(), returnedReview.getDate());
+        Assert.assertEquals("User does not match", secondReview.getUser().getUserName(), returnedReview.getUser().getUserName());
+        Assert.assertEquals("Location does not match", secondReview.getLocation().getGoogleId(), returnedReview.getLocation().getGoogleId());
 
     }
 
     @Test
     public void deleteReview() throws Exception {
-        // TODO write this
+        reviewDao.deleteReview(firstReview);
+
+        //ReviewEntity testReview = reviewDao.getReviewById(1);
+
+        List<ReviewEntity> reviews = reviewDao.getAllReviews();
+
+        //Assert.assertNull("Review retrieved is not null", testReview);
+        Assert.assertEquals("Incorrect number of reviews in database", allReviews.size() - 1, reviews.size());
+
     }
 }
