@@ -113,4 +113,15 @@ public class ReviewEntity {
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ReviewEntity{" +
+                "id=" + id +
+                ", body='" + body + '\'' +
+                ", date=" + date +
+                ", user=" + user +
+                ", location=" + location +
+                '}';
+    }
 }

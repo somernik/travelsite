@@ -5,6 +5,7 @@ import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
 import javafx.util.converter.LocalDateStringConverter;
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -60,7 +61,15 @@ public class ReviewDaoTest {
 
         ReviewEntity newEntity = new ReviewEntity("This is great!", dateConverter.fromString("10/01/17"), testUser, location);
 
-        int newId = reviewDao.insertReview(newEntity);
+        int newId = 1;//reviewDao.insertReview(newEntity);
+
+        LocationEntity afterInsert = locationDao.getLocationById(1);
+        log.info("here");
+
+        for (ReviewEntity review : afterInsert.getReviews()) {
+            log.info(review.getBody());
+        }
+        log.info("here");
 
         Assert.assertEquals("Id no matches", newId,1);
     }
@@ -82,5 +91,17 @@ public class ReviewDaoTest {
         Assert.assertEquals("Date does not match", returnedReview.getDate(), review.getDate());
         Assert.assertEquals("User does not match", returnedReview.getUser(), review.getUser());
         Assert.assertEquals("Location does not match", returnedReview.getLocation(), review.getLocation());
+    }
+
+    @Test
+    public void updateReview() throws Exception {
+        //TODO write this
+
+
+    }
+
+    @Test
+    public void deleteReview() throws Exception {
+        // TODO write this
     }
 }

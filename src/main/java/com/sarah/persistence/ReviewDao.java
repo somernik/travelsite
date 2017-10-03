@@ -100,4 +100,61 @@ public class ReviewDao {
         return review;
     }
 
+    /** Update  review
+     * @param review review to update
+     */
+    public void updateReview(ReviewEntity review) {
+        Transaction transaction = null;
+        Session session = null;
+
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(review);
+            transaction.commit();
+        } catch(HibernateException he) {
+            log.error("Hibernate Exception: ", he);
+            if (transaction != null) {
+
+                try {
+                    transaction.rollback();
+                } catch (HibernateException he2) {
+                    log.error("Error rolling back save of review: " + review, he2);
+                }
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    /** Delete  review
+     * @param review review to update
+     */
+    public void deleteReview(ReviewEntity review) {
+        Transaction transaction = null;
+        Session session = null;
+
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.delete(review);
+            transaction.commit();
+        } catch(HibernateException he) {
+            log.error("Hibernate Exception: ", he);
+            if (transaction != null) {
+
+                try {
+                    transaction.rollback();
+                } catch (HibernateException he2) {
+                    log.error("Error rolling back delete of review: " + review, he2);
+                }
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

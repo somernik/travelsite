@@ -3,10 +3,7 @@ package com.sarah.persistence;
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -87,7 +84,8 @@ public class LocationDao {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             locationEntity = (LocationEntity) session.get(LocationEntity.class, id);
-
+            Hibernate.initialize(locationEntity.getReviews());
+            Hibernate.initialize(locationEntity.getUsers());
         } catch (HibernateException he) {
             log.error("Error getting location with id: " + id, he);
 
@@ -100,18 +98,18 @@ public class LocationDao {
         return locationEntity;
     }
 
-    /** Update  user
-     * @param user user to update
+    /** Update  location
+     * @param location location to update
      */
-    /*
-    public void update(User user) {
+
+    public void updateLocation(LocationEntity location) {
         Transaction transaction = null;
         Session session = null;
 
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.saveOrUpdate(user);
+            session.saveOrUpdate(location);
             transaction.commit();
         } catch(HibernateException he) {
             log.error("Hibernate Exception: ", he);
@@ -120,7 +118,7 @@ public class LocationDao {
                 try {
                     transaction.rollback();
                 } catch (HibernateException he2) {
-                    log.error("Error rolling back save of user: " + user, he2);
+                    log.error("Error rolling back save of location: " + location, he2);
                 }
             }
         } finally {
@@ -129,29 +127,28 @@ public class LocationDao {
             }
         }
     }
-    */
 
-    /** Delete  user
-     * @param user user to update
+
+    /** Delete  location
+     * @param location location to update
      */
-    /*
-    public void delete(User user) {
+    public void deleteLocation(LocationEntity location) {
         Transaction transaction = null;
         Session session = null;
 
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.delete(user);
+            session.delete(location);
             transaction.commit();
-        } catch(HibernateException he) {
+        } catch (HibernateException he) {
             log.error("Hibernate Exception: ", he);
             if (transaction != null) {
 
                 try {
                     transaction.rollback();
                 } catch (HibernateException he2) {
-                    log.error("Error rolling back delete of user: " + user, he2);
+                    log.error("Error rolling back delete of location: " + location, he2);
                 }
             }
         } finally {
@@ -160,6 +157,5 @@ public class LocationDao {
             }
         }
     }
-    */
 
 }
