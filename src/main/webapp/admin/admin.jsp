@@ -1,9 +1,9 @@
-<%@include file="templates/taglib.jsp" %>
+<%@include file="../templates/taglib.jsp" %>
 <c:set var = "title" value = "WWW Travel | Admin"/>
 <html>
-<%@include file="templates/head.jsp" %>
+<%@include file="../templates/head.jsp" %>
 <body>
-<%@include file="templates/nav.jsp" %>
+<%@include file="../templates/nav.jsp" %>
 
 <div id="index-banner">
     <div class="section no-pad-bot">
