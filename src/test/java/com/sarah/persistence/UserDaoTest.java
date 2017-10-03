@@ -91,7 +91,7 @@ public class UserDaoTest {
 
         int id = userDao.insert(user);
 
-        Assert.assertEquals("ids dont match", 12, id);
+        Assert.assertEquals("ids dont match", user.getUserid(), id);
 
         User testUser = userDao.getUserById(id);
         Assert.assertEquals("location amount dont match", user.getLocations().size(), testUser.getLocations().size());
