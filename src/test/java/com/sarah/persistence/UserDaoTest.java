@@ -26,14 +26,17 @@ public class UserDaoTest {
     private UserDao userDao = new UserDao();
 
     private final Logger log = Logger.getLogger(this.getClass());
-    User firstUser = new User("First", "User", 1, "first.user@email.com", "testpassword", "firstUser");
-    User secondUser = new User("Test", "Insert", 2, "insert@email.com", "testpassword", "testUser");
-    List<User> allUsers = new ArrayList<User>();
+    private User firstUser = new User("First", "User", 1, "first.user@email.com", "testpassword", "firstUser");
+    private User secondUser = new User("Test", "Insert", 2, "insert@email.com", "testpassword", "testUser");
+    private List<User> allUsers = new ArrayList<User>();
 
     @Before
     public void setUp() throws Exception {
         userDao.insert(firstUser);
         userDao.insert(secondUser);
+
+        allUsers.add(firstUser);
+        allUsers.add(secondUser);
     }
 
     @After
@@ -47,38 +50,41 @@ public class UserDaoTest {
     @Test
     public void getAllUsers() throws Exception {
 
-        //allUsers.add(firstUser);
-        //allUsers.add(secondUser);
 
-        List<User> expectedUsers = userDao.getAllUsers();
-/*
+        List<User> testUsers = userDao.getAllUsers();
+
         for (int i = 0; i < allUsers.size(); i++) {
-            Assert.assertEquals("Ids did not match", expectedUsers.get(i).getUserid(), allUsers.get(i).getUserid());
-            Assert.assertEquals("First Name did not match", expectedUsers.get(i).getFirstName(), allUsers.get(i).getFirstName());
-            Assert.assertEquals("Last Name did not match", expectedUsers.get(i).getLastName(), allUsers.get(i).getLastName());
-            Assert.assertEquals("User name did not match", expectedUsers.get(i).getUserName(), allUsers.get(i).getUserName());
-            Assert.assertEquals("Emails did not match", expectedUsers.get(i).getEmail(), allUsers.get(i).getEmail());
-            Assert.assertEquals("Passwords  did not match", expectedUsers.get(i).getPassword(), allUsers.get(i).getPassword());
+            Assert.assertEquals("Ids did not match", allUsers.get(i).getUserid(), testUsers.get(i).getUserid());
+            Assert.assertEquals("First Name did not match", allUsers.get(i).getFirstName(), testUsers.get(i).getFirstName());
+            Assert.assertEquals("Last Name did not match", allUsers.get(i).getLastName(), testUsers.get(i).getLastName());
+            Assert.assertEquals("User name did not match", allUsers.get(i).getUserName(), testUsers.get(i).getUserName());
+            Assert.assertEquals("Emails did not match", allUsers.get(i).getEmail(), testUsers.get(i).getEmail());
+            Assert.assertEquals("Passwords  did not match", allUsers.get(i).getPassword(), testUsers.get(i).getPassword());
 
         }
-*/
-        //Assert.assertEquals("Array sizes do not match", expectedUsers.size(), allUsers.size());
+
+        Assert.assertEquals("Array sizes do not match", allUsers.size(), testUsers.size());
     }
 
     @Test
     public void insert() throws Exception {
         int firstUserId = userDao.insert(firstUser);
-        //Assert.assertEquals("Ids dont match", firstUserId, firstUser.getUserid());
+        Assert.assertEquals("Ids dont match", firstUser.getUserid(), firstUserId);
 
     }
 
 
     @Test
     public void insertUserWithLocations() throws Exception {
+        // Prepare locations
         LocationEntity location1 = new LocationEntity("test", "test id");
+        LocationDao locationDao = new LocationDao();
+        locationDao.insertLocation(location1);
+
         Set<LocationEntity> locations = new HashSet<LocationEntity>();
         locations.add(location1);
 
+        // Create user
         User user = new User("Test", "Locations", "email@email.com", "password", "username");
         user.setLocations(locations);
 
@@ -86,6 +92,10 @@ public class UserDaoTest {
 
         Assert.assertEquals("ids dont match", 3, id);
 
+        User testUser = userDao.getUserById(id);
+        Assert.assertEquals("location amount dont match", user.getLocations().size(), testUser.getLocations().size());
+
+        // TODO better check that locations are valid
     }
 
     @Test
@@ -95,12 +105,12 @@ public class UserDaoTest {
         User testUser = userDao.getUserById(firstUser.getUserid());
 
         assertNotNull(testUser);
-        Assert.assertEquals("Ids did not match", testUser.getUserid(), firstUser.getUserid());
-        Assert.assertEquals("First Name did not match", testUser.getFirstName(), firstUser.getFirstName());
-        Assert.assertEquals("Last Name did not match", testUser.getLastName(), firstUser.getLastName());
-        Assert.assertEquals("User name did not match", testUser.getUserName(), firstUser.getUserName());
-        Assert.assertEquals("Emails did not match", testUser.getEmail(), firstUser.getEmail());
-        Assert.assertEquals("Passwords  did not match", testUser.getPassword(), firstUser.getPassword());
+        Assert.assertEquals("Ids did not match", firstUser.getUserid(), testUser.getUserid());
+        Assert.assertEquals("First Name did not match", firstUser.getFirstName(), testUser.getFirstName());
+        Assert.assertEquals("Last Name did not match", firstUser.getLastName(), testUser.getLastName());
+        Assert.assertEquals("User name did not match", firstUser.getUserName(), testUser.getUserName());
+        Assert.assertEquals("Emails did not match", firstUser.getEmail(), testUser.getEmail());
+        Assert.assertEquals("Passwords  did not match", firstUser.getPassword(), testUser.getPassword());
 
     }
 
@@ -111,12 +121,12 @@ public class UserDaoTest {
         userDao.update(secondUser);
 
         User testUser = userDao.getUserById(secondUser.getUserid());
-        Assert.assertEquals("Ids did not match", testUser.getUserid(), secondUser.getUserid());
-        Assert.assertEquals("First Name did not match", testUser.getFirstName(), secondUser.getFirstName());
-        Assert.assertEquals("Last Name did not match", testUser.getLastName(), secondUser.getLastName());
-        Assert.assertEquals("User name did not match", testUser.getUserName(), secondUser.getUserName());
-        Assert.assertEquals("Emails did not match", testUser.getEmail(), secondUser.getEmail());
-        Assert.assertEquals("Passwords  did not match", testUser.getPassword(), secondUser.getPassword());
+        Assert.assertEquals("Ids did not match", secondUser.getUserid(), testUser.getUserid());
+        Assert.assertEquals("First Name did not match", secondUser.getFirstName(), testUser.getFirstName());
+        Assert.assertEquals("Last Name did not match", secondUser.getLastName(), testUser.getLastName());
+        Assert.assertEquals("User name did not match", secondUser.getUserName(), testUser.getUserName());
+        Assert.assertEquals("Emails did not match", secondUser.getEmail(), testUser.getEmail());
+        Assert.assertEquals("Passwords  did not match", secondUser.getPassword(), testUser.getPassword());
 
 
     }
@@ -127,7 +137,10 @@ public class UserDaoTest {
 
         User testUser = userDao.getUserById(firstUser.getUserid());
 
+        List<User> users = userDao.getAllUsers();
+
         Assert.assertNull("User retrieved is not null", testUser);
+        Assert.assertEquals("Incorrect number of users in database", allUsers.size() - 1, users.size());
 
     }
 

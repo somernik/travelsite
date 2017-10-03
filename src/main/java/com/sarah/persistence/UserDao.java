@@ -2,10 +2,7 @@ package com.sarah.persistence;
 
 import com.sarah.entity.User;
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -86,7 +83,7 @@ public class UserDao {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             user = (User) session.get(User.class, id);
-
+            Hibernate.initialize(user.getLocations());
         } catch (HibernateException he) {
             log.error("Error getting user with id: " + id, he);
 

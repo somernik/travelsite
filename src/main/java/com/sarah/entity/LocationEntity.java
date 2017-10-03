@@ -115,9 +115,9 @@ public class LocationEntity {
         return "LocationEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", googleId='" + googleId + '\'' +
+                ", googleId='" + googleId + '\'' +/*
                 ", reviews=" + reviews +
-                ", users=" + users +
+                ", users=" + users +*/
                 '}';
     }
 }
