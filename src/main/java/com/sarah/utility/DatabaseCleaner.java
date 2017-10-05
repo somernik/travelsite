@@ -24,7 +24,7 @@ public class DatabaseCleaner {
             SQLQuery query = session.createSQLQuery(sql);
             query.executeUpdate();
 
-            sql = "DELETE FROM userprivelege";
+            sql = "DELETE FROM userprivilege";
             query = session.createSQLQuery(sql);
             query.executeUpdate();
 
@@ -45,7 +45,7 @@ public class DatabaseCleaner {
             SQLQuery alterQuery = session.createSQLQuery(alterSql);
             alterQuery.executeUpdate();
 
-            alterSql = "ALTER TABLE userprivelege AUTO_INCREMENT = 1";
+            alterSql = "ALTER TABLE userprivilege AUTO_INCREMENT = 1";
             alterQuery = session.createSQLQuery(alterSql);
             alterQuery.executeUpdate();
 

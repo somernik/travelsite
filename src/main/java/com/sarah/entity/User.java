@@ -1,5 +1,6 @@
 package com.sarah.entity;
 
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -47,11 +48,14 @@ public class User {
             })
     private Set<LocationEntity> locations = new HashSet<LocationEntity>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL) //TODO
+    private Set<UserPrivilegeEntity> userPrivileges = new HashSet<UserPrivilegeEntity>();
+
     /**
      * Instantiates a new User.
      */
-    public User() {
-    }
+    public User() {}
+
 
     /**
      * Instantiates a new User no id
@@ -66,6 +70,8 @@ public class User {
         this.email = email;
         this.password = password;
         this.userName = userName;
+
+        createContributorPrivilege();
     }
 
     /**
@@ -83,6 +89,8 @@ public class User {
         this.email = email;
         this.password = password;
         this.userName = userName;
+
+        createContributorPrivilege();
     }
 
     public User(String firstName, String lastName, String email, String password, String userName, Set<ReviewEntity> reviews) {
@@ -93,6 +101,8 @@ public class User {
         this.password = password;
         this.userName = userName;
         this.reviews = reviews;
+
+        createContributorPrivilege();
     }
 
     /**
@@ -189,6 +199,14 @@ public class User {
         this.locations = locations;
     }
 
+    public Set<UserPrivilegeEntity> getUserPrivileges() {
+        return userPrivileges;
+    }
+
+    public void setUserPrivileges(Set<UserPrivilegeEntity> userPrivileges) {
+        this.userPrivileges = userPrivileges;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -201,4 +219,41 @@ public class User {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userid != user.userid) return false;
+        if (!firstName.equals(user.firstName)) return false;
+        if (!lastName.equals(user.lastName)) return false;
+        if (!email.equals(user.email)) return false;
+        if (!password.equals(user.password)) return false;
+        if (!userName.equals(user.userName)) return false;
+        if (reviews != null ? !reviews.equals(user.reviews) : user.reviews != null) return false;
+        return locations != null ? locations.equals(user.locations) : user.locations == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + userid;
+        result = 31 * result + email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + userName.hashCode();
+        result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
+        result = 31 * result + (locations != null ? locations.hashCode() : 0);
+        return result;
+    }
+
+    private void createContributorPrivilege() {
+        PrivilegeEntity privilegeEntity = new PrivilegeEntity(2, "Contributor");
+
+        UserPrivilegeEntity userPrivilege = new UserPrivilegeEntity(this.getUserName(), this, privilegeEntity);
+
+        this.getUserPrivileges().add(userPrivilege);
+    }
 }

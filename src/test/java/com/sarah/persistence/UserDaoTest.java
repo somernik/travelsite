@@ -144,5 +144,11 @@ public class UserDaoTest {
         Assert.assertEquals("Incorrect number of users in database", allUsers.size() - 1, users.size());
 
     }
+/*
+    @Test(expected = HibernateException.class)
+    public void InsertExceptionTest() throws Exception {
+        User user = new User();
+        userDao.insert(user);
+    }*/
 
 }

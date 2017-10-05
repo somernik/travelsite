@@ -70,13 +70,13 @@ LOCK TABLES `photo` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `privelege`
+-- Table structure for table `privilege`
 --
 
-DROP TABLE IF EXISTS `privelege`;
+DROP TABLE IF EXISTS `privilege`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `privelege` (
+CREATE TABLE `privilege` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
@@ -84,13 +84,13 @@ CREATE TABLE `privelege` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `privelege`
+-- Dumping data for table `privilege`
 --
 
-LOCK TABLES `privelege` WRITE;
-/*!40000 ALTER TABLE `privelege` DISABLE KEYS */;
-INSERT INTO `privelege` VALUES (1,'administrator'),(2,'contributor');
-/*!40000 ALTER TABLE `privelege` ENABLE KEYS */;
+LOCK TABLES `privilege` WRITE;
+/*!40000 ALTER TABLE `privilege` DISABLE KEYS */;
+INSERT INTO `privilege` VALUES (1,'administrator'),(2,'contributor');
+/*!40000 ALTER TABLE `privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -261,31 +261,32 @@ LOCK TABLES `userlocation` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `userprivelege`
+-- Table structure for table `userprivilege`
 --
 
-DROP TABLE IF EXISTS `userprivelege`;
+DROP TABLE IF EXISTS `userprivilege`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `userprivelege` (
-  `Privelege_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `userprivilege` (
+  `Privilege_id` int(11) NOT NULL,
   `User_id` int(11) NOT NULL,
   `user_name` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`Privelege_id`,`User_id`),
-  KEY `userPrivelege_User` (`User_id`),
-  CONSTRAINT `userPrivelege_Privelege` FOREIGN KEY (`Privelege_id`) REFERENCES `privelege` (`id`),
-  CONSTRAINT `userPrivelege_User` FOREIGN KEY (`User_id`) REFERENCES `user` (`id`)
+  PRIMARY KEY (`Privilege_id`,`User_id`),
+  KEY `userPrivilege_User` (`User_id`),
+  KEY `userPrivilege_Privilege` (`Privilege_id`),
+  CONSTRAINT `userPrivilege_Privilege` FOREIGN KEY (`Privilege_id`) REFERENCES `privilege` (`id`),
+  CONSTRAINT `userPrivilege_User` FOREIGN KEY (`User_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `userprivelege`
+-- Dumping data for table `userprivilege`
 --
 
-LOCK TABLES `userprivelege` WRITE;
-/*!40000 ALTER TABLE `userprivelege` DISABLE KEYS */;
-INSERT INTO `userprivelege` VALUES (1,1,'sarah'),(2,1,'sarah');
-/*!40000 ALTER TABLE `userprivelege` ENABLE KEYS */;
+LOCK TABLES `userprivilege` WRITE;
+/*!40000 ALTER TABLE `userprivilege` DISABLE KEYS */;
+INSERT INTO `userprivilege` VALUES (1,1,'sarah'),(2,1,'sarah');
+/*!40000 ALTER TABLE `userprivilege` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
