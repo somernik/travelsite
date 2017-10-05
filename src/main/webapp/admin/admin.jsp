@@ -4,68 +4,119 @@
 <%@include file="admin-head.jsp" %>
 <body>
 <%@include file="../templates/nav.jsp" %>
+<style>
 
-<div id="index-banner">
-    <div class="section no-pad-bot">
-        <div class="container">
-<h2>Admin</h2>
-<div id="search">
-    <h3>Search Users</h3>
-    <form action="searchUser">
+    .tabs .tab a, .tabs .tab.disabled a {
+        color: #26a69a;
+    }
 
-        <select id="searchType" name="searchType">
-            <option value="id">ID</option>
-            <option value="f_name">First Name</option>
-            <option value="l_name">Last Name</option>
-        </select>
-        <select id="searchOperator" name="searchOperator">
-            <option value="=">=</option>
-            <option value="LIKE">contains</option>
-        </select>
-        <input name="searchValue" id="searchValue" type="text" required />
-        <input type="submit" value="Search" />
-    </form>
-    <a href = "searchUser">See all users</a>
-</div>
-<div id="privileges">
+    .tabs .indicator {
+        background-color: #26a69a;
+    }
 
-    <h3>Grant Privileges</h3>
-    <form class="col s12 m6 offset-m3" action="/updateUser">
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="id" type="text" name="id" class="validate">
-                <label for="id">User Id</label>
-            </div>
+    .tabs .tab a:hover, .tabs .tab a.active {
+        color: #26a69a;
+    }
+</style>
+<div class="container">
+    <h5>Admin</h5>
+    <div class="section no-pad-bot" id="adminOptions">
 
-            <div class="input-field col s12">
-                <input id="username" type="text" name="username" class="validate">
-                <label for="username">Username</label>
-            </div>
+        <div id="filters">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a href="#search">Search Users</a></li>
+                        <li class="tab col s3"><a href="#privileges">Privileges</a></li>
+                        <li class="tab col s3"><a href="#reported">Reported Items</a></li>
+                        <li class="tab col s3"><a href="#other">Other Things</a></li>
+                    </ul>
+                </div>
+                <div id="search">
+                    <p>Search Users</p>
+                    <form action="searchUser">
 
-            <div class="input-field col s12">
-                <input id="newUsername" type="text" name="newUsername" class="validate">
-                <label for="newUsername">New Username</label>
+                        <select id="searchType" name="searchType">
+                            <option value="id">ID</option>
+                            <option value="f_name">First Name</option>
+                            <option value="l_name">Last Name</option>
+                        </select>
+                        <select id="searchOperator" name="searchOperator">
+                            <option value="=">=</option>
+                            <option value="LIKE">contains</option>
+                        </select>
+                        <input name="searchValue" id="searchValue" type="text" required />
+                        <input type="submit" value="Search" />
+                    </form>
+                    <a href = "searchUser">See all users</a>
+                </div>
+                <div id="privileges">
+
+                    <p>Admin Users</p>
+                    <div class="container-fluid">
+                        <c:if test="${empty adminUsers}"><p>No Admin Users!</p></c:if>
+                        <c:if test="${not empty adminUsers}">
+                        <table>
+                            <tr><th>Id</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Privilege</th></tr>
+                            <c:forEach var="user" items="${adminUsers}">
+                                <tr><td>${user.userid}</td><td>${user.userName}</td><td>${user.firstName}</td><td>${user.lastName}</td><td>
+                                    <form class="col s12 m6 offset-m3" action="removeAdmin">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="id" type="text" name="id" class="validate">
+                                                <label for="id">User Id</label>
+                                            </div>
+                                        </div>
+
+                                        <input type="submit" value="Remove Admin" />
+                                    </form>
+
+                                </td></tr>
+                            </c:forEach>
+                        </table>
+                        </c:if>
+                    </div>
+
+                    <form class="col s12 m6" action="addAdmin">
+                        <p>Grant Admin</p>
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <input id="id" type="text" name="id" class="validate">
+                                <label for="id">User Id</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input id="username" type="text" name="username" class="validate">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="col s4">
+                            <button class="btn waves-effect waves-light" type="submit" name="grant">Grant Admin</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div id="reported">
+                    <p>list of reported reviews, images, users?</p>
+                    <p>Delete Account</p><!-- TODO -->
+                    <form class="col s12 m6 offset-m3" action="deleteUser">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="id" type="text" name="id" class="validate">
+                                <label for="id">User Id</label>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Delete Account" />
+                    </form>
+
+                </div>
+                <div id="other">
+                    <p>nothing here yet</p>
+                </div>
             </div>
         </div>
-
-        <input type="submit" value="Save Changes" />
-        <label for="admin">Grant Admin Privileges</label>
-        <input type="checkbox" id="admin" name="admin" style="opacity: initial; pointer-events: auto"  />
-    </form>
-
-    <h3>Delete Account</h3>
-    <form class="col s12 m6 offset-m3" action="/deleteUser">
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="id" type="text" name="id" class="validate">
-                <label for="id">User Id</label>
-            </div>
-        </div>
-
-        <input type="submit" value="Delete Account" />
-    </form>
-
+    </div>
 </div>
-        </div></div></div>
 </body>
 </html>

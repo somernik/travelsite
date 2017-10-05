@@ -23,7 +23,7 @@ public class LocationDaoTest {
 
         int id = locationDao.insertLocation(location);
 
-        Assert.assertEquals("IDs do not equal", id, 1);
+        Assert.assertEquals("IDs do not equal", 1, id);
     }
 
     @Test

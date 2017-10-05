@@ -21,7 +21,6 @@
 </style>
 <body>
 
-<%--TODO Pretty up the results! - DONE --%>
 <div class="container-fluid">
     <h2>Search: ${type} ${operator} ${value} <c:if test="${empty value}">all</c:if></h2>
     <h2>Search Results: </h2>

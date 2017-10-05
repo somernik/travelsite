@@ -24,6 +24,10 @@ public class DatabaseCleaner {
             SQLQuery query = session.createSQLQuery(sql);
             query.executeUpdate();
 
+            sql = "DELETE FROM userprivelege";
+            query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
             sql = "DELETE FROM review";
             query = session.createSQLQuery(sql);
             query.executeUpdate();
@@ -39,6 +43,10 @@ public class DatabaseCleaner {
             // reset ids
             String alterSql = "ALTER TABLE userlocation AUTO_INCREMENT = 1";
             SQLQuery alterQuery = session.createSQLQuery(alterSql);
+            alterQuery.executeUpdate();
+
+            alterSql = "ALTER TABLE userprivelege AUTO_INCREMENT = 1";
+            alterQuery = session.createSQLQuery(alterSql);
             alterQuery.executeUpdate();
 
             alterSql = "ALTER TABLE review AUTO_INCREMENT = 1";
