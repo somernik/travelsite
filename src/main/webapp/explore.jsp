@@ -10,16 +10,15 @@
         padding-left: 3em;
         width: 95%;
     }
-
-
 </style><!-- previous style is the same as on the index.jsp -->
 
 <style>
-   form p {
+    form.filterForms p {
        display: inline;
        padding-top: 5px;
-   }
-    form label {
+    }
+
+    form.filterForms label {
         padding: 0 30px;
     }
 
@@ -67,7 +66,7 @@
                     </ul>
                 </div>
                 <div id="test1" class="col s12">
-                    <form action="#"><!-- TODO pull dynamically from DB -->
+                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB -->
                         <p>
                             <input type="checkbox" id="test5" />
                             <label for="test5">Backpacking</label>
@@ -89,7 +88,7 @@
                     When filtering by activities... top activities with a "best in: < month here >, location: < location here (restricted to what is visible in map) >" will appear ranked by ratings</div>
                 </div>
                 <div id="test2" class="col s12">
-                    <form action="#"><!-- TODO pull dynamically from DB -->
+                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB -->
                         <p>
                             <input type="checkbox" id="1" />
                             <label for="1">January</label>

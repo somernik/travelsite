@@ -10,20 +10,20 @@
     <form class="col s12">
         <span class="rating">
             <input type="radio" class="rating-input"
-                   id="rating-input-1-5" name="rating-input-1">
-            <label for="rating-input-1-5" class="rating-star"><i class="material-icons" id="1">star_border</i></label>
+                   id="rating-input-1-1" name="rating-input-1">
+            <label for="rating-input-1-1" class="rating-star"><i class="material-icons" id="1">star_border</i></label>
             <input type="radio" class="rating-input"
-                   id="rating-input-1-4" name="rating-input-1">
-            <label for="rating-input-1-4" class="rating-star"><i class="material-icons" id="2">star_border</i></label>
+                   id="rating-input-1-2" name="rating-input-1">
+            <label for="rating-input-1-2" class="rating-star"><i class="material-icons" id="2">star_border</i></label>
             <input type="radio" class="rating-input"
                    id="rating-input-1-3" name="rating-input-1">
             <label for="rating-input-1-3" class="rating-star"><i class="material-icons" id="3">star_border</i></label>
             <input type="radio" class="rating-input"
-                   id="rating-input-1-2" name="rating-input-1">
-            <label for="rating-input-1-2" class="rating-star"><i class="material-icons" id="4">star_border</i></label>
+                   id="rating-input-1-4" name="rating-input-1">
+            <label for="rating-input-1-4" class="rating-star"><i class="material-icons" id="4">star_border</i></label>
             <input type="radio" class="rating-input"
-                   id="rating-input-1-1" name="rating-input-1">
-            <label for="rating-input-1-1" class="rating-star"><i class="material-icons" id="5">star_border</i></label>
+                   id="rating-input-1-5" name="rating-input-1">
+            <label for="rating-input-1-5" class="rating-star"><i class="material-icons" id="5">star_border</i></label>
         </span>
         <div class="row">
             <div class="input-field col s12">
@@ -77,34 +77,46 @@
 
     $('.rating-star').click(function(){
 
-        var newIcon = document.createElement('i');
-        newIcon.className = "material-icons";
-        var iconText = document.createTextNode("star");
-        var oldChild = this.firstChild;
-        newIcon.appendChild(iconText);
-
         var current = this;
+        modifyStars(current, "star");
+
         while (current = current.previousSibling) {
-            if (current.nodeName == 'LABEL' && current.hasChildNodes()) {
-                alert("its a label");
-                var old = current.firstChild;
 
-                current.removeChild(old);
+            modifyStars(current, "star");
 
-                //current.replaceChild(newIcon, old);
-            }
         }
 
-        var siblings = this.parentNode.childNodes;
-        /*
-        alert(this.nodeName);
-        alert(this.previousSibling.nodeName);
-        alert(this.previousSibling.previousSibling.nodeName);
-        */
+        current = this;
+        while (current = current.nextSibling) {
+            modifyStars(current, "star_border");
 
-        //this.replaceChild(newIcon, oldChild);
+        }
     });
+
+    function modifyStars(currentNode, starType){
+
+        if (currentNode.nodeName == 'LABEL' && currentNode.hasChildNodes()) {
+
+            var old = currentNode.firstChild;
+
+            var newIcon = document.createElement('i');
+            newIcon.className = "material-icons";
+
+            var iconText = document.createTextNode(starType);
+            newIcon.appendChild(iconText);
+
+            currentNode.replaceChild(newIcon, old);
+        }
+    }
 </script>
 <style>
+    [type="radio"] + label:before,
+    [type="radio"] + label:after {
+        display: none;
+    }
 
+    [type="radio"]:not(:checked) + label,
+    [type="radio"]:checked + label {
+        padding-left: 0px;
+    }
 </style>

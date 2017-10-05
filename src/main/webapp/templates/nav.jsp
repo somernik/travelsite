@@ -1,9 +1,9 @@
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
         <ul class="left hide-on-med-and-down">
-            <li><a href="/explore.jsp" class="waves-effect waves-light btn"><i class="material-icons">search</i></a></li>
+            <li><a href="explore.jsp" class="waves-effect waves-light btn"><i class="material-icons">search</i></a></li>
         </ul>
-        <a id="logo-container" href="/index.jsp" class="brand-logo center">WWW Travel</a>
+        <a id="logo-container" href="index.jsp" class="brand-logo center">WWW Travel</a>
         <ul class="right hide-on-med-and-down">
             <li><a class="waves-effect waves-light btn modal-trigger" href="#signup">Sign Up</a></li>
             <li><a class="waves-effect waves-light btn modal-trigger" href="#login">Login</a></li>
@@ -29,6 +29,6 @@ below css used to make forms in modals look nice with spacing and no scroll bar
     }
 
     .modal {
-        max-height: 80%;
+        max-height: 82%;
     }
 </style>
