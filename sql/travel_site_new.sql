@@ -25,9 +25,9 @@ DROP TABLE IF EXISTS `location`;
 CREATE TABLE `location` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `googleId` int(11) NOT NULL,
+  `googleId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +36,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (1,'place 1','test id');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +80,7 @@ CREATE TABLE `privelege` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,6 +89,7 @@ CREATE TABLE `privelege` (
 
 LOCK TABLES `privelege` WRITE;
 /*!40000 ALTER TABLE `privelege` DISABLE KEYS */;
+INSERT INTO `privelege` VALUES (1,'administrator'),(2,'contributor');
 /*!40000 ALTER TABLE `privelege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,16 +101,16 @@ DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `review` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `body` varchar(1000) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `User_id` int(11) NOT NULL,
-  `Location_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `body` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `Location_id` int(11) DEFAULT NULL,
+  `User_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `Review_Locations` (`Location_id`),
-  KEY `Review_User` (`User_id`),
-  CONSTRAINT `Review_Locations` FOREIGN KEY (`Location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `Review_User` FOREIGN KEY (`User_id`) REFERENCES `user` (`id`)
+  KEY `FK_d516yyroxds5co36dtnls8x4q` (`Location_id`),
+  KEY `FK_8547wsuvd2xekqq2jmr5riqd8` (`User_id`),
+  CONSTRAINT `FK_8547wsuvd2xekqq2jmr5riqd8` FOREIGN KEY (`User_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_d516yyroxds5co36dtnls8x4q` FOREIGN KEY (`Location_id`) REFERENCES `location` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -118,6 +120,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (1,'This is great!','2017-10-01',1,1);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +219,7 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `user_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,6 +228,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Sarah','Omernik','sarah.omernik@gmail.com','ArchLang21','sarah');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,13 +268,16 @@ DROP TABLE IF EXISTS `userprivelege`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userprivelege` (
-  `Privelege_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Privelege_id` int(11) NOT NULL,
   `User_id` int(11) NOT NULL,
-  PRIMARY KEY (`Privelege_id`,`User_id`),
+  `user_name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userPrivelege_Privelege` (`Privelege_id`),
   KEY `userPrivelege_User` (`User_id`),
   CONSTRAINT `userPrivelege_Privelege` FOREIGN KEY (`Privelege_id`) REFERENCES `privelege` (`id`),
   CONSTRAINT `userPrivelege_User` FOREIGN KEY (`User_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,6 +286,7 @@ CREATE TABLE `userprivelege` (
 
 LOCK TABLES `userprivelege` WRITE;
 /*!40000 ALTER TABLE `userprivelege` DISABLE KEYS */;
+INSERT INTO `userprivelege` VALUES (1,1,1,'sarah'),(2,2,1,'sarah');
 /*!40000 ALTER TABLE `userprivelege` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -291,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-19 10:23:29
+-- Dump completed on 2017-10-04 20:19:57

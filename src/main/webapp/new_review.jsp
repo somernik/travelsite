@@ -91,7 +91,7 @@
 
                 current.removeChild(old);
 
-                current.replaceChild(newIcon, old);
+                //current.replaceChild(newIcon, old);
             }
         }
 

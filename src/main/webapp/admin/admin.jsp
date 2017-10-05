@@ -1,7 +1,7 @@
 <%@include file="../templates/taglib.jsp" %>
 <c:set var = "title" value = "WWW Travel | Admin"/>
 <html>
-<%@include file="../templates/head.jsp" %>
+<%@include file="admin-head.jsp" %>
 <body>
 <%@include file="../templates/nav.jsp" %>
 
