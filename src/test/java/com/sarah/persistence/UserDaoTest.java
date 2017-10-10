@@ -2,6 +2,7 @@ package com.sarah.persistence;
 
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
+import com.sarah.entity.UserPrivilegeEntity;
 import com.sarah.utility.DatabaseCleaner;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
@@ -129,6 +130,29 @@ public class UserDaoTest {
         //Assert.assertNull("User retrieved is not null", testUser);
         Assert.assertEquals("Incorrect number of users in database", allUsers.size() - 1, users.size());
 
+    }
+
+    @Test
+    public void addAdmin() {
+        userDao.addAdmin(secondUser);
+
+        User returnedUser = userDao.getUserById(secondUser.getUserid());
+
+        log.info(returnedUser.getUserPrivileges());
+        Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 2);
+
+        List<String> returnedValues = new ArrayList<String>();
+        List<String> actualValues = new ArrayList<String>();
+        actualValues.add("administrator");
+        actualValues.add("contributor");
+
+        for (UserPrivilegeEntity entity : returnedUser.getUserPrivileges()) {
+            log.info(entity.getPrivilege().getValue());
+            returnedValues.add(entity.getPrivilege().getValue());
+        }
+
+        Assert.assertEquals("First priv doesn't match", returnedValues.get(0), actualValues.get(0));
+        Assert.assertEquals("Second priv doesn't match", returnedValues.get(1), actualValues.get(1));
     }
 /*
     @Test(expected = HibernateException.class)

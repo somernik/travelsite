@@ -3,8 +3,10 @@ package com.sarah.persistence;
 import com.sarah.entity.PrivilegeEntity;
 import com.sarah.entity.User;
 import com.sarah.entity.UserPrivilegeEntity;
+import com.sarah.utility.DatabaseCleaner;
 import org.apache.log4j.Logger;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,15 +26,15 @@ public class UserPrivilegeDaoTest {
 
     @After
     public void tearDown() throws Exception {
-
+        DatabaseCleaner cleaner = new DatabaseCleaner();
+        cleaner.run();
     }
 
     @Test
     public void getAllUserPrivileges() throws Exception {
         List<UserPrivilegeEntity> userPrivileges = upDao.getAllUserPrivileges();
-        log.info(userPrivileges);
-        log.info(userPrivileges.size());
 
+        Assert.assertEquals("Incorrect number of privileges", userPrivileges.size(), 0);
     }
 
     @Test
@@ -40,6 +42,7 @@ public class UserPrivilegeDaoTest {
         User testUser = new User("test", "user", "user@email.com", "test pass", "testuser");
         UserDao userDao = new UserDao();
         userDao.insert(testUser);
+
         for (UserPrivilegeEntity entity : testUser.getUserPrivileges()) {
             log.info(entity.getPrivilege().getValue());
         }

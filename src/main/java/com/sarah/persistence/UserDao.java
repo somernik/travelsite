@@ -1,6 +1,8 @@
 package com.sarah.persistence;
 
+import com.sarah.entity.PrivilegeEntity;
 import com.sarah.entity.User;
+import com.sarah.entity.UserPrivilegeEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
@@ -84,6 +86,7 @@ public class UserDao {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             user = (User) session.get(User.class, id);
             Hibernate.initialize(user.getLocations());
+            Hibernate.initialize(user.getUserPrivileges());
         } catch (HibernateException he) {
             log.error("Error getting user with id: " + id, he);
 
@@ -180,6 +183,17 @@ public class UserDao {
                 session.close();
             }
         }
+    }
+
+    public void addAdmin(User user) {
+
+        PrivilegeEntity privilege = new PrivilegeEntity(1, "Administrator");
+
+        UserPrivilegeEntity userPrivilege = new UserPrivilegeEntity(user.getUserName(), user, privilege);
+
+        user.getUserPrivileges().add(userPrivilege);
+
+        this.update(user);
     }
 
 }
