@@ -12,35 +12,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sarah on 10/5/2017.
  */
 @WebServlet(
-    urlPatterns = {"/addAdmin"}
+        urlPatterns = {"/test"}
 )
-public class AddAdmin extends HttpServlet{
+public class Admin extends HttpServlet{
     private final Logger logger = Logger.getLogger(this.getClass());
 
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        List<User> adminUsers = (List<User>) req.getAttribute("adminUsers");
-        // TODO check logged in
 
-        // TODO validate all user input
         UserDao userDao = new UserDao();
+        List<User> users = userDao.getAllUsers();
 
-        User updateUser = userDao.getUserById(Integer.parseInt(req.getParameter("id"))); // TODO get from session
-
-        //userDao.addAdmin(updateUser);
-
-
-        adminUsers.add(updateUser);
-
-        session.setAttribute("adminUsers", adminUsers);
+        session.setAttribute("adminUsers", users);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("admin/admin.jsp");
         dispatcher.forward(req, resp);

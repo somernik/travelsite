@@ -276,7 +276,7 @@ CREATE TABLE `userprivilege` (
   KEY `userPrivilege_Privilege` (`Privilege_id`),
   CONSTRAINT `userPrivilege_Privilege` FOREIGN KEY (`Privilege_id`) REFERENCES `privilege` (`id`),
   CONSTRAINT `userPrivilege_User` FOREIGN KEY (`User_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-04 20:24:20
+-- Dump completed on 2017-10-10 15:41:01
