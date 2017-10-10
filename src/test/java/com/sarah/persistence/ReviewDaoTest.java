@@ -71,8 +71,6 @@ public class ReviewDaoTest {
         for (int i = 0; i < testReviews.size(); i ++) {
             Assert.assertEquals("Body is incorrect", testReviews.get(i).getBody(), allReviews.get(i).getBody());
             Assert.assertEquals("Date is incorrect", testReviews.get(i).getDate(), allReviews.get(i).getDate());
-            //Assert.assertEquals("User's username is incorrect", testReviews.get(i).getUser().getUserName(), allReviews.get(i).getUser().getUserName());
-            //Assert.assertEquals("Location's google id is incorrect", testReviews.get(i).getLocation().getGoogleId(), allReviews.get(i).getLocation().getGoogleId());
         }
 
     }
@@ -116,11 +114,8 @@ public class ReviewDaoTest {
     public void deleteReview() throws Exception {
         reviewDao.deleteReview(firstReview);
 
-        //ReviewEntity testReview = reviewDao.getReviewById(1);
-
         List<ReviewEntity> reviews = reviewDao.getAllReviews();
 
-        //Assert.assertNull("Review retrieved is not null", testReview);
         Assert.assertEquals("Incorrect number of reviews in database", allReviews.size() - 1, reviews.size());
 
     }

@@ -231,9 +231,7 @@ public class User {
         if (!lastName.equals(user.lastName)) return false;
         if (!email.equals(user.email)) return false;
         if (!password.equals(user.password)) return false;
-        if (!userName.equals(user.userName)) return false;
-        if (reviews != null ? !reviews.equals(user.reviews) : user.reviews != null) return false;
-        return locations != null ? locations.equals(user.locations) : user.locations == null;
+        return userName.equals(user.userName);
     }
 
     @Override
@@ -244,8 +242,6 @@ public class User {
         result = 31 * result + email.hashCode();
         result = 31 * result + password.hashCode();
         result = 31 * result + userName.hashCode();
-        result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
-        result = 31 * result + (locations != null ? locations.hashCode() : 0);
         return result;
     }
 
