@@ -53,3 +53,4 @@ fabric.properties
 
 .idea/
 *.properties
+hibernate.cfg.xml
