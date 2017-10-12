@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<form class="col s12 m6 offset-m3" action="/addUser">
+<form class="col s12 m6 offset-m3" action="addUser">
     <div class="row">
         <div class="input-field col s6">
             <input id="first_name" name="first_name" type="text" class="validate">

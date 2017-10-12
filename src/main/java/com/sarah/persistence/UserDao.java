@@ -23,12 +23,15 @@ public class UserDao {
      *
      * @return All users
      */
-    public List<User> getAllUsers() {
+    public List<User> getAllUsersWithPrivileges() {
         List<User> users = new ArrayList<User>();
         Session session = null;
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             users = session.createCriteria(User.class).list();
+            for (User user : users) {
+                Hibernate.initialize(user.getUserPrivileges());
+            }
         } catch (HibernateException he) {
             log.error("Error getting all users", he);
         } finally {

@@ -12,14 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sarah on 10/5/2017.
  */
 @WebServlet(
-        urlPatterns = {"/test"}
+        urlPatterns = {"/admin"}
 )
 public class Admin extends HttpServlet{
     private final Logger logger = Logger.getLogger(this.getClass());
@@ -30,7 +29,7 @@ public class Admin extends HttpServlet{
         HttpSession session = req.getSession();
 
         UserDao userDao = new UserDao();
-        List<User> users = userDao.getAllUsers();
+        List<User> users = userDao.getAllUsersWithPrivileges();
 
         session.setAttribute("adminUsers", users);
 

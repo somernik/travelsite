@@ -24,6 +24,9 @@
         <mapping class="com.sarah.entity.User"/>
         <mapping class="com.sarah.entity.ReviewEntity"/>
         <mapping class="com.sarah.entity.LocationEntity"/>
+        <mapping class="com.sarah.entity.PrivilegeEntity"/>
+        <mapping class="com.sarah.entity.UserPrivilegeEntity"/>
+        <mapping class="com.sarah.entity.UserPrivilegeEntityPK"/>
 
     </session-factory>
 
