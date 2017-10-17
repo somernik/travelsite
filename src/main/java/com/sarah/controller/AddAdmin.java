@@ -27,13 +27,13 @@ public class AddAdmin extends HttpServlet{
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        List<User> adminUsers = (List<User>) session.getAttribute("adminUsers"); // TODO not working
+        List<User> adminUsers = (List<User>) session.getAttribute("adminUsers");
         // TODO check logged in
 
         // TODO validate all user input
         UserDao userDao = new UserDao();
 
-        User updateUser = userDao.getUserById(Integer.parseInt(req.getParameter("addId"))); // TODO get from session
+        User updateUser = userDao.getUserByUsername(req.getParameter("username"));
         logger.info(updateUser);
         logger.info(adminUsers);
 

@@ -155,9 +155,18 @@ public class UserDaoTest {
     }
 /*
     @Test(expected = HibernateException.class)
-    public void InsertExceptionTest() throws Exception {
+    public void insertExceptionTest() throws Exception {
         User user = new User();
         userDao.insert(user);
     }*/
 
+    @Test
+    public void getUserByUsername() throws Exception {
+        User testUser = userDao.getUserByUsername(secondUser.getUserName());
+
+        //log.info(testUser);
+        //log.info(secondUser);
+
+        Assert.assertTrue("Users do not match", secondUser.equals(testUser));
+    }
 }

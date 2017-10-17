@@ -80,10 +80,6 @@
                         <p>Grant Admin</p>
                         <div class="row">
                             <div class="input-field col s4">
-                                <input id="addId" type="text" name="addId" class="validate">
-                                <label for="addId">User Id</label>
-                            </div>
-                            <div class="input-field col s4">
                                 <input id="username" type="text" name="username" class="validate">
                                 <label for="username">Username</label>
                             </div>

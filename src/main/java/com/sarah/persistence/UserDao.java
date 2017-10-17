@@ -5,6 +5,7 @@ import com.sarah.entity.User;
 import com.sarah.entity.UserPrivilegeEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -107,16 +108,17 @@ public class UserDao {
      * @param username user's username
      * @return User
      */
-    public List<User> getUsersByUsername(String username) {
+    public User getUserByUsername(String username) {
 
-        List<User> users = new ArrayList<User>();
+        User user = new User();
         Session session = null;
 
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
-            Criteria criteria = session.createCriteria(User.class);
-            criteria.add(Restrictions.eq("user_name", username));
-            users = criteria.list();
+            Criteria c2 = session.createCriteria(User.class);
+            c2.add(Restrictions.ilike("userName", username, MatchMode.END));
+            c2.setMaxResults(1);
+            user = (User) c2.uniqueResult();
 
         } catch (HibernateException he) {
             log.error("Error getting user with username: " + username, he);
@@ -127,7 +129,7 @@ public class UserDao {
             }
         }
 
-        return users;
+        return user;
     }
 
     /** Update  user
