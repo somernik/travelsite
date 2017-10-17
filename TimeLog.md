@@ -25,3 +25,14 @@
 | 9/29/2017  | 1     | Hibernate | Week 5 | Continue getting daos to work |
 | 10/1/2017  | 1.5     | Videos | Week 6 | Week 6 videos |
 | 10/2/2017  | 2     | Hibernate | Week 6 | Working on one-many and many-many relationships with hibernate |
+| 10/3/2017  | 3     | Hibernate | Week 6 | Continuing to work on one-many and many-many relationships with hibernate |
+| 10/5/2017  | 3     | Machine Learning | Week 6 | Started Coursera Machine Learning course |
+| 10/6/2017  | 2     | Machine Learning | Week 6 | Continuing Coursera Machine Learning course |
+| 10/7/2017  | 1.5     | Videos | Week 7 | SOAP Service Videos |
+| 10/8/2017  | 2     | Exercises | Week 7 | SOAP Service Exercise 1 & 2 |
+| 10/10/2017  | 2     | Exercises | Week 7 | SOAP Service Exercise 1 & 2 |
+| 10/12/2017  | 3     | Security | Week 7 | Working on adding and removing admin priveleges |
+| 10/15/2017  | 5     | Machine Learning | Week 7 | Coursera course videos, exercises, lab |
+| 10/16/2017  |  1.5    | Videos | Week 8 | REST service videos |
+| 10/17/2017  | 2     | Machine Learning | Week 8 | Finding data sources and planning how to determine results |
+
