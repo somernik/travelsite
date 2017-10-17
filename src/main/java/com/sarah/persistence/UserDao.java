@@ -9,7 +9,9 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Access users in the user table.
@@ -119,6 +121,7 @@ public class UserDao {
             c2.add(Restrictions.ilike("userName", username, MatchMode.END));
             c2.setMaxResults(1);
             user = (User) c2.uniqueResult();
+            Hibernate.initialize(user.getUserPrivileges());
 
         } catch (HibernateException he) {
             log.error("Error getting user with username: " + username, he);
@@ -199,6 +202,30 @@ public class UserDao {
         user.getUserPrivileges().add(userPrivilege);
 
         this.update(user);
+    }
+
+    public void removeAdmin(User user) {
+
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            // delete admin privelege for current user
+            String sql = "DELETE FROM userprivilege WHERE user_name='" + user.getUserName() + "' AND Privilege_Id=1";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.executeUpdate();
+            transaction.commit();
+
+        } catch(HibernateException he) {
+            log.error("Hibernate Exception: ", he);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
 }

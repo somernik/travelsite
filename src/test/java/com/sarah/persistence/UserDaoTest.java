@@ -35,6 +35,8 @@ public class UserDaoTest {
         userDao.insert(firstUser);
         userDao.insert(secondUser);
 
+        userDao.addAdmin(firstUser);
+
         allUsers.add(firstUser);
         allUsers.add(secondUser);
     }
@@ -140,25 +142,7 @@ public class UserDaoTest {
         log.info(returnedUser.getUserPrivileges());
         Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 2);
 
-        List<String> returnedValues = new ArrayList<String>();
-        List<String> actualValues = new ArrayList<String>();
-        actualValues.add("administrator");
-        actualValues.add("contributor");
-
-        for (UserPrivilegeEntity entity : returnedUser.getUserPrivileges()) {
-            log.info(entity.getPrivilege().getValue());
-            returnedValues.add(entity.getPrivilege().getValue());
-        }
-        // TODO
-        //Assert.assertEquals("First priv doesn't match", returnedValues.get(0), actualValues.get(0));
-        //Assert.assertEquals("Second priv doesn't match", returnedValues.get(1), actualValues.get(1));
     }
-/*
-    @Test(expected = HibernateException.class)
-    public void insertExceptionTest() throws Exception {
-        User user = new User();
-        userDao.insert(user);
-    }*/
 
     @Test
     public void getUserByUsername() throws Exception {
@@ -168,5 +152,16 @@ public class UserDaoTest {
         //log.info(secondUser);
 
         Assert.assertTrue("Users do not match", secondUser.equals(testUser));
+    }
+
+    @Test
+    public void removeAdmin() throws Exception {
+        //log.info(firstUser.getUserPrivileges().size());
+        userDao.removeAdmin(firstUser);
+        User returnedUser = userDao.getUserById(firstUser.getUserid());
+
+        //log.info("Returned from DB: " + returnedUser.getUserPrivileges().size());
+        Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 1);
+
     }
 }

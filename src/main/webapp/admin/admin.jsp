@@ -66,7 +66,7 @@
                                     </c:forEach>
                                     <form class="in_table" action="removeAdmin">
 
-                                        <input type="hidden" value="${user.userid}"/>
+                                        <input type="hidden" name="removeId" value="${user.userid}"/>
                                         <button type="submit" class="btn waves-effect waves-light" value="Remove Admin">Remove Admin</button>
                                     </form>
 
