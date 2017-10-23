@@ -1,12 +1,17 @@
 package com.sarah.persistence;
 
+import com.sarah.entity.PrivilegeEntity;
 import com.sarah.entity.User;
+import com.sarah.entity.UserPrivilegeEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Access users in the user table.
@@ -21,12 +26,15 @@ public class UserDao {
      *
      * @return All users
      */
-    public List<User> getAllUsers() {
+    public List<User> getAllUsersWithPrivileges() {
         List<User> users = new ArrayList<User>();
         Session session = null;
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             users = session.createCriteria(User.class).list();
+            for (User user : users) {
+                Hibernate.initialize(user.getUserPrivileges());
+            }
         } catch (HibernateException he) {
             log.error("Error getting all users", he);
         } catch (NullPointerException e) {
@@ -87,7 +95,7 @@ public class UserDao {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             user = (User) session.get(User.class, id);
             Hibernate.initialize(user.getLocations());
-
+            Hibernate.initialize(user.getUserPrivileges());
         } catch (HibernateException he) {
             log.error("Error getting user with id: " + id, he);
 
@@ -108,16 +116,18 @@ public class UserDao {
      * @param username user's username
      * @return User
      */
-    public List<User> getUsersByUsername(String username) {
+    public User getUserByUsername(String username) {
 
-        List<User> users = new ArrayList<User>();
+        User user = new User();
         Session session = null;
 
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
-            Criteria criteria = session.createCriteria(User.class);
-            criteria.add(Restrictions.eq("user_name", username));
-            users = criteria.list();
+            Criteria c2 = session.createCriteria(User.class);
+            c2.add(Restrictions.ilike("userName", username, MatchMode.END));
+            c2.setMaxResults(1);
+            user = (User) c2.uniqueResult();
+            Hibernate.initialize(user.getUserPrivileges());
 
         } catch (HibernateException he) {
             log.error("Error getting user with username: " + username, he);
@@ -131,7 +141,7 @@ public class UserDao {
             }
         }
 
-        return users;
+        return user;
     }
 
     /** Update  user
@@ -185,6 +195,41 @@ public class UserDao {
                     log.error("Error rolling back delete of user: " + user, he2);
                 }
             }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void addAdmin(User user) {
+
+        PrivilegeEntity privilege = new PrivilegeEntity(1, "Administrator");
+
+        UserPrivilegeEntity userPrivilege = new UserPrivilegeEntity(user.getUserName(), user, privilege);
+
+        user.getUserPrivileges().add(userPrivilege);
+
+        this.update(user);
+    }
+
+    public void removeAdmin(User user) {
+
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            // delete admin privelege for current user
+            String sql = "DELETE FROM userprivilege WHERE user_name='" + user.getUserName() + "' AND Privilege_Id=1";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.executeUpdate();
+            transaction.commit();
+
+        } catch(HibernateException he) {
+            log.error("Hibernate Exception: ", he);
+
         } finally {
             if (session != null) {
                 session.close();

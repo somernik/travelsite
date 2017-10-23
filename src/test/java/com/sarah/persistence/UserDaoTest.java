@@ -2,9 +2,9 @@ package com.sarah.persistence;
 
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
+import com.sarah.entity.UserPrivilegeEntity;
 import com.sarah.utility.DatabaseCleaner;
 import org.apache.log4j.Logger;
-import org.hibernate.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,6 +35,8 @@ public class UserDaoTest {
         userDao.insert(firstUser);
         userDao.insert(secondUser);
 
+        userDao.addAdmin(firstUser);
+
         allUsers.add(firstUser);
         allUsers.add(secondUser);
     }
@@ -51,7 +53,7 @@ public class UserDaoTest {
     public void getAllUsers() throws Exception {
 
 
-        List<User> testUsers = userDao.getAllUsers();
+        List<User> testUsers = userDao.getAllUsersWithPrivileges();
 
         for (int i = 0; i < allUsers.size(); i++) {
 
@@ -124,17 +126,44 @@ public class UserDaoTest {
 
         //User testUser = userDao.getUserById(firstUser.getUserid());
 
-        List<User> users = userDao.getAllUsers();
+        List<User> users = userDao.getAllUsersWithPrivileges();
 
         //Assert.assertNull("User retrieved is not null", testUser);
         Assert.assertEquals("Incorrect number of users in database", allUsers.size() - 1, users.size());
 
     }
-/*
-    @Test(expected = HibernateException.class)
-    public void InsertExceptionTest() throws Exception {
-        User user = new User();
-        userDao.insert(user);
-    }*/
+
     // TODO test for incorrect user ids
+
+    @Test
+    public void addAdmin() {
+        userDao.addAdmin(secondUser);
+
+        User returnedUser = userDao.getUserById(secondUser.getUserid());
+
+        log.info(returnedUser.getUserPrivileges());
+        Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 2);
+
+    }
+
+    @Test
+    public void getUserByUsername() throws Exception {
+        User testUser = userDao.getUserByUsername(secondUser.getUserName());
+
+        //log.info(testUser);
+        //log.info(secondUser);
+
+        Assert.assertTrue("Users do not match", secondUser.equals(testUser));
+    }
+
+    @Test
+    public void removeAdmin() throws Exception {
+        //log.info(firstUser.getUserPrivileges().size());
+        userDao.removeAdmin(firstUser);
+        User returnedUser = userDao.getUserById(firstUser.getUserid());
+
+        //log.info("Returned from DB: " + returnedUser.getUserPrivileges().size());
+        Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 1);
+
+    }
 }

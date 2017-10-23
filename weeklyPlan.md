@@ -59,42 +59,37 @@ Recurring Items:
 
 Recurring Items:
 - [X] Time Log entries
-- [ ] ML research
+- [X] ML research
 - [X] Add logs
 - [X] Add testing
 
 ## Week 6
-- [ ] Continue adding crud functionality
-- [ ] Create activity tag ranking functionality
-- [ ] Create user comments functionality
-- [ ] Add security authentication - is this just login/sign up?
-- [ ] Use web scraper to get ML Data
-- [ ] Start creating ML model?
-- [ ] Refine design based on Design Review
+- [X] Continue adding crud functionality
+- [X] Add security authentication - is this just login/sign up?
+- [X] Use web scraper to get ML Data
+- [X] Refine design based on Design Review
 
 Recurring Items:
-- [ ] Time Log entries
-- [ ] ML research
-- [ ] Add logs
-- [ ] Add testing
+- [X] Time Log entries
+- [X] ML research
+- [X] Add logs
+- [x] Add testing
 
 ## Week 7
-- [ ] Integrate Google maps API
-- [ ] Create location search functionality
-- [ ] Create activity search functionality
-- [ ] Create time search functionality
-- [ ] Create save location functionality
-- [ ] Add user login
+- [X] Add user login
+- [X] Hibernate setup with privileges
 
 Recurring Items:
-- [ ] Time Log entries
-- [ ] ML research, model & predictions
-- [ ] Add logs
-- [ ] Add testing
+- [X] Time Log entries
+- [X] ML research, model & predictions
+- [X] Add logs
+- [X] Add testing
 
 ## Week 8
-- [ ] Finish Google maps implementation
-- [ ] Finish search functionality
+- [ ] Create activity tag ranking functionality
+- [ ] Create user comments functionality
+- [ ] Integrate Google maps API
+- [ ] Work on search functionality
 
 Recurring Items:
 - [ ] Time Log entries
@@ -103,6 +98,7 @@ Recurring Items:
 - [ ] Add testing
 
 ## Week 9
+- [ ] Create location search functionality
 - [ ] Implement paging of search results
 - [ ] Create admin crud functionality
 
@@ -114,6 +110,9 @@ Recurring Items:
 
 ## Week 10
 - [ ] Continue add jsp functionality
+- [ ] Create activity search functionality
+- [ ] Create time search functionality
+- [ ] Create save location functionality
 
 Recurring Items:
 - [ ] Time Log entries

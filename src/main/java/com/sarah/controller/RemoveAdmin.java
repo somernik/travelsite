@@ -18,9 +18,9 @@ import java.util.List;
  * Created by sarah on 10/5/2017.
  */
 @WebServlet(
-    urlPatterns = {"/addAdmin"}
+        urlPatterns = {"/removeAdmin"}
 )
-public class AddAdmin extends HttpServlet{
+public class RemoveAdmin extends HttpServlet{
     private final Logger logger = Logger.getLogger(this.getClass());
 
     @Override
@@ -30,18 +30,19 @@ public class AddAdmin extends HttpServlet{
         List<User> adminUsers = (List<User>) session.getAttribute("adminUsers");
         // TODO check logged in
 
-        // TODO validate all user input
         UserDao userDao = new UserDao();
 
-        User updateUser = userDao.getUserByUsername(req.getParameter("username"));
-        logger.info(updateUser);
-        logger.info(adminUsers);
+        User updateUser = userDao.getUserById(Integer.parseInt(req.getParameter("removeId")));
+        logger.info("User before: " + updateUser.getUserPrivileges().size());
+        //adminUsers.remove(updateUser);
+        userDao.removeAdmin(updateUser);
+        logger.info("User after remove admin: " + updateUser.getUserPrivileges().size());
 
-        adminUsers.remove(updateUser);
-        logger.info(adminUsers);
-        userDao.addAdmin(updateUser);
-        adminUsers.add(updateUser);
-        logger.info(adminUsers);
+
+        ///userDao.update(updateUser);
+        //adminUsers.add(updateUser);
+        logger.info("Retrieving user from database: " + userDao.getUserById(updateUser.getUserid()).getUserPrivileges().size());
+        adminUsers = userDao.getAllUsersWithPrivileges();
 
         session.setAttribute("adminUsers", adminUsers);
 

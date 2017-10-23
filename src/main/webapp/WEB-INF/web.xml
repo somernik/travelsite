@@ -13,7 +13,7 @@
     </form-login-config>
   </login-config>
 
-  <!-- Protect everything within the "investing" directory. -->
+  <!-- Protect everything within the "admin" directory. -->
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>admin</web-resource-name>

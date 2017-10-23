@@ -3,6 +3,6 @@
            driverName="com.mysql.jdbc.Driver"
            connectionURL="jdbc:mysql://localhost:3306/travelsite?user=tomcat&amp;password=tomcat"
            userTable="user" userNameCol="user_name" userCredCol="password"
-           userRoleTable="userprivelege" roleNameCol="Privelege_id" >
+           userRoleTable="userprivilege" roleNameCol="Privilege_id" >
     </Realm>
 </Context>
