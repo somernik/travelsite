@@ -91,8 +91,10 @@ public class UserDao {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             user = (User) session.get(User.class, id);
-            Hibernate.initialize(user.getLocations());
-            Hibernate.initialize(user.getUserPrivileges());
+            if (user != null) {
+                Hibernate.initialize(user.getLocations());
+                Hibernate.initialize(user.getUserPrivileges());
+            }
         } catch (HibernateException he) {
             log.error("Error getting user with id: " + id, he);
 

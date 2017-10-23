@@ -164,4 +164,5 @@ public class UserDaoTest {
         Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 1);
 
     }
+
 }
