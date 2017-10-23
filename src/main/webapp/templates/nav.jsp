@@ -6,7 +6,8 @@
         <a id="logo-container" href="index.jsp" class="brand-logo center">WWW Travel</a>
         <ul class="right hide-on-med-and-down">
             <li><a class="waves-effect waves-light btn modal-trigger" href="#signup">Sign Up</a></li>
-            <li><a class="waves-effect waves-light btn modal-trigger" href="#login">Login</a></li>
+            <!--<li><a class="waves-effect waves-light btn modal-trigger" href="#login">Login</a></li>-->
+            <li><a class="waves-effect waves-light btn" href="login">Login</a><li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">

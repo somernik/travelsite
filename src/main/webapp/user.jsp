@@ -20,22 +20,21 @@
                 </div>
                 <div id="test1" class="col s12">
                     <h5>User Info</h5>
-                    <p>{user.userid}</p>
                     <br />
 
-                    <p>Fist Name: {user.firstName}</p>
+                    <p>Fist Name: ${user.firstName}</p>
                     <a class="waves-effect waves-light btn modal-trigger" href="#firstName">Edit</a>
                     <br />
 
-                    <p>Last Name: {user.lastName}</p>
+                    <p>Last Name: ${user.lastName}</p>
                     <a class="waves-effect waves-light btn modal-trigger" href="#lastName">Edit</a>
                     <br />
 
-                    <p>Email: {user.email}</p>
+                    <p>Email: ${user.email}</p>
                     <a class="waves-effect waves-light btn modal-trigger" href="#email">Edit</a>
                     <br />
 
-                    <p>Username: {user.username}</p>
+                    <p>Username: ${user.userName}</p>
                     <a class="waves-effect waves-light btn modal-trigger" href="#userName">Edit</a>
                     <br />
                     <a class="waves-effect waves-light btn modal-trigger" href="#password">Change Password</a>
@@ -44,7 +43,7 @@
                     <form class="col s12 m6 offset-m3" action="/deleteUser">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="id" type="text" name="id" class="validate">
+                                <input id="id" type="text" value="" name="id" class="validate">
                                 <label for="id">User Id</label>
                             </div>
                         </div>
