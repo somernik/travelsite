@@ -29,6 +29,9 @@ public class UserDao {
             users = session.createCriteria(User.class).list();
         } catch (HibernateException he) {
             log.error("Error getting all users", he);
+        } catch (NullPointerException e) {
+            log.error("Error getting user with id (user does not exist): " + id, e);
+
         } finally {
             if (session != null) {
                 session.close();
@@ -84,8 +87,12 @@ public class UserDao {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             user = (User) session.get(User.class, id);
             Hibernate.initialize(user.getLocations());
+
         } catch (HibernateException he) {
             log.error("Error getting user with id: " + id, he);
+
+        } catch (NullPointerException e) {
+            log.error("Error getting user with id (user does not exist): " + id, e);
 
         } finally {
             if (session != null) {
@@ -114,6 +121,9 @@ public class UserDao {
 
         } catch (HibernateException he) {
             log.error("Error getting user with username: " + username, he);
+
+        }  catch (NullPointerException e) {
+            log.error("Error getting user with id (user does not exist): " + id, e);
 
         } finally {
             if (session != null) {
