@@ -38,7 +38,7 @@ public class UserDao {
         } catch (HibernateException he) {
             log.error("Error getting all users", he);
         } catch (NullPointerException e) {
-            log.error("Error getting user with id (user does not exist): " + id, e);
+            log.error("Error getting user with id (user does not exist): ", e);
 
         } finally {
             if (session != null) {
@@ -133,7 +133,7 @@ public class UserDao {
             log.error("Error getting user with username: " + username, he);
 
         }  catch (NullPointerException e) {
-            log.error("Error getting user with id (user does not exist): " + id, e);
+            log.error("Error getting user with id (user does not exist): ", e);
 
         } finally {
             if (session != null) {
