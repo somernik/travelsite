@@ -219,6 +219,17 @@ public class User {
                 '}';
     }
 
+    public String toStringJSON() {
+        return "{\"user\" : {" +
+                "\"firstName\" : \"" + firstName + "\"" +
+                ", \"lastName\" : \"" + lastName + "\"" +
+                ", \"userid\" : \"" + userid + "\"" +
+                ", \"email\" : \"" + email + "\"" +
+                ", \"password\" : \"" + password + "\"" +
+                ", \"userName\" : \"" + userName + "\"" +
+                "}}";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

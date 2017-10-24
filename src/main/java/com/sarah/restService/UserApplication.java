@@ -20,7 +20,8 @@ public class UserApplication extends Application {
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(HelloWorld.class );
-        h.add(GetUsers.class );
+        h.add(GetUsersJSON.class );
+        h.add(GetUsersHTML.class );
         return h;
     }
 }
