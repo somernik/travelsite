@@ -1,6 +1,6 @@
 package com.sarah.controller;
 
-import com.sarah.entity.User;
+import com.sarah.entity.*;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
 
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +31,13 @@ public class Admin extends HttpServlet{
 
         UserDao userDao = new UserDao();
         List<User> users = userDao.getAllUsersWithPrivileges();
+        List<User> adminUsers = userDao.getAdminUsersFromListOfUsers(users);
 
-        session.setAttribute("adminUsers", users);
+        session.setAttribute("adminUsers", adminUsers);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("admin/admin.jsp");
         dispatcher.forward(req, resp);
     }
+
+
 }

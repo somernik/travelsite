@@ -237,4 +237,18 @@ public class UserDao {
         }
     }
 
+    public List<User> getAdminUsersFromListOfUsers(List<User> users) {
+        List<User> adminUsers = new ArrayList<User>();
+
+        for (User user: users) {
+            for (UserPrivilegeEntity userPrivilegeEntity : user.getUserPrivileges()) {
+                if (userPrivilegeEntity.getPk().getPrivilege().getId() == 1){
+                    adminUsers.add(user);
+                }
+            }
+        }
+
+        return adminUsers;
+    }
+
 }

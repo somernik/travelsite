@@ -166,4 +166,17 @@ public class UserDaoTest {
         Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 1);
 
     }
+
+    @Test
+    public void getAdminUsersFromListOfUsersTest() throws Exception {
+        //log.info(secondUser.getUserPrivileges());
+        List<User> allUsers = userDao.getAllUsersWithPrivileges();
+        List<User> adminUsers = userDao.getAdminUsersFromListOfUsers(allUsers);
+
+        log.info(adminUsers);
+        log.info(allUsers);
+
+        Assert.assertEquals("Incorrect # of users with admin", adminUsers.size(), 1);
+
+    }
 }
