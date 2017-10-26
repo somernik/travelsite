@@ -3,6 +3,7 @@ package com.sarah.persistence;
 import com.sarah.entity.PrivilegeEntity;
 import com.sarah.entity.User;
 import com.sarah.entity.UserPrivilegeEntity;
+import com.sarah.entity.UserPrivilegeEntityPK;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.criterion.MatchMode;
@@ -246,6 +247,39 @@ public class UserDao {
                     adminUsers.add(user);
                 }
             }
+        }
+
+        return adminUsers;
+    }
+
+    public List<User> getAdminUsers() {
+        List<User> adminUsers = new ArrayList<User>();
+        List<Integer> ids = new ArrayList<Integer>();
+
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            // delete admin privilege for current user
+            String sql = "SELECT user.id as userid FROM user JOIN userprivilege ON user.id = userprivilege.User_id WHERE userprivilege.Privilege_id = 1";
+            SQLQuery query = session.createSQLQuery(sql);
+            ids = query.list();
+
+        } catch (HibernateException he) {
+            log.error("Error getting admin users", he);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        for (Integer id : ids) {
+            User user = getUserById(id);
+            adminUsers.add(user);
         }
 
         return adminUsers;

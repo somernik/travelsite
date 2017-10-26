@@ -30,8 +30,8 @@ public class Admin extends HttpServlet{
         HttpSession session = req.getSession();
 
         UserDao userDao = new UserDao();
-        List<User> users = userDao.getAllUsersWithPrivileges();
-        List<User> adminUsers = userDao.getAdminUsersFromListOfUsers(users);
+        //List<User> users = userDao.getAllUsersWithPrivileges();
+        List<User> adminUsers = userDao.getAdminUsers();
 
         session.setAttribute("adminUsers", adminUsers);
 

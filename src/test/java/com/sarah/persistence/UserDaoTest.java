@@ -179,4 +179,14 @@ public class UserDaoTest {
         Assert.assertEquals("Incorrect # of users with admin", adminUsers.size(), 1);
 
     }
+
+    @Test
+    public void getAdminUsersTest() throws Exception {
+
+        List<User> adminUsers = userDao.getAdminUsers();
+        log.info(adminUsers);
+        Assert.assertEquals("Incorrect # of users with admin", adminUsers.size(), 1);
+
+    }
+
 }
