@@ -214,7 +214,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", userid='" + userid + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                //", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
     }
@@ -225,7 +225,7 @@ public class User {
                 ", \"lastName\" : \"" + lastName + "\"" +
                 ", \"userid\" : \"" + userid + "\"" +
                 ", \"email\" : \"" + email + "\"" +
-                ", \"password\" : \"" + password + "\"" +
+                //", \"password\" : \"" + password + "\"" +
                 ", \"userName\" : \"" + userName + "\"" +
                 "}}";
     }
