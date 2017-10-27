@@ -14,3 +14,9 @@ Sometimes you just don't know what activities to plan for a given location and t
 
 ### [Time Log](/TimeLog.md)
 ### [Weekly Plan](/weeklyPlan.md)
+
+###WebService
+/travelsite/wwwTravel/JSON/users - returns all Users
+/travesite/wwwTravel/JSON/users/<id> - return specific user based on id
+
+To get data back as HTML replace JSON with HTML
