@@ -86,8 +86,23 @@ Recurring Items:
 - [X] Add testing
 
 ## Week 8
-- [ ] Create activity tag ranking functionality
-- [ ] Create user comments functionality
+- [X] Continue add jsp functionality
+- [X] Explore AWS Machine learning course on Coursera
+- [X] Install GraphLab
+- [X] Follow instructions to analyze data
+- [X] Determine how to use CSV data
+
+
+Recurring Items:
+- [X] Time Log entries
+- [X] ML research, model & predictions
+- [X] Add logs
+- [X] Add testing
+
+## Week 9
+- [ ] Create location search functionality
+- [ ] Implement paging of search results?
+- [ ] Create admin crud functionality
 - [ ] Integrate Google maps API
 - [ ] Work on search functionality
 
@@ -97,22 +112,10 @@ Recurring Items:
 - [ ] Add logs
 - [ ] Add testing
 
-## Week 9
-- [ ] Create location search functionality
-- [ ] Implement paging of search results
-- [ ] Create admin crud functionality
-
-Recurring Items:
-- [ ] Time Log entries
-- [ ] ML research, model & predictions
-- [ ] Add logs
-- [ ] Add testing
-
 ## Week 10
-- [ ] Continue add jsp functionality
+- [ ] Create activity tag ranking functionality
+- [ ] Create user comments functionality
 - [ ] Create activity search functionality
-- [ ] Create time search functionality
-- [ ] Create save location functionality
 
 Recurring Items:
 - [ ] Time Log entries
@@ -121,7 +124,9 @@ Recurring Items:
 - [ ] Add testing
 
 ## Week 11
-- [ ] Start implementing independent research functionality (Jenkins?)
+- [ ] Create time search functionality
+- [ ] Create save location functionality
+- [ ] Start implementing independent research functionality (?)
 
 Recurring Items:
 - [ ] Time Log entries
@@ -130,7 +135,8 @@ Recurring Items:
 - [ ] Add testing
 
 ## Week 12
-- [ ] Implement independent research functionality (Jenkins?)
+- [ ] Implement independent research functionality
+- [ ] Continue with searching/saving functionality
 
 Recurring Items:
 - [ ] Time Log entries

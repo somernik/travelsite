@@ -66,7 +66,8 @@ public class SearchUser extends HttpServlet {
         }
         logger.info(users);
         req.setAttribute("users", users);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
+        //RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("admin/admin.jsp");
         dispatcher.forward(req, resp);
     }
 

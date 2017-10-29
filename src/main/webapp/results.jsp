@@ -22,8 +22,8 @@
 <body>
 
 <div class="container-fluid">
-    <h2>Search: ${type} ${operator} ${value} <c:if test="${empty value}">all</c:if></h2>
-    <h2>Search Results: </h2>
+    <h5>Search: ${type} ${operator} ${value} <c:if test="${empty value}">all</c:if></h5>
+    <h5>Search Results: </h5>
     <c:if test="${empty users}"><p>No Results!</p></c:if>
     <table>
         <tr><th>Id</th><th>First Name</th><th>Last Name</th></tr>

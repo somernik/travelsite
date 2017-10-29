@@ -4,6 +4,8 @@
 <%@include file="../templates/head.jsp" %>
 <body>
 <%@include file="../templates/nav.jsp" %>
+
+<!--<img src="images/admin_background.jpeg" />-->
 <style>
 
     .tabs .tab a, .tabs .tab.disabled a {
@@ -14,6 +16,10 @@
         background-color: #26a69a;
     }
 
+    .tabs {
+        box-shadow: grey 2px 2px 2px;
+    }
+
     .tabs .tab a:hover, .tabs .tab a.active {
         color: #26a69a;
     }
@@ -21,13 +27,57 @@
     form .in_table {
         margin: 0px;
     }
+
+    img {
+        opacity : 0.25;
+        position: absolute;
+        width: 100%;
+    }
+    #addadmin, table {
+        background-color:darkslategray;
+        width: 100%;
+    }
+    #formDiv {
+        width: 70%;
+        margin: 1em auto;
+    }
+
+    #grantFormInput1 {
+        margin-left: 15%;
+    }
+    #grantFormInput2 {
+        margin-right: 15%;
+    }
+
+    form p, table {
+        color: white;
+    }
+
+
+    .formHeader {
+        text-align: center;
+    }
+
+    #tabsFilters {
+        margin-bottom: 1em;
+    }
+
+    #filters div.row {
+        margin:0;
+    }
+
+    body {
+        background-image: url("images/admin_background.jpeg");
+        background-size: cover;
+    }
+
 </style>
 <div class="container">
     <div class="section no-pad-bot" id="adminOptions">
 
         <div id="filters">
             <div class="row">
-                <div class="col s12">
+                <div class="col s12" id="tabsFilters">
                     <ul class="tabs">
                         <li class="tab col s3"><a href="#search">Search Users</a></li>
                         <li class="tab col s3"><a href="#privileges">Privileges</a></li>
@@ -50,7 +100,21 @@
                         <input name="searchValue" id="searchValue" type="text" required />
                         <input type="submit" value="Search" />
                     </form>
-                    <a href = "searchUser">See all users</a>
+
+                    <c:if test="${empty users}"><p>Enter an id to search!</p></c:if>
+                    <c:if test="${not empty users}">
+                    <div class="container-fluid">
+                        <h5>Search: ${type} ${operator} ${value} <c:if test="${empty value}">all</c:if></h5>
+                        <h5>Search Results: </h5>
+                        <c:if test="${empty users}"><p>No Results!</p></c:if>
+                        <table>
+                            <tr><th>Id</th><th>First Name</th><th>Last Name</th></tr>
+                            <c:forEach var="user" items="${users}">
+                                <tr><td>${user.userid}</td><td>${user.firstName}</td><td>${user.lastName}</td></tr>
+                            </c:forEach>
+                        </table>
+                    </div>
+                    </c:if>
                 </div>
                 <div id="privileges">
 
@@ -75,21 +139,22 @@
                         </table>
                         </c:if>
                     </div>
-
-                    <form class="col s12 m6" action="addAdmin">
-                        <p>Grant Admin</p>
-                        <div class="row">
-                            <div class="input-field col s4">
+                    <div id="formDiv">
+                    <form class="col s12 m6" action="addAdmin" id="addadmin">
+                        <h5 class="formHeader">Grant Admin</h5>
+                        <!--<div class="row">-->
+                            <div class="input-field col s4" id="grantFormInput1">
                                 <input id="username" type="text" name="username" class="validate">
                                 <label for="username">Username</label>
                             </div>
-                            <div class="col s4">
+                            <div class="col s4" id="grantFormInput2">
                             <button class="btn waves-effect waves-light" type="submit" name="grant">Grant Admin</button>
                             </div>
-                        </div>
+                        <!--</div>-->
 
 
                     </form>
+                    </div>
                 </div>
                 <div id="reported">
                     <p>list of reported reviews, images, users?</p>
