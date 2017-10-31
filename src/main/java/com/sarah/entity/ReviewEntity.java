@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "review")
-public class ReviewEntity {
-    private int id;
+public class ReviewEntity extends BaseEntity<Long>{
+    private Long id;
     private String body;
     private LocalDate date;
 
@@ -30,7 +30,7 @@ public class ReviewEntity {
         this.location = location;
     }
 
-    public ReviewEntity(int reviewId, String body, LocalDate date, User user, LocationEntity location) {
+    public ReviewEntity(Long reviewId, String body, LocalDate date, User user, LocationEntity location) {
         this.id = reviewId;
         this.body = body;
         this.date = date;
@@ -42,11 +42,11 @@ public class ReviewEntity {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name="increment", strategy="increment")
     @Column(name = "id")
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -104,14 +104,6 @@ public class ReviewEntity {
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
 
         return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (body != null ? body.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        return result;
     }
 
     @Override

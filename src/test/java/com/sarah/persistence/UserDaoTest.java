@@ -25,8 +25,6 @@ import static org.junit.Assert.*;
  */
 public class UserDaoTest {
     private UserDao userDao = new UserDao();
-    @Inject
-    private GenericDao dao;
 
     private final Logger log = Logger.getLogger(this.getClass());
     private User firstUser = new User("First", "User", new Long(1), "first.user@email.com", "testpassword", "firstUser");
@@ -36,10 +34,9 @@ public class UserDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        dao = new GenericDao();
 
-        dao.save(firstUser);
-        dao.save(secondUser);
+        userDao.save(firstUser);
+        userDao.save(secondUser);
 
         userDao.addAdmin(firstUser);
 
@@ -62,7 +59,7 @@ public class UserDaoTest {
         // Prepare locations
         LocationEntity location1 = new LocationEntity("test", "test id");
         LocationDao locationDao = new LocationDao();
-        locationDao.insertLocation(location1);
+        locationDao.save(location1);
 
         Set<LocationEntity> locations = new HashSet<LocationEntity>();
         locations.add(location1);
@@ -71,7 +68,7 @@ public class UserDaoTest {
         User user = new User("Test", "Locations","email@email.com", "password", "username");
         user.setLocations(locations);
 
-        Long id = dao.save(user);
+        Long id = userDao.save(user);
 
         Assert.assertEquals("ids dont match", user.getId(), id);
 
@@ -84,7 +81,7 @@ public class UserDaoTest {
     @Test
     @Transactional
     public void getUserByIdWithLocationsAndPrivilegesTest() throws Exception {
-        dao.save(firstUser);
+        userDao.save(firstUser);
         User testUser = userDao.getUserById(firstUser.getId());
 
         assertNotNull(testUser);

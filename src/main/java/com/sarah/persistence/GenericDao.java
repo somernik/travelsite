@@ -29,11 +29,6 @@ import org.hibernate.criterion.Restrictions;
 @Stateless
 public class GenericDao {
     private final Logger log = Logger.getLogger(this.getClass());
-    //take a look at the getSession() method.
-    //This is not used "directly".
-    @Inject
-    private EntityManager entityManager;
-
 
     /**
      * Saves an entity.
@@ -182,10 +177,13 @@ public class GenericDao {
      * @param value the value by which to find.
      * @return
      */
+    /*
     @SuppressWarnings("unchecked")
+
     public <T extends BaseEntity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) {
         return getSession().createCriteria(clazz).add(Restrictions.eq(propertyName, value)).list();
     }
+    */
 
     /**
      * Finds entities by a String property specifying a MatchMode. This search
@@ -247,11 +245,6 @@ public class GenericDao {
             }
         }
         return items;
-    }
-
-
-    protected Session getSession() {
-        return (Session) entityManager.getDelegate();
     }
 
 }

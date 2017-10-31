@@ -43,13 +43,13 @@ public class ReviewDaoTest {
 
         // Prepare location
         LocationDao locationDao = new LocationDao();
-        locationDao.insertLocation(location);
+        locationDao.save(location);
 
-        firstReview = new ReviewEntity(1, "This is great!", dateConverter.fromString("10/01/17"), testUser, location);
-        secondReview = new ReviewEntity(2, "This is not great :(", dateConverter.fromString("10/02/17"), testUser, location);
+        firstReview = new ReviewEntity(new Long(1), "This is great!", dateConverter.fromString("10/01/17"), testUser, location);
+        secondReview = new ReviewEntity(new Long(2), "This is not great :(", dateConverter.fromString("10/02/17"), testUser, location);
 
-        reviewDao.insertReview(firstReview);
-        reviewDao.insertReview(secondReview);
+        reviewDao.save(firstReview);
+        reviewDao.save(secondReview);
 
         allReviews.add(firstReview);
         allReviews.add(secondReview);
@@ -65,7 +65,7 @@ public class ReviewDaoTest {
 
     @Test
     public void getAllReviews() throws Exception {
-        List<ReviewEntity> testReviews = reviewDao.getAllReviews();
+        List<ReviewEntity> testReviews = reviewDao.findAll(ReviewEntity.class);
 
         Assert.assertEquals("Incorrect number of reviews", testReviews.size(), allReviews.size());
 
@@ -79,45 +79,52 @@ public class ReviewDaoTest {
     @Test
     public void insertReview() throws Exception {
 
-        ReviewEntity newReview = new ReviewEntity(3,"This is meh", dateConverter.fromString("10/01/17"), testUser, location);
+        ReviewEntity newReview = new ReviewEntity(new Long(3),"This is meh", dateConverter.fromString("10/01/17"), testUser, location);
 
-        int newId = reviewDao.insertReview(newReview);
+        Long newId = reviewDao.save(newReview);
 
-        Assert.assertEquals("Id no matches", newReview.getId(),newId);
+        Assert.assertEquals("Id no matches", newReview.getId(), newId);
     }
 
     @Test
     public void getReviewById() throws Exception {
 
-        ReviewEntity returnedReview = reviewDao.getReviewById(secondReview.getId());
+        ReviewEntity returnedReview = reviewDao.find(ReviewEntity.class, secondReview.getId());
         Assert.assertEquals("Id does not match", secondReview.getId(), returnedReview.getId());
         Assert.assertEquals("Body does not match", secondReview.getBody(), returnedReview.getBody());
         Assert.assertEquals("Date does not match", secondReview.getDate(), returnedReview.getDate());
-        Assert.assertEquals("User does not match", secondReview.getUser().getUserName(), returnedReview.getUser().getUserName());
-        Assert.assertEquals("Location does not match", secondReview.getLocation().getGoogleId(), returnedReview.getLocation().getGoogleId());
     }
 
     @Test
     public void updateReview() throws Exception {
         secondReview.setBody("This was awesome");
-        reviewDao.updateReview(secondReview);
+        reviewDao.update(secondReview);
 
-        ReviewEntity returnedReview = reviewDao.getReviewById(secondReview.getId());
+        ReviewEntity returnedReview = reviewDao.find(ReviewEntity.class, secondReview.getId());
         Assert.assertEquals("Id does not match", secondReview.getId(), returnedReview.getId());
         Assert.assertEquals("Body does not match", secondReview.getBody(), returnedReview.getBody());
         Assert.assertEquals("Date does not match", secondReview.getDate(), returnedReview.getDate());
-        Assert.assertEquals("User does not match", secondReview.getUser().getUserName(), returnedReview.getUser().getUserName());
-        Assert.assertEquals("Location does not match", secondReview.getLocation().getGoogleId(), returnedReview.getLocation().getGoogleId());
 
     }
 
     @Test
     public void deleteReview() throws Exception {
-        reviewDao.deleteReview(firstReview);
+        reviewDao.delete(ReviewEntity.class, firstReview.getId());
 
-        List<ReviewEntity> reviews = reviewDao.getAllReviews();
+        List<ReviewEntity> reviews = reviewDao.findAll(ReviewEntity.class);
 
         Assert.assertEquals("Incorrect number of reviews in database", allReviews.size() - 1, reviews.size());
+
+    }
+
+    @Test
+    public void getReviewWithInfo () throws Exception {
+        ReviewEntity returnedReview = reviewDao.getReviewById(secondReview.getId());
+        Assert.assertEquals("Id does not match", secondReview.getId(), returnedReview.getId());
+        Assert.assertEquals("Body does not match", secondReview.getBody(), returnedReview.getBody());
+        Assert.assertEquals("Date does not match", secondReview.getDate(), returnedReview.getDate());
+        Assert.assertEquals("User does not match", secondReview.getUser().toString(), returnedReview.getUser().toString());
+        Assert.assertEquals("Location does not match", secondReview.getLocation().toString(), returnedReview.getLocation().toString());
 
     }
 }

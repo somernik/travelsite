@@ -121,7 +121,6 @@ public class UserDao extends GenericDao {
         }
     }
 
-
     public List<User> getAdminUsers() {
         List<User> adminUsers = new ArrayList<User>();
         List<Long> ids = new ArrayList<Long>();

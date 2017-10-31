@@ -14,70 +14,16 @@ import java.util.List;
  *
  * @author somernik
  */
-public class ReviewDao {
+public class ReviewDao extends GenericDao {
 
     private final Logger log = Logger.getLogger(this.getClass());
-
-    /** Return a list of all reviews
-     *
-     * @return All reviews
-     */
-    public List<ReviewEntity> getAllReviews() {
-        List<ReviewEntity> reviews = new ArrayList<ReviewEntity>();
-        Session session = null;
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            reviews = session.createCriteria(ReviewEntity.class).list();
-
-        } catch (HibernateException he) {
-            log.error("Error getting all reviews", he);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return reviews;
-    }
-
-    /** save new review
-     * @param review review to insert
-     * @return id of the inserted review
-     */
-    public int insertReview(ReviewEntity review) {
-        int id = 0;
-        Transaction transaction = null;
-        Session session = null;
-
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            id = (Integer) session.save(review);
-            transaction.commit();
-        } catch (HibernateException he) {
-            log.error("Starting roll back: " + review, he);
-            if (transaction != null) {
-                try {
-
-                    transaction.rollback();
-                } catch (HibernateException he2) {
-                    log.error("Error rolling back review insert: " + review, he2);
-                }
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-
-        return id;
-    }
 
     /** Get a single reviewEntity for the given id
      *
      * @param id reviewEntity's id
      * @return ReviewEntity
      */
-    public ReviewEntity getReviewById(int id) {
+    public ReviewEntity getReviewById(Long id) {
 
         ReviewEntity review = null;
         Session session = null;
@@ -99,61 +45,4 @@ public class ReviewDao {
         return review;
     }
 
-    /** Update  review
-     * @param review review to update
-     */
-    public void updateReview(ReviewEntity review) {
-        Transaction transaction = null;
-        Session session = null;
-
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.saveOrUpdate(review);
-            transaction.commit();
-        } catch(HibernateException he) {
-            log.error("Hibernate Exception: ", he);
-            if (transaction != null) {
-
-                try {
-                    transaction.rollback();
-                } catch (HibernateException he2) {
-                    log.error("Error rolling back save of review: " + review, he2);
-                }
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
-
-    /** Delete  review
-     * @param review review to update
-     */
-    public void deleteReview(ReviewEntity review) {
-        Transaction transaction = null;
-        Session session = null;
-
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.delete(review);
-            transaction.commit();
-        } catch(HibernateException he) {
-            log.error("Hibernate Exception: ", he);
-            if (transaction != null) {
-
-                try {
-                    transaction.rollback();
-                } catch (HibernateException he2) {
-                    log.error("Error rolling back delete of review: " + review, he2);
-                }
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
 }

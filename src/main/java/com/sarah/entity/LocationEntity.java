@@ -11,8 +11,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "location")
-public class LocationEntity {
-    private int id;
+public class LocationEntity extends BaseEntity<Long> {
+    private Long id;
     private String name;
     private String googleId;
     private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
@@ -25,7 +25,7 @@ public class LocationEntity {
         this.googleId = googleId;
     }
 
-    public LocationEntity(int id, String name, String googleId) {
+    public LocationEntity(Long id, String name, String googleId) {
         this.id = id;
         this.name = name;
         this.googleId = googleId;
@@ -38,7 +38,7 @@ public class LocationEntity {
         this.users = users;
     }
 
-    public LocationEntity(int id, String name, String googleId, Set<ReviewEntity> reviews, Set<User> users) {
+    public LocationEntity(Long id, String name, String googleId, Set<ReviewEntity> reviews, Set<User> users) {
         this.id = id;
         this.name = name;
         this.googleId = googleId;
@@ -50,11 +50,11 @@ public class LocationEntity {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name="increment", strategy="increment")
     @Column(name = "id", unique = true)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

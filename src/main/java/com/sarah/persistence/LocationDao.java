@@ -14,69 +14,16 @@ import java.util.List;
  *
  * @author somernik
  */
-public class LocationDao {
+public class LocationDao extends GenericDao {
 
     private final Logger log = Logger.getLogger(this.getClass());
-
-    /** Return a list of all locations
-     *
-     * @return All locations
-     */
-    public List<LocationEntity> getAllLocations() {
-        List<LocationEntity> locations = new ArrayList<LocationEntity>();
-        Session session = null;
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            locations = session.createCriteria(LocationEntity.class).list();
-        } catch (HibernateException he) {
-            log.error("Error getting all locations", he);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return locations;
-    }
-
-    /** save new location
-     * @param location location to insert
-     * @return id of the inserted location
-     */
-    public int insertLocation(LocationEntity location) {
-        int id = 0;
-        Transaction transaction = null;
-        Session session = null;
-
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            id = (Integer) session.save(location);
-            transaction.commit();
-        } catch (HibernateException he) {
-            log.error("Starting roll back: " + location, he);
-            if (transaction != null) {
-                try {
-
-                    transaction.rollback();
-                } catch (HibernateException he2) {
-                    log.error("Error rolling back location insert: " + location, he2);
-                }
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-
-        return id;
-    }
 
     /** Get a single location for the given id
      *
      * @param id location's id
      * @return LocationEnity
      */
-    public LocationEntity getLocationById(int id) {
+    public LocationEntity getLocationByIdWithReview(Long id) {
 
         LocationEntity locationEntity = null;
         Session session = null;
@@ -96,66 +43,6 @@ public class LocationDao {
         }
 
         return locationEntity;
-    }
-
-    /** Update  location
-     * @param location location to update
-     */
-
-    public void updateLocation(LocationEntity location) {
-        Transaction transaction = null;
-        Session session = null;
-
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.saveOrUpdate(location);
-            transaction.commit();
-        } catch(HibernateException he) {
-            log.error("Hibernate Exception: ", he);
-            if (transaction != null) {
-
-                try {
-                    transaction.rollback();
-                } catch (HibernateException he2) {
-                    log.error("Error rolling back save of location: " + location, he2);
-                }
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
-
-
-    /** Delete  location
-     * @param location location to update
-     */
-    public void deleteLocation(LocationEntity location) {
-        Transaction transaction = null;
-        Session session = null;
-
-        try {
-            session = SessionFactoryProvider.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.delete(location);
-            transaction.commit();
-        } catch (HibernateException he) {
-            log.error("Hibernate Exception: ", he);
-            if (transaction != null) {
-
-                try {
-                    transaction.rollback();
-                } catch (HibernateException he2) {
-                    log.error("Error rolling back delete of location: " + location, he2);
-                }
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
     }
 
 }
