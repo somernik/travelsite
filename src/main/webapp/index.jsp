@@ -9,6 +9,13 @@
         padding-left: 3em;
         width: 95%;
     }
+    .parallax-container {
+        height: 400px;
+    }
+
+    #logo-container {
+        color: black;
+    }
 </style>
 <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">

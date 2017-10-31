@@ -30,6 +30,6 @@ below css used to make forms in modals look nice with spacing and no scroll bar
     }
 
     .modal {
-        max-height: 82%;
+        max-height: 84%;
     }
 </style>

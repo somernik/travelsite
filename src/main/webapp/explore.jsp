@@ -10,6 +10,18 @@
         padding-left: 3em;
         width: 95%;
     }
+
+    .button_in_popup {
+        font-size: 10px;
+        padding: 0 1rem;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 0.5em;
+    }
+
+    .row {
+        margin-bottom: 0;
+    }
 </style><!-- previous style is the same as on the index.jsp -->
 
 <style>
@@ -164,6 +176,7 @@
 
 
 <script>
+    var currentPlaceId = '';
     // This example adds a search box to a map, using the Google Place Autocomplete
     // feature. People can enter geographical searches. The search box will return a
     // pick list containing a mix of places and predicted search terms.
@@ -232,7 +245,18 @@
                 })
 
                 google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.setContent(place.name);
+                    currentPlaceId = place.place_id;
+                    ///////
+                    var detailForm = "<form action='viewDetails'>" +
+                        "<input value='" + place.place_id + "' type='hidden' name='placeId' />" +
+                        "<input type='submit' class='waves-effect waves-light btn button_in_popup' value='Details' />" +
+                        "</form>";
+
+                    var reviewForm = "<a class='waves-effect waves-light btn button_in_popup modal-trigger' href='#new_review'>New Review</a>";
+
+                    ///////
+                    infowindow.setContent(place.name + "<br/>" + detailForm + reviewForm);
+                    // TODO add overall rating or something
                     infowindow.open(map, this);
                 });
 
@@ -250,6 +274,46 @@
         });
     }
 
+    function prepareInputs() {
+        document.getElementById("placeId").value = currentPlaceId;
+
+        if (document.getElementById("rating-input-1-5").checked) {
+            document.getElementById("rating").value = 5;
+
+        } else if (document.getElementById("rating-input-1-4").checked) {
+            document.getElementById("rating").value = 4;
+
+        } else if (document.getElementById("rating-input-1-3").checked) {
+            document.getElementById("rating").value = 3;
+
+        } else if (document.getElementById("rating-input-1-2").checked) {
+            document.getElementById("rating").value = 2
+
+        } else if (document.getElementById("rating-input-1-1").checked) {
+            document.getElementById("rating").value = 1;
+
+        }
+
+        document.getElementById("goodTags").value = processTags('good');
+
+        document.getElementById("badTags").value = processTags('bad');
+
+    }
+
+    function processTags(inputId) {
+
+        var tags = $('#' + inputId).material_chip('data');
+
+        var string = "";
+
+        tags.forEach(function(e, i) {
+            //console.log(e.tag);
+            //console.log(i);
+            string += e.tag + ";";
+        });
+
+        return string;
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDzIyqAs2QFZHodjbm8z7bnr233R9aSuo&libraries=places&callback=initAutocomplete"
         async defer></script>
@@ -258,7 +322,7 @@
     /* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
     #map {
-        height: 100%;
+        height: 80%;
     }
     /* Optional: Makes the sample page fill the window. */
     html, body {

@@ -7,7 +7,11 @@
 --%>
 
 <div class="row">
-    <form class="col s12">
+    <form class="col s12" action='addReview' onsubmit="prepareInputs()">
+        <input id="placeId" type='hidden' name='placeId' />
+        <input id="rating" type='hidden' name='rating' />
+        <input id="goodTags" type='hidden' name='goodTags' />
+        <input id="badTags" type='hidden' name='badTags' />
         <span class="rating">
             <input type="radio" class="rating-input"
                    id="rating-input-1-1" name="rating-input-1">
@@ -28,38 +32,51 @@
         <div class="row">
             <div class="input-field col s12">
                 <div class="chips chips-placeholder" id="good"></div>
-                <label for="good">Good Tags</label>
+                <label for="good">Recommended Activities</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <div class="chips chips-placeholder" id="bad"></div>
-                <label for="bad">Bad Tags</label>
+                <div class="chips chips-autocomplete" id="bad"></div>
+                <label for="bad">Activities to Avoid</label>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s12">
-                <input id="date" type="text" class="datepicker">
+                <input id="date" type="text" class="datepicker" name="date">
                 <label for="date">Date Visited</label>
             </div>
         </div>
-        <div class="row"><!-- TODO fix text area issue -->
+        <div class="row">
             <div class="input-field col s12">
-                <textarea id="review" class="materialize-textarea" data-length="120">test</textarea>
+                <textarea id="review" class="materialize-textarea" name="review" data-length="120"></textarea>
                 <label for="review">Review</label>
             </div>
         </div>
+
         <button class="btn waves-effect waves-light" type="">Cancel</button>
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit <i class="material-icons right">send</i></button>
     </form>
 </div>
-<script>/*
+<script>
     $(document).ready(function(){
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
+        $('.chips-autocomplete').material_chip({
+            autocompleteOptions: {
+                data: {
+                    'Apple': null,
+                    'Microsoft': null,
+                    'Google': null
+                },
+                limit: Infinity,
+                minLength: 1
+            }
+        });
     });
-    */
+
+
 
     $('.chips-placeholder').material_chip({
         //placeholder: 'Enter a tag',
@@ -118,5 +135,9 @@
     [type="radio"]:not(:checked) + label,
     [type="radio"]:checked + label {
         padding-left: 0px;
+    }
+
+    .row {
+        max-height:
     }
 </style>
