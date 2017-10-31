@@ -29,7 +29,7 @@ public class UserFilter implements Filter {
 
             if (session.getAttribute("user") == null) {
                 UserDao userDao = new UserDao();
-                User user = userDao.getUserByUsername(remoteUser);
+                User user = userDao.getUserByUsernameWithPrivilege(remoteUser);
 
                 session.setAttribute("user", user);
             }

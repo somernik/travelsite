@@ -76,7 +76,7 @@ public class SearchUser extends HttpServlet {
         User user;
         UserDao userDao = new UserDao();
 
-        user = userDao.getUserById(Integer.parseInt(req.getParameter("searchValue"))); // TODO check inputs
+        user = userDao.getUserById(Long.parseLong(req.getParameter("searchValue"))); // TODO check inputs
 
         logger.debug(user);
         return user;

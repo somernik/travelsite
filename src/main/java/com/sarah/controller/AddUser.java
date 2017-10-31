@@ -1,6 +1,7 @@
 package com.sarah.controller;
 
 import com.sarah.entity.User;
+import com.sarah.persistence.GenericDao;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
 
@@ -29,9 +30,10 @@ public class AddUser extends HttpServlet {
 
         // TODO validate password check
         // TODO validate all user input
-        UserDao userDao = new UserDao();
+        //UserDao userDao = new UserDao();
+        GenericDao dao = new GenericDao();
         User newUser = new User(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("email"), req.getParameter("password"), req.getParameter("username")); // pass in params
-        userDao.insert(newUser);
+        dao.save(newUser);
         logger.info(newUser);
 
 

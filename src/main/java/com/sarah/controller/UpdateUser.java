@@ -28,7 +28,7 @@ public class UpdateUser extends HttpServlet {
         // TODO validate password check
         // TODO validate all user input
         UserDao userDao = new UserDao();
-        User updateUser = userDao.getUserById(Integer.parseInt(req.getParameter("id"))); // TODO get from session
+        User updateUser = userDao.getUserById(Long.parseLong(req.getParameter("id"))); // TODO get from session
         logger.info("Current: " + updateUser);
 
         //User updateUser = new User(req.getParameter("first_name"), req.getParameter("last_name"), req.getParameter("email"), req.getParameter("password"), req.getParameter("username")); // pass in params

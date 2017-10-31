@@ -1,6 +1,5 @@
 package com.sarah.entity;
 
-import org.apache.log4j.Logger;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,12 +8,11 @@ import java.util.Set;
 
 /**
  * A class to represent a user.
- *
  * @author somernik
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends BaseEntity<Long> {
 
     @Column(name = "first_name")
     private String firstName;
@@ -26,7 +24,7 @@ public class User {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name="increment", strategy="increment")
     @Column(name = "id")
-    private int userid;
+    private Long userid;
 
     @Column(name = "email")
     private String email;
@@ -48,9 +46,16 @@ public class User {
             })
     private Set<LocationEntity> locations = new HashSet<LocationEntity>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL) //TODO
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL)
     private Set<UserPrivilegeEntity> userPrivileges = new HashSet<UserPrivilegeEntity>();
-
+/*
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "taglocation", joinColumns = {
+            @JoinColumn(name = "User_id") },
+            inverseJoinColumns = {
+            @JoinColumn(name = "tagLocation_id") })
+    private Set<TaglocationEntity> taglocations = new HashSet<TaglocationEntity>();
+*/
     /**
      * Instantiates a new User.
      */
@@ -81,7 +86,7 @@ public class User {
      * @param lastName  the last name
      * @param userid    the userid
      */
-    public User(String firstName, String lastName, int userid, String email, String password, String userName) {
+    public User(String firstName, String lastName, Long userid, String email, String password, String userName) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -146,7 +151,7 @@ public class User {
      *
      * @return the userid
      */
-    public int getUserid() {
+    public Long getId() {
         return userid;
     }
 
@@ -155,7 +160,7 @@ public class User {
      *
      * @param userid the userid
      */
-    public void setUserid(int userid) {
+    public void setId(Long userid) {
         this.userid = userid;
     }
 
@@ -206,7 +211,15 @@ public class User {
     public void setUserPrivileges(Set<UserPrivilegeEntity> userPrivileges) {
         this.userPrivileges = userPrivileges;
     }
+/*
+    public Set<TaglocationEntity> getTaglocations() {
+        return taglocations;
+    }
 
+    public void setTaglocations(Set<TaglocationEntity> taglocationEntities) {
+        this.taglocations = taglocationEntities;
+    }
+*/
     @Override
     public String toString() {
         return "User{" +
@@ -234,6 +247,7 @@ public class User {
         return userName.equals(user.userName);
     }
 
+    /*
     @Override
     public int hashCode() {
         int result = firstName.hashCode();
@@ -244,7 +258,7 @@ public class User {
         result = 31 * result + userName.hashCode();
         return result;
     }
-
+*/
     private void createContributorPrivilege() {
         PrivilegeEntity privilegeEntity = new PrivilegeEntity(2, "Contributor");
 

@@ -1,6 +1,7 @@
 package com.sarah.controller;
 
 import com.sarah.entity.User;
+import com.sarah.persistence.GenericDao;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
 
@@ -32,7 +33,7 @@ public class RemoveAdmin extends HttpServlet{
 
         UserDao userDao = new UserDao();
 
-        User updateUser = userDao.getUserById(Integer.parseInt(req.getParameter("removeId")));
+        User updateUser = userDao.getUserById(Long.parseLong(req.getParameter("removeId")));
         logger.info("User before: " + updateUser.getUserPrivileges().size());
         //adminUsers.remove(updateUser);
         userDao.removeAdmin(updateUser);
@@ -41,8 +42,8 @@ public class RemoveAdmin extends HttpServlet{
 
         ///userDao.update(updateUser);
         //adminUsers.add(updateUser);
-        logger.info("Retrieving user from database: " + userDao.getUserById(updateUser.getUserid()).getUserPrivileges().size());
-        adminUsers = userDao.getAllUsersWithPrivileges();
+        //logger.info("Retrieving user from database: " + userDao.getUserById((Long) updateUser.getId()).getUserPrivileges().size());
+        adminUsers = userDao.getAdminUsers();
 
         session.setAttribute("adminUsers", adminUsers);
 

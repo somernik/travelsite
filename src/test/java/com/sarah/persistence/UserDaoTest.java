@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import java.util.ArrayList;
@@ -24,16 +25,21 @@ import static org.junit.Assert.*;
  */
 public class UserDaoTest {
     private UserDao userDao = new UserDao();
+    @Inject
+    private GenericDao dao;
 
     private final Logger log = Logger.getLogger(this.getClass());
-    private User firstUser = new User("First", "User", 1, "first.user@email.com", "testpassword", "firstUser");
-    private User secondUser = new User("Test", "Insert", 2, "insert@email.com", "testpassword", "testUser");
+    private User firstUser = new User("First", "User", new Long(1), "first.user@email.com", "testpassword", "firstUser");
+    private User secondUser = new User("Test", "Insert", new Long(2), "insert@email.com", "testpassword", "testUser");
+
     private List<User> allUsers = new ArrayList<User>();
 
     @Before
     public void setUp() throws Exception {
-        userDao.insert(firstUser);
-        userDao.insert(secondUser);
+        dao = new GenericDao();
+
+        dao.save(firstUser);
+        dao.save(secondUser);
 
         userDao.addAdmin(firstUser);
 
@@ -46,28 +52,6 @@ public class UserDaoTest {
 
         DatabaseCleaner cleaner = new DatabaseCleaner();
         cleaner.run();
-
-    }
-
-    @Test
-    public void getAllUsers() throws Exception {
-
-
-        List<User> testUsers = userDao.getAllUsersWithPrivileges();
-
-        for (int i = 0; i < allUsers.size(); i++) {
-
-            Assert.assertTrue("User did not match", testUsers.get(i).equals(allUsers.get(i)));
-
-        }
-
-        Assert.assertEquals("Array sizes do not match", allUsers.size(), testUsers.size());
-    }
-
-    @Test
-    public void insert() throws Exception {
-        int firstUserId = userDao.insert(firstUser);
-        Assert.assertEquals("Ids dont match", firstUser.getUserid(), firstUserId);
 
     }
 
@@ -87,9 +71,9 @@ public class UserDaoTest {
         User user = new User("Test", "Locations","email@email.com", "password", "username");
         user.setLocations(locations);
 
-        int id = userDao.insert(user);
+        Long id = dao.save(user);
 
-        Assert.assertEquals("ids dont match", user.getUserid(), id);
+        Assert.assertEquals("ids dont match", user.getId(), id);
 
         User testUser = userDao.getUserById(id);
         Assert.assertEquals("location amounts dont match", user.getLocations().size(), testUser.getLocations().size());
@@ -99,9 +83,9 @@ public class UserDaoTest {
 
     @Test
     @Transactional
-    public void getUserById() throws Exception {
-        userDao.insert(firstUser);
-        User testUser = userDao.getUserById(firstUser.getUserid());
+    public void getUserByIdWithLocationsAndPrivilegesTest() throws Exception {
+        dao.save(firstUser);
+        User testUser = userDao.getUserById(firstUser.getId());
 
         assertNotNull(testUser);
 
@@ -111,35 +95,10 @@ public class UserDaoTest {
 
 
     @Test
-    public void update() throws Exception {
-        secondUser.setEmail("newemail@email.com");
-        userDao.update(secondUser);
-
-        User testUser = userDao.getUserById(secondUser.getUserid());
-
-        Assert.assertTrue("User did not match", testUser.equals(secondUser));
-    }
-
-    @Test
-    public void delete() throws Exception {
-        userDao.delete(firstUser);
-
-        //User testUser = userDao.getUserById(firstUser.getUserid());
-
-        List<User> users = userDao.getAllUsersWithPrivileges();
-
-        //Assert.assertNull("User retrieved is not null", testUser);
-        Assert.assertEquals("Incorrect number of users in database", allUsers.size() - 1, users.size());
-
-    }
-
-    // TODO test for incorrect user ids
-
-    @Test
     public void addAdmin() {
         userDao.addAdmin(secondUser);
 
-        User returnedUser = userDao.getUserById(secondUser.getUserid());
+        User returnedUser = userDao.getUserById(secondUser.getId());
 
         log.info(returnedUser.getUserPrivileges());
         Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 2);
@@ -148,7 +107,7 @@ public class UserDaoTest {
 
     @Test
     public void getUserByUsername() throws Exception {
-        User testUser = userDao.getUserByUsername(secondUser.getUserName());
+        User testUser = userDao.getUserByUsernameWithPrivilege(secondUser.getUserName());
 
         //log.info(testUser);
         //log.info(secondUser);
@@ -160,23 +119,10 @@ public class UserDaoTest {
     public void removeAdmin() throws Exception {
         //log.info(firstUser.getUserPrivileges().size());
         userDao.removeAdmin(firstUser);
-        User returnedUser = userDao.getUserById(firstUser.getUserid());
+        User returnedUser = userDao.getUserById(firstUser.getId());
 
         //log.info("Returned from DB: " + returnedUser.getUserPrivileges().size());
         Assert.assertEquals("Incorrect # of privileges", returnedUser.getUserPrivileges().size(), 1);
-
-    }
-
-    @Test
-    public void getAdminUsersFromListOfUsersTest() throws Exception {
-        //log.info(secondUser.getUserPrivileges());
-        List<User> allUsers = userDao.getAllUsersWithPrivileges();
-        List<User> adminUsers = userDao.getAdminUsersFromListOfUsers(allUsers);
-
-        log.info(adminUsers);
-        log.info(allUsers);
-
-        Assert.assertEquals("Incorrect # of users with admin", adminUsers.size(), 1);
 
     }
 

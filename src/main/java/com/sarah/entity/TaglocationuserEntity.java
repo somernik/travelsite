@@ -1,15 +1,17 @@
 package com.sarah.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by sarah on 9/26/2017.
  */
 @Entity
-@Table(name = "taglocationuser", schema = "travelsite", catalog = "")
+@Table(name = "taglocationuser")
+@AssociationOverrides({
+        @AssociationOverride(name = "pk.stock",
+                joinColumns = @JoinColumn(name = "User_id")),
+        @AssociationOverride(name = "pk.taglocation",
+                joinColumns = @JoinColumn(name = "tagLocation_id")) })
 public class TaglocationuserEntity {
     private int id;
 

@@ -1,6 +1,7 @@
 package com.sarah.controller;
 
 import com.sarah.entity.User;
+import com.sarah.persistence.GenericDao;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
 
@@ -28,10 +29,11 @@ public class DeleteUser extends HttpServlet {
         // TODO validate password check
         // TODO validate all user input
         UserDao userDao = new UserDao();
-        User userToDelete = userDao.getUserById(Integer.parseInt(req.getParameter("id")));
+        GenericDao dao = new GenericDao();
+        User userToDelete = userDao.getUserById(Long.parseLong(req.getParameter("id")));
         logger.info("Current: " + userToDelete);
 
-        userDao.delete(userToDelete); // TODO get from session
+        dao.delete(User.class, userToDelete.getId()); // TODO get from session
         logger.info("Deleted: " + userToDelete);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");

@@ -1,6 +1,9 @@
 package com.sarah.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sarah on 9/26/2017.
@@ -10,6 +13,9 @@ import javax.persistence.*;
 public class TaglocationEntity {
     private int id;
     private int rank;
+    /*
+    private Set<User> users = new HashSet<User>();
+*/
 
     @Id
     @Column(name = "id")
@@ -30,6 +36,17 @@ public class TaglocationEntity {
     public void setRank(int rank) {
         this.rank = rank;
     }
+/*
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "taglocations")
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+*/
 
     @Override
     public boolean equals(Object o) {

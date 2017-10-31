@@ -33,7 +33,7 @@ public class AddAdmin extends HttpServlet{
         // TODO validate all user input
         UserDao userDao = new UserDao();
 
-        User updateUser = userDao.getUserByUsername(req.getParameter("username"));
+        User updateUser = userDao.getUserByUsernameWithPrivilege(req.getParameter("username"));
         logger.info(updateUser);
         logger.info(adminUsers);
 
