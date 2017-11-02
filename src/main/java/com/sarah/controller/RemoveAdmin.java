@@ -1,7 +1,6 @@
 package com.sarah.controller;
 
 import com.sarah.entity.User;
-import com.sarah.persistence.GenericDao;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
 

@@ -1,9 +1,6 @@
 package com.sarah.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by sarah on 9/26/2017.

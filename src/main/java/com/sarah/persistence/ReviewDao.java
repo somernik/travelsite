@@ -1,13 +1,8 @@
 package com.sarah.persistence;
 
 import com.sarah.entity.ReviewEntity;
-import com.sarah.entity.User;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
-import org.hibernate.criterion.Restrictions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Access users in the user table.

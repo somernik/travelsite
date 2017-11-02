@@ -2,7 +2,6 @@ package com.sarah.persistence;
 
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
-import com.sarah.entity.UserPrivilegeEntity;
 import com.sarah.utility.DatabaseCleaner;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -10,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import java.util.ArrayList;

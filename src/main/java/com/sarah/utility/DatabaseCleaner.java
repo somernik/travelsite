@@ -1,9 +1,7 @@
 package com.sarah.utility;
 
-import com.sarah.entity.User;
 import com.sarah.persistence.SessionFactoryProvider;
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;

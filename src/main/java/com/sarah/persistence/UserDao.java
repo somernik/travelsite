@@ -3,16 +3,13 @@ package com.sarah.persistence;
 import com.sarah.entity.PrivilegeEntity;
 import com.sarah.entity.User;
 import com.sarah.entity.UserPrivilegeEntity;
-import com.sarah.entity.UserPrivilegeEntityPK;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Access users in the user table.

@@ -17,7 +17,6 @@ public abstract class BaseEntity<T extends Serializable> {
     /**
      * This method should return the primary key.
      *
-     * @return
      */
     public abstract T getId();
 

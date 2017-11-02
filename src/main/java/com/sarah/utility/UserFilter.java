@@ -3,7 +3,6 @@ package com.sarah.utility;
 import com.sarah.entity.User;
 import com.sarah.persistence.UserDao;
 
-import javax.ejb.EJB;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;

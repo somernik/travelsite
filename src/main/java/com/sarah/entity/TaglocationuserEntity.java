@@ -7,11 +7,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "taglocationuser")
-@AssociationOverrides({
-        @AssociationOverride(name = "pk.stock",
-                joinColumns = @JoinColumn(name = "User_id")),
-        @AssociationOverride(name = "pk.taglocation",
-                joinColumns = @JoinColumn(name = "tagLocation_id")) })
 public class TaglocationuserEntity {
     private int id;
 
