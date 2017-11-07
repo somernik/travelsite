@@ -9,9 +9,11 @@
 <div class="row">
     <form class="col s12" action='addReview' onsubmit="prepareInputs()">
         <input id="placeId" type='hidden' name='placeId' />
+        <input id="placeName" type='hidden' name='placeName' />
         <input id="rating" type='hidden' name='rating' />
         <input id="goodTags" type='hidden' name='goodTags' />
         <input id="badTags" type='hidden' name='badTags' />
+
         <span class="rating">
             <input type="radio" class="rating-input"
                    id="rating-input-1-1" name="rating-input-1">

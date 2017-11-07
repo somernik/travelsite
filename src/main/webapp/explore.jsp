@@ -177,6 +177,7 @@
 
 <script>
     var currentPlaceId = '';
+    var currentPlaceName = '';
     // This example adds a search box to a map, using the Google Place Autocomplete
     // feature. People can enter geographical searches. The search box will return a
     // pick list containing a mix of places and predicted search terms.
@@ -246,6 +247,7 @@
 
                 google.maps.event.addListener(marker, 'click', function() {
                     currentPlaceId = place.place_id;
+                    currentPlaceName = place.name;
                     ///////
                     var detailForm = "<form action='viewDetails'>" +
                         "<input value='" + place.place_id + "' type='hidden' name='placeId' />" +
@@ -276,6 +278,8 @@
 
     function prepareInputs() {
         document.getElementById("placeId").value = currentPlaceId;
+        document.getElementById("placeName").value = currentPlaceName;
+
 
         if (document.getElementById("rating-input-1-5").checked) {
             document.getElementById("rating").value = 5;

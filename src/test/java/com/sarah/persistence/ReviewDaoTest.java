@@ -36,8 +36,7 @@ public class ReviewDaoTest {
     public void setUp() throws Exception {
         // Prepare user
         UserDao userDao = new UserDao();
-        GenericDao dao = new GenericDao();
-        dao.save(testUser);
+        userDao.save(testUser);
 
         // Prepare location
         LocationDao locationDao = new LocationDao();
