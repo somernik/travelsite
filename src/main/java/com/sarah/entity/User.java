@@ -1,8 +1,12 @@
 package com.sarah.entity;
 
+import com.sarah.utility.LocalDateAttributeConverter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +38,10 @@ public class User extends BaseEntity<Long> {
 
     @Column(name = "user_name")
     private String userName;
+
+    @Column(name = "created")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
@@ -220,6 +228,15 @@ public class User extends BaseEntity<Long> {
         this.taglocations = taglocationEntities;
     }
 */
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -247,18 +264,6 @@ public class User extends BaseEntity<Long> {
         return userName.equals(user.userName);
     }
 
-    /*
-    @Override
-    public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + userid;
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + userName.hashCode();
-        return result;
-    }
-*/
     private void createContributorPrivilege() {
         PrivilegeEntity privilegeEntity = new PrivilegeEntity(2, "Contributor");
 

@@ -38,6 +38,10 @@ public class DatabaseCleaner {
             query = session.createSQLQuery(sql);
             query.executeUpdate();
 
+            sql = "DELETE FROM tag";
+            query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
             // reset ids
             String alterSql = "ALTER TABLE userlocation AUTO_INCREMENT = 1";
             SQLQuery alterQuery = session.createSQLQuery(alterSql);
@@ -56,6 +60,10 @@ public class DatabaseCleaner {
             alterQuery.executeUpdate();
 
             alterSql = "ALTER TABLE location AUTO_INCREMENT = 1";
+            alterQuery = session.createSQLQuery(alterSql);
+            alterQuery.executeUpdate();
+
+            alterSql = "ALTER TABLE tag AUTO_INCREMENT = 1";
             alterQuery = session.createSQLQuery(alterSql);
             alterQuery.executeUpdate();
 

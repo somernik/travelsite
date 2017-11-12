@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by sarah on 9/26/2017.
@@ -15,6 +16,7 @@ public class ReviewEntity extends BaseEntity<Long>{
     private Long id;
     private String body;
     private LocalDate date;
+    private Date created;
 
     private User user;
     private LocationEntity location;
@@ -91,6 +93,16 @@ public class ReviewEntity extends BaseEntity<Long>{
         this.location = location;
     }
 
+    @Column(name = "created")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,6 +125,7 @@ public class ReviewEntity extends BaseEntity<Long>{
                 ", date=" + date +
                 ", user=" + user +
                 ", location=" + location +
+                ", created=" + created +
                 '}';
     }
 }

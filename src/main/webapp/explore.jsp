@@ -178,6 +178,43 @@
 <script>
     var currentPlaceId = '';
     var currentPlaceName = '';
+    var currentLat = '';
+    var currentLong = '';
+
+    //////////////////////////////////////////////////////////
+    // Get user location
+    // https://www.w3schools.com/html/html5_geolocation.asp
+    function getUserLocation() {
+        console.log("here2");
+        //var x = document.getElementById("demo");
+        // previous var for error message
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            // User denied request oh well
+            //x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+        console.log("here3");
+        currentLat = position.coords.latitude;
+        currentLong = position.coords.longitude;
+        /*
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+            */
+        console.log(currentLat);
+        console.log(currentLong);
+    }
+
+
+    //////////////////////////////////////////////////////////
+
+
+
+
+    //https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
+
     // This example adds a search box to a map, using the Google Place Autocomplete
     // feature. People can enter geographical searches. The search box will return a
     // pick list containing a mix of places and predicted search terms.
@@ -187,6 +224,22 @@
     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
     function initAutocomplete() {
+
+        getUserLocation();
+        // TODO make this wait until the values are populated
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                currentLat = position.coords.latitude;
+                currentLong = position.coords.longitude;
+
+                });
+        } else {
+            // User denied request oh well
+            //x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+
+        console.log(currentLat);
+        console.log(currentLong);
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -33.8688, lng: 151.2195},
             zoom: 13,
@@ -254,7 +307,13 @@
                         "<input type='submit' class='waves-effect waves-light btn button_in_popup' value='Details' />" +
                         "</form>";
 
-                    var reviewForm = "<a class='waves-effect waves-light btn button_in_popup modal-trigger' href='#new_review'>New Review</a>";
+
+                    <c:if test="${not empty user}">
+                        var reviewForm = "<a class='waves-effect waves-light btn button_in_popup modal-trigger' href='#new_review'>New Review</a>";
+                    </c:if>
+                    <c:if test="${empty user}">
+                        var reviewForm = "<p><a href='user.jsp'>Sign in</a> to add a review</p>";
+                    </c:if>
 
                     ///////
                     infowindow.setContent(place.name + "<br/>" + detailForm + reviewForm);
