@@ -174,13 +174,29 @@ public class GenericDao {
      * @param value the value by which to find.
      * @return
      */
-    /*
     @SuppressWarnings("unchecked")
-
     public <T extends BaseEntity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) {
-        return getSession().createCriteria(clazz).add(Restrictions.eq(propertyName, value)).list();
+
+        Session session = null;
+        List<T> items = new ArrayList<T>();
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+
+            items = session.createCriteria(clazz).add(Restrictions.eq(propertyName, value)).list();
+
+        } catch (HibernateException he) {
+            log.error("Error getting all items", he);
+        } catch (NullPointerException e) {
+            log.error("Error getting item (item does not exist): ", e);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return items;
     }
-    */
+
 
     /**
      * Finds entities by a String property specifying a MatchMode. This search
@@ -204,9 +220,9 @@ public class GenericDao {
                 items =  session.createCriteria(clazz).add(Restrictions.ilike(propertyName, value, MatchMode.EXACT)).list();
             }
         } catch (HibernateException he) {
-            log.error("Error getting all users", he);
+            log.error("Error getting all items", he);
         } catch (NullPointerException e) {
-            log.error("Error getting user with id (user does not exist): ", e);
+            log.error("Error getting item, id does not exist): ", e);
 
         } finally {
             if (session != null) {
@@ -232,9 +248,9 @@ public class GenericDao {
             items = session.createCriteria(clazz).list();
 
         } catch (HibernateException he) {
-            log.error("Error getting all users", he);
+            log.error("Error getting all items", he);
         } catch (NullPointerException e) {
-            log.error("Error getting user with id (user does not exist): ", e);
+            log.error("Error getting item with id (item does not exist): ", e);
 
         } finally {
             if (session != null) {
