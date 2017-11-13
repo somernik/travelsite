@@ -1,7 +1,10 @@
 package com.sarah.persistence;
 
+import com.sarah.entity.LocationEntity;
+import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
 import com.sarah.utility.DatabaseCleaner;
+import javafx.util.converter.LocalDateStringConverter;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 import org.junit.After;
@@ -10,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,5 +117,24 @@ public class GenericDaoTest {
         List<User> usersWithMatchingUsername = dao.findByProperty(User.class, "userName", firstUser.getUserName(), MatchMode.ANYWHERE);
         Assert.assertEquals("Usernames dont match", usersWithMatchingUsername.get(0).getUserName(), firstUser.getUserName());
 
+    }
+
+    @Test
+    public void findByObjectTest() throws Exception {
+        LocalDateStringConverter dateConverter = new LocalDateStringConverter();
+        LocationEntity location = new LocationEntity("Madison", "123");
+
+        ReviewEntity review1 = new ReviewEntity("Awesome!", dateConverter.fromString("10/01/17"), firstUser, location);
+        ReviewEntity review2 = new ReviewEntity("Meh", dateConverter.fromString("10/01/17"), secondUser, location);
+
+        dao.save(location);
+        dao.save(review1);
+        dao.save(review2);
+
+        List<ReviewEntity> reviews = dao.findByProperty(ReviewEntity.class, "user", firstUser);
+
+        log.info(reviews.size());
+
+        Assert.assertEquals("Incorrect # of reviews", 1, reviews.size());
     }
 }

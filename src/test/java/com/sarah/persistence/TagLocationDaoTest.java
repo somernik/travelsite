@@ -27,8 +27,8 @@ public class TagLocationDaoTest {
     TagEntity tag = new TagEntity("hiking");
     TagEntity tag2 = new TagEntity("biking");
 
-    TaglocationEntity tagLocation1 = new TaglocationEntity(1, location, tag);
-    TaglocationEntity tagLocation2 = new TaglocationEntity(1, location, tag2);
+    TaglocationEntity tagLocation1 = new TaglocationEntity(1, 2, location, tag);
+    TaglocationEntity tagLocation2 = new TaglocationEntity(3, 1, location, tag2);
 
     @Before
     public void setUp() throws Exception {
@@ -75,7 +75,7 @@ public class TagLocationDaoTest {
         TagEntity tag = new TagEntity("boating");
         dao.save(tag);
 
-        TaglocationEntity tagLocation2 = new TaglocationEntity(1, location, tag);
+        TaglocationEntity tagLocation2 = new TaglocationEntity(1, 2, location, tag);
 
         Long newId = dao.save(tagLocation2);
 
@@ -120,5 +120,17 @@ public class TagLocationDaoTest {
 
         Assert.assertEquals("Incorrect number of taglocations in database", expectedTagLocations.size(), allTagLocations.size());
 
+    }
+
+    @Test
+    public void getRankByLocationAndTagTest() throws Exception {
+
+        tagLocation1.setRank(3);
+        dao.update(tagLocation1);
+
+        TaglocationEntity returnedEntity = dao.getByLocationAndTag(location, tag);
+        log.info(returnedEntity);
+
+        Assert.assertTrue("Tag Locations not equal", tagLocation1.equals(returnedEntity));
     }
 }
