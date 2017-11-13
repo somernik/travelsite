@@ -1,7 +1,16 @@
 package com.sarah.persistence;
 
+import org.apache.log4j.Logger;
+
 /**
- * Created by sarah on 11/12/2017.
+ * Access taglocations in the taglocation table.
+ *
+ * @author somernik
  */
-public class TagLocationDao {
+public class TagLocationDao extends GenericDao {
+
+    private final Logger log = Logger.getLogger(this.getClass());
+
+
+
 }

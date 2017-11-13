@@ -1,5 +1,6 @@
 package com.sarah.persistence;
 
+import com.sarah.entity.LocationEntity;
 import com.sarah.entity.PrivilegeEntity;
 import com.sarah.entity.User;
 import com.sarah.entity.UserPrivilegeEntity;
@@ -10,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Access users in the user table.
@@ -48,6 +50,43 @@ public class UserDao extends GenericDao {
         }
 
         return user;
+    }
+
+    public User addSavedLocation(User user, LocationEntity location) {
+        User userWithLocations = this.getUserById(user.getId());
+        Set<LocationEntity> locations = userWithLocations.getLocations();
+        locations.add(location);
+        User updatedUser = this.update(userWithLocations);
+
+        return updatedUser;
+
+    }
+
+    public User removeSavedLocation(User user, LocationEntity location) {
+        User userWithLocations = this.getUserById(user.getId());
+
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            // delete admin privelege for current user
+            String sql = "DELETE FROM userlocation WHERE User_id='" + userWithLocations.getId() + "' AND Location_id='" + location.getId() + "'";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.executeUpdate();
+            transaction.commit();
+
+        } catch(HibernateException he) {
+            log.error("Hibernate Exception: ", he);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return this.getUserById(userWithLocations.getId());
     }
 
     /** Get a single user for the given id
