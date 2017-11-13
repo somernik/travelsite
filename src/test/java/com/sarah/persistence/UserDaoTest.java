@@ -126,7 +126,32 @@ public class UserDaoTest {
 
         List<User> adminUsers = userDao.getAdminUsers();
         log.info(adminUsers);
-        Assert.assertEquals("Incorrect # of users with admin", adminUsers.size(), 1);
+        Assert.assertEquals("Incorrect # of users with admin", 1, adminUsers.size());
+
+    }
+
+    @Test
+    public void addSavedLocationTest() throws Exception {
+        LocationEntity locationEntity = new LocationEntity("Madison", "123");
+        log.info(firstUser.getLocations());
+        log.info(locationEntity);
+        firstUser = userDao.addSavedLocation(firstUser, locationEntity);
+        log.info(firstUser.getLocations());
+
+        Assert.assertEquals("Location not saved correctly", 1, firstUser.getLocations().size());
+    }
+
+    @Test
+    public void removeSavedLocationTest() throws Exception {
+        LocationEntity locationEntity = new LocationEntity("Madison", "1234");
+
+        firstUser = userDao.addSavedLocation(firstUser, locationEntity);
+        for (LocationEntity location: firstUser.getLocations()) {
+            firstUser = userDao.removeSavedLocation(firstUser, location);
+        }
+
+        Assert.assertEquals("Location not removed correctly", 0, firstUser.getLocations().size());
+
 
     }
 

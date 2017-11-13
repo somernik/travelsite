@@ -34,6 +34,14 @@ public class DatabaseCleaner {
             query = session.createSQLQuery(sql);
             query.executeUpdate();
 
+            sql = "DELETE FROM taglocationuser";
+            query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
+            sql = "DELETE FROM taglocation";
+            query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
             sql = "DELETE FROM location";
             query = session.createSQLQuery(sql);
             query.executeUpdate();
@@ -60,6 +68,14 @@ public class DatabaseCleaner {
             alterQuery.executeUpdate();
 
             alterSql = "ALTER TABLE location AUTO_INCREMENT = 1";
+            alterQuery = session.createSQLQuery(alterSql);
+            alterQuery.executeUpdate();
+
+            alterSql = "ALTER TABLE taglocationuser AUTO_INCREMENT = 1";
+            alterQuery = session.createSQLQuery(alterSql);
+            alterQuery.executeUpdate();
+
+            alterSql = "ALTER TABLE taglocation AUTO_INCREMENT = 1";
             alterQuery = session.createSQLQuery(alterSql);
             alterQuery.executeUpdate();
 

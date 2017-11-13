@@ -2,9 +2,11 @@ package com.sarah.controller;
 
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.ReviewEntity;
+import com.sarah.entity.TagEntity;
 import com.sarah.entity.User;
 import com.sarah.persistence.LocationDao;
 import com.sarah.persistence.ReviewDao;
+import com.sarah.persistence.TagDao;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 
@@ -12,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.swing.text.html.HTML;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -46,7 +49,7 @@ public class AddReview extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         if (req.getParameter("placeId") == null || req.getParameter("placeName") == null) {
-            log.info(" null properties");
+            log.info("null properties");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("explore.jsp");
             dispatcher.forward(req, resp);
@@ -89,10 +92,20 @@ public class AddReview extends HttpServlet {
         log.info(req.getParameter("badTags"));
 
         // TODO new METHOD
+        TagDao tagDao = new TagDao();
         if (req.getParameter("badTags").length() > 0) {
             String[] badTags = req.getParameter("badTags").split("\\;");
             for (String tag : badTags) {
-                // TODO add each tag
+                List<TagEntity> returnedTags = tagDao.findByProperty(TagEntity.class, "name", tag, MatchMode.ANYWHERE);
+                if (returnedTags == null) {
+                    // tag doesn't exist add it
+                    TagEntity tagObj = new TagEntity(tag);
+                    tagDao.save(tagObj);
+
+                    // TODO update taglocation
+                } else {
+                    // TODO update taglocation
+                }
                 log.info(tag);
             }
         }
