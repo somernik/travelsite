@@ -23,6 +23,10 @@ public class TaglocationEntity extends BaseEntity<Long> {
     @Column(name = "rank")
     private int rank;
 
+    @Basic
+    @Column(name = "negativeRank")
+    private int negativeRank;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Location_id", nullable = false)
     private LocationEntity location;
@@ -41,8 +45,9 @@ public class TaglocationEntity extends BaseEntity<Long> {
         this.location = location;
     }
 
-    public TaglocationEntity(int rank, LocationEntity location, TagEntity tag) {
+    public TaglocationEntity(int rank, int negativeRank, LocationEntity location, TagEntity tag) {
         this.rank = rank;
+        this.negativeRank = negativeRank;
         this.location = location;
         this.tag = tag;
     }
@@ -61,6 +66,14 @@ public class TaglocationEntity extends BaseEntity<Long> {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public int getNegativeRank() {
+        return negativeRank;
+    }
+
+    public void setNegativeRank(int negativeRank) {
+        this.negativeRank = negativeRank;
     }
 
     public LocationEntity getLocation() {

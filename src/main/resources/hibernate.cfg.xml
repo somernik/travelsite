@@ -27,6 +27,7 @@
         <mapping class="com.sarah.entity.PrivilegeEntity"/>
         <mapping class="com.sarah.entity.UserPrivilegeEntity"/>
         <mapping class="com.sarah.entity.UserPrivilegeEntityPK"/>
+        <mapping class="com.sarah.entity.TaglocationEntity"/>
         <mapping class="com.sarah.entity.TagEntity"/>
 
     </session-factory>
