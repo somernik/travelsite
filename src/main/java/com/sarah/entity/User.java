@@ -56,19 +56,18 @@ public class User extends BaseEntity<Long> {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL)
     private Set<UserPrivilegeEntity> userPrivileges = new HashSet<UserPrivilegeEntity>();
-/*
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "taglocation", joinColumns = {
+    @JoinTable(name = "taglocationuser", joinColumns = {
             @JoinColumn(name = "User_id") },
             inverseJoinColumns = {
             @JoinColumn(name = "tagLocation_id") })
     private Set<TaglocationEntity> taglocations = new HashSet<TaglocationEntity>();
-*/
+
     /**
      * Instantiates a new User.
      */
     public User() {}
-
 
     /**
      * Instantiates a new User no id
@@ -219,7 +218,7 @@ public class User extends BaseEntity<Long> {
     public void setUserPrivileges(Set<UserPrivilegeEntity> userPrivileges) {
         this.userPrivileges = userPrivileges;
     }
-/*
+
     public Set<TaglocationEntity> getTaglocations() {
         return taglocations;
     }
@@ -227,7 +226,6 @@ public class User extends BaseEntity<Long> {
     public void setTaglocations(Set<TaglocationEntity> taglocationEntities) {
         this.taglocations = taglocationEntities;
     }
-*/
 
     public Date getCreated() {
         return created;

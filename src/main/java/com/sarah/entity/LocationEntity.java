@@ -17,6 +17,7 @@ public class LocationEntity extends BaseEntity<Long> {
     private String googleId;
     private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
     private Set<User> users = new HashSet<User>();
+    private Set<TaglocationEntity> tagLocations = new HashSet<TaglocationEntity>();
 
     public LocationEntity() {}
 
@@ -94,6 +95,15 @@ public class LocationEntity extends BaseEntity<Long> {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
+    public Set<TaglocationEntity> getTagLocations() {
+        return tagLocations;
+    }
+
+    public void setTagLocations(Set<TaglocationEntity> tagLocations) {
+        this.tagLocations = tagLocations;
     }
 
     @Override
