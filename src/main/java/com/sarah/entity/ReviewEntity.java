@@ -17,7 +17,7 @@ public class ReviewEntity extends BaseEntity<Long>{
     private String body;
     private LocalDate date;
     private Date created;
-    private int stars;
+    private Integer stars;
 
     private User user;
     private LocationEntity location;
@@ -107,11 +107,11 @@ public class ReviewEntity extends BaseEntity<Long>{
     }
 
     @Column(name = "stars")
-    public int getStars() {
+    public Integer getStars() {
         return stars;
     }
 
-    public void setStars(int stars) {
+    public void setStars(Integer stars) {
         this.stars = stars;
     }
 

@@ -28,6 +28,18 @@
     #allPhotos {
         right: 153px;
     }
+
+    .tabs .tab a, .tabs .tab.disabled a {
+        color: #26a69a;
+    }
+
+    .tabs .indicator {
+        background-color: #26a69a;
+    }
+
+    .tabs .tab a:hover, .tabs .tab a.active {
+        color: #26a69a;
+    }
 </style>
 <%@include file="templates/nav.jsp" %>
 <div class="container" id="main">
@@ -58,7 +70,7 @@
     </div>
 
     <div class="row">
-        <div class="col s12 m9 l9">
+        <div class="col s12 m9 l9"><!-- reviews/photos/all tags -->
             <ul class="tabs tabs-fixed-width">
                 <li class="tab col s3"><a href="#reviews" class="active">Reviews</a></li>
                 <li class="tab col s3"><a href="#photos">Photos</a></li>
@@ -66,11 +78,14 @@
             </ul>
 
 
-            <div id="reviews" class="col s12">Test 1</div>
-            <div id="photos" class="col s12">Test 2</div>
-            <div id="allTags" class="col s12">Test 3</div>
+            <div id="reviews" class="col s12"><!-- display of reviews -->
+                Test 1
+                ${reviews}
+            </div>
+            <div id="photos" class="col s12"><!-- display of photos -->Test 2</div>
+            <div id="allTags" class="col s12"><!-- display of all tags -->Test 3</div>
         </div>
-        <div class="col s12 m3 l3">
+        <div class="col s12 m3 l3"><!-- weather plugin? -->
             <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
 
         </div>

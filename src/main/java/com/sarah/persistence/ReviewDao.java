@@ -3,6 +3,10 @@ package com.sarah.persistence;
 import com.sarah.entity.ReviewEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Access users in the user table.
@@ -38,6 +42,31 @@ public class ReviewDao extends GenericDao {
         }
 
         return review;
+    }
+
+    public List<ReviewEntity> findByAndInitializeProperties (String propertyName, Object value) {
+
+        Session session = null;
+        List<ReviewEntity> items = new ArrayList<ReviewEntity>();
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+
+            items = session.createCriteria(ReviewEntity.class).add(Restrictions.eq(propertyName, value)).list();
+            for (ReviewEntity review: items) {
+                Hibernate.initialize(review.getLocation());
+                Hibernate.initialize(review.getUser());
+            }
+        } catch (HibernateException he) {
+            log.error("Error initializing items", he);
+        } catch (NullPointerException e) {
+            log.error("Error initializing item (item does not exist): ", e);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return items;
     }
 
 }
