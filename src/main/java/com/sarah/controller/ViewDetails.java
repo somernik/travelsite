@@ -23,6 +23,13 @@ public class ViewDetails extends HttpServlet {
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String placeId = req.getParameter("placeId");
         log.info(placeId);
+
+
+        // TODO Get locations info for detail page
+        // tags, reviews, google images,
+        // later - images
+
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
         dispatcher.forward(req, resp);
     }

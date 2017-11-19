@@ -105,17 +105,15 @@ public class AddReview extends HttpServlet {
 
         // add review (which is optional)
         if (req.getParameter("review").length() > 0 && locationId > 0 && req.getParameter("date").length() > 0) {
-            ReviewEntity review = new ReviewEntity(req.getParameter("review"), date, currentUser, location);
+            ReviewEntity review = new ReviewEntity(req.getParameter("review"), date, currentUser, location, Integer.parseInt(req.getParameter("review")));
             log.info(review.toString());
             ReviewDao reviewDao = new ReviewDao();
             Long id = reviewDao.save(review);
         }
 
-        // TODO Get locations info for detail page
-        // tags, reviews, google images,
-        // later - images
+        req.setAttribute("locationId", locationId);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/viewDetails");
         dispatcher.forward(req, resp);
     }
 

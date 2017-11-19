@@ -42,8 +42,8 @@ public class ReviewDaoTest {
         LocationDao locationDao = new LocationDao();
         locationDao.save(location);
 
-        firstReview = new ReviewEntity(new Long(1), "This is great!", dateConverter.fromString("10/01/17"), testUser, location);
-        secondReview = new ReviewEntity(new Long(2), "This is not great :(", dateConverter.fromString("10/02/17"), testUser, location);
+        firstReview = new ReviewEntity(new Long(1), "This is great!", dateConverter.fromString("10/01/17"), testUser, location, 5);
+        secondReview = new ReviewEntity(new Long(2), "This is not great :(", dateConverter.fromString("10/02/17"), testUser, location, 2);
 
         reviewDao.save(firstReview);
         reviewDao.save(secondReview);
@@ -76,7 +76,7 @@ public class ReviewDaoTest {
     @Test
     public void insertReview() throws Exception {
 
-        ReviewEntity newReview = new ReviewEntity(new Long(3),"This is meh", dateConverter.fromString("10/01/17"), testUser, location);
+        ReviewEntity newReview = new ReviewEntity(new Long(3),"This is meh", dateConverter.fromString("10/01/17"), testUser, location, 3);
 
         Long newId = reviewDao.save(newReview);
 

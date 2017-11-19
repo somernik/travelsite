@@ -28,6 +28,7 @@ public class LocationDao extends GenericDao {
             locationEntity = (LocationEntity) session.get(LocationEntity.class, id);
             Hibernate.initialize(locationEntity.getReviews());
             Hibernate.initialize(locationEntity.getUsers());
+            Hibernate.initialize(locationEntity.getTagLocations());
         } catch (HibernateException he) {
             log.error("Error getting location with id: " + id, he);
 

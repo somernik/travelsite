@@ -124,8 +124,8 @@ public class GenericDaoTest {
         LocalDateStringConverter dateConverter = new LocalDateStringConverter();
         LocationEntity location = new LocationEntity("Madison", "123");
 
-        ReviewEntity review1 = new ReviewEntity("Awesome!", dateConverter.fromString("10/01/17"), firstUser, location);
-        ReviewEntity review2 = new ReviewEntity("Meh", dateConverter.fromString("10/01/17"), secondUser, location);
+        ReviewEntity review1 = new ReviewEntity("Awesome!", dateConverter.fromString("10/01/17"), firstUser, location, 5);
+        ReviewEntity review2 = new ReviewEntity("Meh", dateConverter.fromString("10/01/17"), secondUser, location, 3);
 
         dao.save(location);
         dao.save(review1);

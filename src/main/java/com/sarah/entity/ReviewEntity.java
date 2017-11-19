@@ -17,6 +17,7 @@ public class ReviewEntity extends BaseEntity<Long>{
     private String body;
     private LocalDate date;
     private Date created;
+    private int stars;
 
     private User user;
     private LocationEntity location;
@@ -24,19 +25,21 @@ public class ReviewEntity extends BaseEntity<Long>{
     public ReviewEntity(){
     }
 
-    public ReviewEntity(String body, LocalDate date, User user, LocationEntity location) {
+    public ReviewEntity(String body, LocalDate date, User user, LocationEntity location, int stars) {
         this.body = body;
         this.date = date;
         this.user = user;
         this.location = location;
+        this.stars = stars;
     }
 
-    public ReviewEntity(Long reviewId, String body, LocalDate date, User user, LocationEntity location) {
+    public ReviewEntity(Long reviewId, String body, LocalDate date, User user, LocationEntity location, int stars) {
         this.id = reviewId;
         this.body = body;
         this.date = date;
         this.user = user;
         this.location = location;
+        this.stars = stars;
     }
 
     @Id
@@ -103,6 +106,15 @@ public class ReviewEntity extends BaseEntity<Long>{
         this.created = created;
     }
 
+    @Column(name = "stars")
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -126,6 +138,7 @@ public class ReviewEntity extends BaseEntity<Long>{
                 ", user=" + user +
                 ", location=" + location +
                 ", created=" + created +
+                ", stars=" + stars +
                 '}';
     }
 }
