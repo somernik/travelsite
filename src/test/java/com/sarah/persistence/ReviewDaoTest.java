@@ -6,13 +6,23 @@ import com.sarah.entity.User;
 import com.sarah.utility.DatabaseCleaner;
 import javafx.util.converter.LocalDateStringConverter;
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+
 
 /**
  * Created by sarah on 9/30/2017.
@@ -122,6 +132,51 @@ public class ReviewDaoTest {
         Assert.assertEquals("Date does not match", secondReview.getDate(), returnedReview.getDate());
         Assert.assertEquals("User does not match", secondReview.getUser().toString(), returnedReview.getUser().toString());
         Assert.assertEquals("Location does not match", secondReview.getLocation().toString(), returnedReview.getLocation().toString());
+
+    }
+
+    // TODO test intialize function
+    @Test
+    public void getLocationImage() throws Exception {
+        URI baseURI = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ_xkgOm1TBogRmEFIurX8DE4&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();
+
+        Client client = ClientBuilder.newClient();
+
+        WebTarget target = client.target(baseURI);
+        //String allQuestions = target.path("JSON/all").request().accept(MediaType.APPLICATION_JSON).get(String.class);
+
+        String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+        //log.info(response);
+        String photoReference = "";
+
+        try {
+            //JSONArray jsonArray = new JSONArray(response);
+            //log.info(jsonArray);
+            JSONObject jsonObj = new JSONObject(response);
+            JSONObject result = jsonObj.getJSONObject("result");
+            JSONArray photos = result.getJSONArray("photos");
+            JSONObject firstPhoto = photos.getJSONObject(0);
+            photoReference = firstPhoto.getString("photo_reference");
+
+            log.info(photoReference);
+
+            //questionsArrayList = parseJSON(jsonArray);
+        } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+        }
+
+        URI baseURI2 = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photoReference + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();
+
+        Client client2 = ClientBuilder.newClient();
+
+        WebTarget target2 = client2.target(baseURI2);
+
+        String response2 = target2.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+        //log.info(response2);
+
+
+
+        //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=YOUR_API_KEY
 
     }
 }
