@@ -6,6 +6,7 @@ import com.sarah.entity.TagEntity;
 import com.sarah.entity.TaglocationEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -58,5 +59,30 @@ public class TagLocationDao extends GenericDao {
 
         return entity;
     }
+
+    public List<TaglocationEntity> findByAndInitializeTag (String propertyName, Object value) {
+
+        Session session = null;
+        List<TaglocationEntity> items = new ArrayList<TaglocationEntity>();
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+
+            items = session.createCriteria(TaglocationEntity.class).add(Restrictions.eq(propertyName, value)).list();
+            for (TaglocationEntity review: items) {
+                Hibernate.initialize(review.getTag());
+            }
+        } catch (HibernateException he) {
+            log.error("Error initializing items", he);
+        } catch (NullPointerException e) {
+            log.error("Error initializing item (item does not exist): ", e);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return items;
+    }
+
 
 }
