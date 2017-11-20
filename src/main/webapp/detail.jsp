@@ -47,10 +47,10 @@
     <div class="col s12 m12 l12">
         <div class="card" id="imageContent">
             <div class="card-image">
-                <img src="images/demo.png">
-                <span class="card-title">Location Name + stars here</span>
+                <img src="images/demo.png"><!-- TODO pull first google image -->
+                <span class="card-title">${location.name} + stars here</span>
                 <div class="fixed-action-btn horizontal click-to-toggle">
-                    <a class="btn-floating halfway-fab btn-large red">
+                    <a class="btn-floating halfway-fab btn-large">
                         <i class="large material-icons">menu</i>
                     </a>
                     <ul>
@@ -72,18 +72,19 @@
     <div class="row">
         <div class="col s12 m9 l9"><!-- reviews/photos/all tags -->
             <ul class="tabs tabs-fixed-width">
-                <li class="tab col s3"><a href="#reviews" class="active">Reviews</a></li>
+                <li class="tab col s3"><a href="#reviews" >Reviews</a></li>
                 <li class="tab col s3"><a href="#photos">Photos</a></li>
-                <li class="tab col s3"><a href="#allTags">All Tags</a></li>
+                <li class="tab col s3"><a href="#allTags" class="active">All Tags</a></li>
             </ul>
 
+            <%@include file="templates/reviews_display.jsp" %><!-- display of reviews -->
 
-            <div id="reviews" class="col s12"><!-- display of reviews -->
-                Test 1
-                ${reviews}
+            <div id="photos" class="col s12"><!-- display of photos -->
+                Test
             </div>
-            <div id="photos" class="col s12"><!-- display of photos -->Test 2</div>
-            <div id="allTags" class="col s12"><!-- display of all tags -->Test 3</div>
+
+            <%@include file="templates/tags_display.jsp" %><!-- display of all tags -->
+
         </div>
         <div class="col s12 m3 l3"><!-- weather plugin? -->
             <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
