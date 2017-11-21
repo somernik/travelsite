@@ -33,7 +33,7 @@
         </span>
         <div class="row">
             <div class="input-field col s12">
-                <div class="chips chips-placeholder" id="good"></div>
+                <div class="chips chips-autocomplete" id="good"></div>
                 <label for="good">Recommended Activities</label>
             </div>
         </div>
@@ -62,17 +62,38 @@
     </form>
 </div>
 <script>
+
+    var tags = {};
+
+    <c:forEach var="tag" items="${tags}">
+    tags['${tag.name}'] = null;
+    </c:forEach>
+/*
     $(document).ready(function(){
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         // TODO populate from database
         $('.modal').modal();
         $('.chips-autocomplete').material_chip({
             autocompleteOptions: {
-                data: {
-                    'Apple': null,
-                    'Microsoft': null,
-                    'Google': null
-                },
+                data: tags,
+                limit: Infinity,
+                minLength: 1
+            }
+        });
+    });
+    */
+
+var test = {};
+test['Apple'] = null;
+console.log(test);
+console.log(tags);
+    $(document).ready(function(){
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        // TODO populate from database
+        $('.modal').modal();
+        $('.chips-autocomplete').material_chip({
+            autocompleteOptions: {
+                data: tags,
                 limit: Infinity,
                 minLength: 1
             }

@@ -1,7 +1,7 @@
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
         <ul class="left hide-on-med-and-down">
-            <li><a href="explore.jsp" class="waves-effect waves-light btn"><i class="material-icons">search</i></a></li>
+            <li><a href="explore" class="waves-effect waves-light btn"><i class="material-icons">search</i></a></li>
         </ul>
         <a id="logo-container" href="index.jsp" class="brand-logo center">WWW Travel</a>
         <ul class="right hide-on-med-and-down">

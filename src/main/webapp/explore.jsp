@@ -31,7 +31,7 @@
     }
 
     form.filterForms label {
-        padding: 0 30px;
+        padding: 0 20px;
     }
 
 </style>
@@ -69,44 +69,34 @@
                     </ul>
                 </div>
                 <div id="test1" class="col s12">
-                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB -->
-                        <p>
-                            <input type="checkbox" id="test5" />
-                            <label for="test5">Backpacking</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="test6" />
-                            <label for="test6">Biking</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" class="filled-in" id="filled-in-box" />
-                            <label for="filled-in-box">Hiking</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="indeterminate-checkbox" />
-                            <label for="indeterminate-checkbox">Kayaking</label>
-                        </p>
+                    <form action="#" class="filterForms"><!-- pulled dynamically from DB -->
+                        <c:forEach items="${tags}" var="tag">
+                            <p>
+                                <input type="checkbox" id="${tag.name}" />
+                                <label for="${tag.name}">${tag.name}</label>
+                            </p>
+                        </c:forEach>
                     </form>
                     <div>
                     When filtering by activities... top activities with a "best in: < month here >, location: < location here (restricted to what is visible in map) >" will appear ranked by ratings</div>
                 </div>
                 <div id="test2" class="col s12">
-                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB -->
+                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB?     -->
                         <p>
                             <input type="checkbox" id="1" />
-                            <label for="1">January</label>
+                            <label for="1">Jan</label>
                         </p>
                         <p>
                             <input type="checkbox" id="2" />
-                            <label for="2">February</label>
+                            <label for="2">Feb</label>
                         </p>
                         <p>
                             <input type="checkbox" class="filled-in" id="3" />
-                            <label for="3">March</label>
+                            <label for="3">Mar</label>
                         </p>
                         <p>
                             <input type="checkbox" id="4" />
-                            <label for="4">April</label>
+                            <label for="4">Apr</label>
                         </p>
                         <p>
                             <input type="checkbox" id="5" />
@@ -114,31 +104,31 @@
                         </p>
                         <p>
                             <input type="checkbox" id="6" />
-                            <label for="6">June</label>
-                        </p><br />
+                            <label for="6">Jun</label>
+                        </p>
                         <p>
                             <input type="checkbox" class="filled-in" id="7" />
-                            <label for="7">July</label>
+                            <label for="7">Jul</label>
                         </p>
                         <p>
                             <input type="checkbox" id="8" />
-                            <label for="8">August</label>
+                            <label for="8">Aug</label>
                         </p>
                         <p>
                             <input type="checkbox" id="9" />
-                            <label for="9">September</label>
+                            <label for="9">Sept</label>
                         </p>
                         <p>
                             <input type="checkbox" id="10" />
-                            <label for="10">October</label>
+                            <label for="10">Oct</label>
                         </p>
                         <p>
                             <input type="checkbox" class="filled-in" id="11" />
-                            <label for="11">November</label>
+                            <label for="11">Nov</label>
                         </p>
                         <p>
                             <input type="checkbox" id="12" />
-                            <label for="12">December</label>
+                            <label for="12">Dec</label>
                         </p>
                     </form>
                     When filtering by month... shows top activities given month(s) selected and location on map</div>

@@ -40,14 +40,42 @@
     .tabs .tab a:hover, .tabs .tab a.active {
         color: #26a69a;
     }
+
+    .crop-height {
+        /* max-width: 1200px; /* native or declared width of img src (if known) */
+        max-height: 320px;
+        overflow: hidden; }
+
+    img.scale {
+        /* corrects small inline gap at bottom of containing div */
+        display: block;
+        width: 100%; /* corrects obscure Firefox bug */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        display: block; /* corrects small inline gap at bottom of containing div */
+        width: 100% /* corrects obscure Firefox bug */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        /*width: auto\9;
+        /* ie8+9 - use modernizr instead of this \9 hack */
+        /* lt ie8 */
+        -ms-interpolation-mode: bicubic;
+        /* optionally force a minimum size if img src size is known: */
+        /* min-height: 320px; /* max-height of .crop-height */
+        /* min-width: 480px; /* proportional to above */ }
 </style>
 <%@include file="templates/nav.jsp" %>
+
 <div class="container" id="main">
     <div class="row">
     <div class="col s12 m12 l12">
         <div class="card" id="imageContent">
             <div class="card-image">
-                <img src="images/demo.png"><!-- TODO pull first google image -->
+                <div class="crop-height">
+                <img src="${photoUrl}" class="scale"><!-- TODO pull first google image -->
+                </div>
                 <span class="card-title">${location.name} + stars here</span>
                 <div class="fixed-action-btn horizontal click-to-toggle">
                     <a class="btn-floating halfway-fab btn-large">
@@ -74,7 +102,7 @@
             <ul class="tabs tabs-fixed-width">
                 <li class="tab col s3"><a href="#reviews" >Reviews</a></li>
                 <li class="tab col s3"><a href="#photos">Photos</a></li>
-                <li class="tab col s3"><a href="#allTags" class="active">All Tags</a></li>
+                <li class="tab col s3"><a href="#allTags">All Tags</a></li>
             </ul>
 
             <%@include file="templates/reviews_display.jsp" %><!-- display of reviews -->
