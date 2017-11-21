@@ -66,9 +66,9 @@
     var tags = {};
 
     <c:forEach var="tag" items="${tags}">
-    tags['${tag.name}'] = null;
+        tags['${tag.name}'] = null;
     </c:forEach>
-/*
+
     $(document).ready(function(){
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         // TODO populate from database
@@ -81,26 +81,6 @@
             }
         });
     });
-    */
-
-var test = {};
-test['Apple'] = null;
-console.log(test);
-console.log(tags);
-    $(document).ready(function(){
-        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-        // TODO populate from database
-        $('.modal').modal();
-        $('.chips-autocomplete').material_chip({
-            autocompleteOptions: {
-                data: tags,
-                limit: Infinity,
-                minLength: 1
-            }
-        });
-    });
-
-
 
     $('.chips-placeholder').material_chip({
         //placeholder: 'Enter a tag',
