@@ -48,7 +48,7 @@ public class ViewDetails extends HttpServlet {
         // TODO Get locations info for detail page
         // Get reviews
         LocationDao locationDao = new LocationDao();
-        List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId" , "ChIJ_xkgOm1TBogRmEFIurX8DE4", MatchMode.EXACT);
+        List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId" , placeId, MatchMode.EXACT);
         log.info("locations: " + locations);
 
         if (locations.size() == 1) {
@@ -73,7 +73,6 @@ public class ViewDetails extends HttpServlet {
             // TODO throw error? there shouldnt be more than 1 location with a single id
         }
         // google images, later - images
-
 
         log.info(session.getAttribute("user"));
         RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
