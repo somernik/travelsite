@@ -34,6 +34,7 @@ public class Explore extends HttpServlet {
         List<TagEntity> tags = tagDao.findAll(TagEntity.class);
 
         req.setAttribute("tags", tags);
+        // TODO add any search criteria to google map
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("explore.jsp");
         dispatcher.forward(req, resp);
