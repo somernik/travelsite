@@ -54,7 +54,7 @@ public class AddReview extends HttpServlet {
         if (req.getParameter("placeId") == null || req.getParameter("placeName") == null) {
             log.info("null properties");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("explore.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("explore");
             dispatcher.forward(req, resp);
         }
 
@@ -84,7 +84,7 @@ public class AddReview extends HttpServlet {
         } else {
             // TODO error with location -> exit
             // TODO figure out how to add error message and save search
-            RequestDispatcher dispatcher = req.getRequestDispatcher("explore.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("explore");
             dispatcher.forward(req, resp);
         }
 
@@ -113,7 +113,7 @@ public class AddReview extends HttpServlet {
 
         req.setAttribute("locationId", locationId);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/viewDetails");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("viewDetails");
         dispatcher.forward(req, resp);
     }
 
