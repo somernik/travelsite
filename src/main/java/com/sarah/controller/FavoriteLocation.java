@@ -1,10 +1,8 @@
 package com.sarah.controller;
 
 import com.sarah.entity.LocationEntity;
-import com.sarah.entity.TagEntity;
 import com.sarah.entity.User;
 import com.sarah.persistence.LocationDao;
-import com.sarah.persistence.TagDao;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
