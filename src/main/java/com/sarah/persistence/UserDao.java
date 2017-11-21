@@ -58,6 +58,7 @@ public class UserDao extends GenericDao {
         LocationDao locationDao = new LocationDao();
         LocationEntity updatedLocation = locationDao.update(location); // In case location wasnt previously saved
 
+        user = this.getUserById(user.getId());
         Set<LocationEntity> currentLocations = user.getLocations();
         currentLocations.add(updatedLocation);
 
