@@ -118,6 +118,8 @@ public class UserDao extends GenericDao {
             c2.setMaxResults(1);
             user = (User) c2.uniqueResult();
             Hibernate.initialize(user.getUserPrivileges());
+            Hibernate.initialize(user.getLocations());
+            Hibernate.initialize(user.getReviews());
 
         } catch (HibernateException he) {
             log.error("Error getting user with username: " + username, he);

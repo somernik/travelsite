@@ -51,8 +51,14 @@
 
                     </form>
                 </div>
-                <div id="test2" class="col s12">Test 2</div>
-                <div id="test3" class="col s12">Test 3</div>
+                <!--<div id="test2" class="col s12">Test 2</div>-->
+                <c:set var="reviews" value="${userReviews}"></c:set>
+                <%@include file="templates/reviews_display.jsp" %><!-- display of reviews -->
+
+                <div id="test3" class="col s12">Test 3
+                    <c:set value="hi" var="test"/>
+                    ${test}
+                </div>
                 <div id="test4" class="col s12">Test 4</div>
             </div>
 

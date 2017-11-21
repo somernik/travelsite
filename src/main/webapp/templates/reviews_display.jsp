@@ -14,7 +14,7 @@
                 </c:forEach>
                 <p>${review.body}</p>
                     <!-- TODO maybe tags added with this review? -->
-                <p class="extra_info">Visited ${review.date} <br/>
+                    <p class="extra_info">Visited <a href="viewDetails?placeId=${review.location.googleId}">${review.location.name}</a> on ${review.date} <br/>
                     Posted on ${review.created} by ${review.user.userName}
                 </p>
 
