@@ -17,19 +17,29 @@
                 <p class="extra_info">Visited ${review.date} <br/>
                     Posted on ${review.created} by ${review.user.userName}
                 </p>
-                    <!-- todo add check for not owner/admin -->
 
-                <a href="#!" class="secondary-content tooltipped" id="report"
-                   data-position="right" data-delay="50" data-tooltip="Report Review"><i class="material-icons comment_icon">announcement</i></a>
+                <c:if test="${user.userName != review.user.userName}">
+                    <!-- check for not owner/admin -->
+                    <a href="#!" class="secondary-content tooltipped" id="report"
+                       data-position="right" data-delay="50" data-tooltip="Report Review"><i class="material-icons comment_icon">announcement</i></a>
+                </c:if>
 
                 <c:if test="${user.userName == review.user.userName}"><!-- if user is review owner -->
                       <a href="#!" class="secondary-content tooltipped" id="edit"
                          data-position="right" data-delay="50" data-tooltip="Edit Review"><i class="material-icons comment_icon">create</i></a>
-                </c:if>
-<!-- todo add check for owner/admin -->
-                <a href="#!" class="secondary-content tooltipped" id="delete"
-                   data-position="right" data-delay="50" data-tooltip="Delete Review"><i class="material-icons comment_icon">delete</i></a>
 
+                      <a href="#!" class="secondary-content tooltipped" id="delete"
+                         data-position="right" data-delay="50" data-tooltip="Delete Review"><i class="material-icons comment_icon">delete</i></a>
+
+                </c:if>
+
+                <!-- check for admin -->
+                <c:forEach var="priv" items="${user.userPrivileges}">
+                    <c:if test="${priv.pk.privilege.value == 'administrator'}">
+                         <a href="#!" class="secondary-content tooltipped" id="delete"
+                            data-position="right" data-delay="50" data-tooltip="Delete Review"><i class="material-icons comment_icon">delete</i></a>
+                    </c:if>
+                </c:forEach>
             </li>
 
         </c:forEach>
