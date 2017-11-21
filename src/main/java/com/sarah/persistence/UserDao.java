@@ -10,6 +10,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -53,12 +54,22 @@ public class UserDao extends GenericDao {
     }
 
     public User addSavedLocation(User user, LocationEntity location) {
-        User userWithLocations = this.getUserById(user.getId());
-        Set<LocationEntity> locations = userWithLocations.getLocations();
-        locations.add(location);
-        User updatedUser = this.update(userWithLocations);
 
-        return updatedUser;
+        LocationDao locationDao = new LocationDao();
+        LocationEntity updatedLocation = locationDao.update(location); // In case location wasnt previously saved
+
+        Set<LocationEntity> currentLocations = user.getLocations();
+        currentLocations.add(updatedLocation);
+
+        // Create user
+        user.setLocations(currentLocations);
+
+        user = this.update(user);
+
+        // Get locations & privileges
+        user = this.getUserById(user.getId());
+
+        return user;
 
     }
 

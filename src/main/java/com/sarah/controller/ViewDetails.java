@@ -8,6 +8,9 @@ import com.sarah.persistence.ReviewDao;
 import com.sarah.persistence.TagLocationDao;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,15 +42,17 @@ public class ViewDetails extends HttpServlet {
         HttpSession session = req.getSession();
 
         String placeId = req.getParameter("placeId");
-        log.info(placeId);
+        log.info("place: " + placeId);
         // TODO handle no place Id
 
         // TODO Get locations info for detail page
         // Get reviews
         LocationDao locationDao = new LocationDao();
         List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId" , "ChIJ_xkgOm1TBogRmEFIurX8DE4", MatchMode.EXACT);
+        log.info("locations: " + locations);
+
         if (locations.size() == 1) {
-            log.info(locations.get(0));
+            log.info("location: " + locations.get(0));
             ReviewDao reviewDao = new ReviewDao();
             List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("location", locations.get(0));
 
@@ -59,14 +64,15 @@ public class ViewDetails extends HttpServlet {
 
             req.setAttribute("location", locations.get(0));
 
-            getPhotoFromGoogle(locations.get(0));
+            String photoUrl = getPhotoFromGoogle(locations.get(0));
+
+            req.setAttribute("photoUrl", photoUrl);
 
         } else {
 
             // TODO throw error? there shouldnt be more than 1 location with a single id
         }
-        // tags, reviews, google images,
-        // later - images
+        // google images, later - images
 
 
         log.info(session.getAttribute("user"));
@@ -74,23 +80,38 @@ public class ViewDetails extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private void getPhotoFromGoogle(LocationEntity location) {
+    private String getPhotoFromGoogle(LocationEntity location) {
+        log.info("Id: " + location.getGoogleId());
         URI baseURI = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + location.getGoogleId() + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();
 
         Client client = ClientBuilder.newClient();
 
         WebTarget target = client.target(baseURI);
+        //String allQuestions = target.path("JSON/all").request().accept(MediaType.APPLICATION_JSON).get(String.class);
 
-        String allQuestions = target.path("JSON/all").request().accept(MediaType.APPLICATION_JSON).get(String.class);
-        log.info(allQuestions);
-        /*
+        String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+        log.info(response);
+        String photoReference = "";
+
+
         try {
-            JSONArray jsonArray = new JSONArray(allQuestions);
-            questionsArrayList = parseJSON(jsonArray);
+            JSONObject jsonObj = new JSONObject(response);
+            JSONObject result = jsonObj.getJSONObject("result");
+            JSONArray photos = result.getJSONArray("photos");
+            JSONObject firstPhoto = photos.getJSONObject(0);
+            photoReference = firstPhoto.getString("photo_reference");
+            // width & height
+            log.info(photoReference);
+
         } catch (JSONException jsonException) {
             jsonException.printStackTrace();
         }
-        */
+
+        // TODO use url shortener to shorten url with below url, send url to page to appear as photo??
+
+        String photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=" + photoReference + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE";
+
+        return photoUrl;
     }
 
 }
