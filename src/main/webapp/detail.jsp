@@ -84,8 +84,8 @@
                     <ul>
                         <li><a class="btn-floating halfway-fab yellow darken-1" id="addPhoto"><i class="material-icons">add_a_photo</i></a></li>
                         <li><a class="btn-floating halfway-fab blue" id="allPhotos"><i class="material-icons">photo_library</i></a></li>
-                        <li><a class="btn-floating halfway-fab green" id="addReview" ><i class="material-icons">add</i></a></li>
-                        <li><a class="btn-floating halfway-fab red" id="fav"><i class="material-icons">favorite</i></a></li>
+                        <li><a class="btn-floating halfway-fab green" id="addReview"><i class="material-icons">add</i></a></li>
+                        <li><a class="btn-floating halfway-fab red" id="fav" href="favorite?placeId=${location.googleId}"><i class="material-icons">favorite</i></a></li>
 
                     </ul>
                 </div>
