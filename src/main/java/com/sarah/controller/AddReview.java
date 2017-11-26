@@ -105,18 +105,15 @@ public class AddReview extends HttpServlet {
             processTagInput(req.getParameter("goodTags"), location, true);
         }
 
-        // add review (which is optional)
-        if (req.getParameter("review").length() > 0 && locationId > 0 && req.getParameter("date").length() > 0) {
-            ReviewEntity review = new ReviewEntity(req.getParameter("review"), date, currentUser, location, Integer.parseInt(req.getParameter("review")));
+        // add review (which is optional) --  review, stars, date and location needed
+        if (req.getParameter("review").length() > 0 && locationId > 0 && req.getParameter("date").length() > 0 && req.getParameter("rating").length() > 0) {
+            ReviewEntity review = new ReviewEntity(req.getParameter("review"), date, currentUser, location, Integer.parseInt(req.getParameter("rating")));
             log.info(review.toString());
             ReviewDao reviewDao = new ReviewDao();
             Long id = reviewDao.save(review);
         }
 
-        req.setAttribute("locationId", locationId);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("viewDetails");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId") + "&placeName=" + req.getParameter("placeName"));
     }
 
     private void processTagInput(String tagString, LocationEntity location, boolean positive) {

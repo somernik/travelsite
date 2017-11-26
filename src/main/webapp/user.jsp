@@ -66,7 +66,6 @@
             <!-- modal forms -->
             <%@include file="templates/user_update_forms.jsp" %>
 
-            <%@include file="templates/form_modals.jsp" %><!-- TODO remove? a user should already be signed in? -->
             <!-- end of modal forms -->
         </div>
     </div>
@@ -112,6 +111,10 @@
 
     #filterDiv {
         padding-top: 3px;
+    }
+
+    #profile p {
+        display: inline-block;
     }
 
 </style>

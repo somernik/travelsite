@@ -93,6 +93,8 @@ public class ViewDetails extends HttpServlet {
 
         //log.info(session.getAttribute("user"));
 
+        req.setAttribute("referrer", "detail.jsp");
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
         dispatcher.forward(req, resp);
     }

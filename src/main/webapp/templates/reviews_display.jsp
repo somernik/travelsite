@@ -26,18 +26,24 @@
 
                 <c:if test="${user.userName == review.user.userName}"><!-- if user is review owner -->
                       <a href="#!" class="secondary-content tooltipped" id="edit"
-                         data-position="right" data-delay="50" data-tooltip="Edit Review"><i class="material-icons comment_icon">create</i></a>
+                         data-position="right" data-delay="50" data-tooltip="Edit Review">
+                          <i class="material-icons comment_icon">create</i>
+                      </a>
 
-                      <a href="#!" class="secondary-content tooltipped" id="delete"
-                         data-position="right" data-delay="50" data-tooltip="Delete Review"><i class="material-icons comment_icon">delete</i></a>
+                      <a class="secondary-content tooltipped" id="delete" href="deleteReview?id=${review.id}"
+                         data-position="right" data-delay="50" data-tooltip="Delete Review">
+                          <i class="material-icons comment_icon">delete</i>
+                      </a>
 
                 </c:if>
 
                 <!-- check for admin -->
                 <c:forEach var="priv" items="${user.userPrivileges}">
                     <c:if test="${priv.pk.privilege.value == 'administrator'}">
-                         <a href="#!" class="secondary-content tooltipped" id="delete"
-                            data-position="right" data-delay="50" data-tooltip="Delete Review"><i class="material-icons comment_icon">delete</i></a>
+                         <a class="secondary-content tooltipped" id="delete" href="deleteReview?id=${review.id}&referrer=${referrer}"
+                            data-position="right" data-delay="50" data-tooltip="Delete Review">
+                             <i class="material-icons comment_icon">delete</i>
+                         </a>
                     </c:if>
                 </c:forEach>
             </li>

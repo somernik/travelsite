@@ -18,7 +18,7 @@
                 <li><a class="waves-effect waves-light btn-flat teal" href="login">Login</a><li>
             </c:if>
             <c:if test="${not empty user}">
-                <li>${user.userName}<a class="dropdown-button iconLinks" href="#!" data-activates="userOptions"><i class="material-icons teal">more_vert</i></a><li>
+                <li>${user.userName}<a class="dropdown-button iconLinks btn-flat" href="#!" data-activates="userOptions"><i class="material-icons teal">more_vert</i></a><li>
             </c:if>
 
         </ul>
