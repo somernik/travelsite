@@ -5,12 +5,22 @@
   Time: 1:55 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="templates/taglib.jsp" %>
+<c:set var = "title" value = "WWW Travel | Login Error"/>
 <html>
-<head>
-    <title>Title</title>
-</head>
+<%@include file="templates/head.jsp" %>
 <body>
-no entry
+<style>
+    #errorContent {
+        width: 50%;
+        margin: auto;
+        font-align: center;
+    }
+</style>
+<%@include file="templates/nav.jsp" %>
+    <div id="errorContent">
+        <h3>Your username or password was incorrect.</h3>
+        <p>Please try again <a href="login">here</a> or <a class="modal-trigger" href="#signup">sign up</a> for an account.</p>
+    </div>
 </body>
 </html>

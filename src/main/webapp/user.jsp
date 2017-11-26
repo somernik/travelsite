@@ -11,14 +11,14 @@
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s3"><a href="#test1">Profile</a></li>
-                        <li class="tab col s3"><a href="#test2">Reviews</a></li>
+                        <li class="tab col s3"><a href="#profile">Profile</a></li>
+                        <li class="tab col s3"><a href="#reviews">Reviews</a></li>
                         <li class="tab col s3"><a href="#test3">Photos</a></li>
-                        <li class="tab col s3"><a href="#test4">Favorites</a></li>
+                        <li class="tab col s3"><a href="#locations">Favorites</a></li>
 
                     </ul>
                 </div>
-                <div id="test1" class="col s12">
+                <div id="profile" class="col s12">
                     <h5>User Info</h5>
                     <br />
 
@@ -59,7 +59,8 @@
                     <c:set value="hi" var="test"/>
                     ${test}
                 </div>
-                <div id="test4" class="col s12">Test 4</div>
+
+                <%@include file="templates/locations_display.jsp" %><!-- display of all favorited locations -->
             </div>
 
             <!-- modal forms -->

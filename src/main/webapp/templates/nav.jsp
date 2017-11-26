@@ -11,10 +11,11 @@
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">Navbar Link</a></li>
+            <li id="test"><a href="#">Navbar Link</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
+
 
 </nav>
 <!-- TODO add to css page
@@ -32,4 +33,9 @@ below css used to make forms in modals look nice with spacing and no scroll bar
     .modal {
         max-height: 84%;
     }
+
+    #logo-container {
+        color:black;
+    }
 </style>
+<%@include file="form_modals.jsp" %>

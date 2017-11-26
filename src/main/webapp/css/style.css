@@ -55,3 +55,23 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+form {
+  color: black;
+  margin-bottom: 0em;
+}
+.modal-content .row {
+  margin-bottom: 0em;
+}
+
+.modal {
+  max-height: 84%;
+}
+
+#logo-container {
+  color:black;
+}
+
+#test {
+  color: red;
+}

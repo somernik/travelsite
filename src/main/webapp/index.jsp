@@ -13,16 +13,11 @@
         height: 400px;
     }
 
-    #logo-container {
-        color: black;
-    }
 </style>
 <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-
-            <%@include file="templates/form_modals.jsp" %>
 
             <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
             <div class="row center">

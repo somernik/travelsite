@@ -6,22 +6,7 @@
 
 <%@include file="templates/nav.jsp" %>
 <style>
-    #search {
-        padding-left: 3em;
-        width: 95%;
-    }
 
-    .button_in_popup {
-        font-size: 10px;
-        padding: 0 1rem;
-        height: 20px;
-        line-height: 20px;
-        margin-top: 0.5em;
-    }
-
-    .row {
-        margin-bottom: 0;
-    }
 </style><!-- previous style is the same as on the index.jsp -->
 
 <style>
@@ -149,8 +134,6 @@
             </div>
 
         </div>
-
-        <%@include file="templates/form_modals.jsp" %>
 
     </div>
     <div class="section no-pad-bot no-pad-top">
@@ -294,6 +277,7 @@
                     ///////
                     var detailForm = "<form action='viewDetails'>" +
                         "<input value='" + place.place_id + "' type='hidden' name='placeId' />" +
+                        "<input value='" + place.name + "' type='hidden' name='placeName' />" +
                         "<input type='submit' class='waves-effect waves-light btn button_in_popup' value='Details' />" +
                         "</form>";
 
