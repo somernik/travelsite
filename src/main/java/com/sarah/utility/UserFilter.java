@@ -1,7 +1,10 @@
 package com.sarah.utility;
 
+import com.sarah.controller.LocationPhoto;
+import com.sarah.entity.LocationEntity;
 import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
+import com.sarah.persistence.LocationDao;
 import com.sarah.persistence.ReviewDao;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
@@ -10,8 +13,11 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.tools.JavaFileManager;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,6 +26,7 @@ import java.util.Set;
 @WebFilter("/*")
 public class UserFilter implements Filter {
     private final Logger log = Logger.getLogger(this.getClass());
+    private LocationPhoto locationPhoto = new LocationPhoto();
 
     public void init(FilterConfig config) {
 
@@ -36,25 +43,21 @@ public class UserFilter implements Filter {
                 UserDao userDao = new UserDao();
                 User user = userDao.getUserByUsernameWithPrivilege(remoteUser);
                 log.info(user);
-                /*
-                log.info(user.getReviews().size());
-                Set<ReviewEntity> reviews = user.getReviews();
-                log.info(reviews.size());
-                Set<ReviewEntity> initializedReviews = user.getReviews();
-                ReviewDao reviewDao = new ReviewDao();
-                for (ReviewEntity review: reviews) {
-                    review = reviewDao.getReviewById(review.getId());
-                    log.info(review.getLocation().getName());
-                    initializedReviews.add(review);
-                }
-*/
 
                 ReviewDao reviewDao = new ReviewDao();
                 List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("user", user);
+                //LocationDao locationDao = new LocationDao();
+                //List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class,"user", user);
+                Map<Long, String> locationImageURLs = new HashMap<Long, String>();
 
+                for (LocationEntity location : user.getLocations()) {
+                    String imageURL = locationPhoto.getPhotoFromGoogle(location.getGoogleId());
+                    locationImageURLs.put(location.getId(), imageURL);
+                }
+
+                session.setAttribute("imageUrls", locationImageURLs);
                 session.setAttribute("userReviews", reviews);
                 session.setAttribute("user", user);
-                //session.setAttribute("userReviews", initializedReviews);
             }
         }
 

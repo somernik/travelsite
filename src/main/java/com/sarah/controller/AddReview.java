@@ -6,6 +6,7 @@ import com.sarah.persistence.ReviewDao;
 import com.sarah.persistence.TagDao;
 import com.sarah.persistence.TagLocationDao;
 import com.sarah.utility.DateFormatter;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 
@@ -78,7 +79,8 @@ public class AddReview extends HttpServlet {
             location = locations.get(0);
             locationId = location.getId();
         } else if (locations.size() == 0 || locations == null) {
-            location = new LocationEntity(req.getParameter("placeName"), req.getParameter("placeId"));
+            String escapedName = StringEscapeUtils.escapeJava(req.getParameter("placeName"));
+            location = new LocationEntity(escapedName, req.getParameter("placeId"));
             locationId = locationDao.save(location);
             location.setId(locationId);
         } else {

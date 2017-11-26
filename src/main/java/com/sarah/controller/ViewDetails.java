@@ -7,6 +7,8 @@ import com.sarah.persistence.LocationDao;
 import com.sarah.persistence.ReviewDao;
 import com.sarah.persistence.TagLocationDao;
 import org.apache.log4j.Logger;
+import org.apache.commons.lang.StringEscapeUtils;
+
 import org.hibernate.criterion.MatchMode;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,12 +38,14 @@ import java.util.List;
 )
 public class ViewDetails extends HttpServlet {
     private final Logger log = Logger.getLogger(this.getClass());
+    private LocationPhoto locationPhoto = new LocationPhoto();
 
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
         String placeId = req.getParameter("placeId");
+        String name = req.getParameter("placeName");
         log.info("place: " + placeId);
         // TODO handle no place Id
 
@@ -51,66 +55,47 @@ public class ViewDetails extends HttpServlet {
         List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId" , placeId, MatchMode.EXACT);
         log.info("locations: " + locations);
 
-        if (locations.size() == 1) {
+        if (locations != null && locations.size() == 1) {
             log.info("location: " + locations.get(0));
+            // add review
             ReviewDao reviewDao = new ReviewDao();
             List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("location", locations.get(0));
 
             req.setAttribute("reviews", reviews);
 
+            // add tags
             TagLocationDao tagLocationDao = new TagLocationDao();
             List<TaglocationEntity> tagLocations = tagLocationDao.findByAndInitializeTag("location", locations.get(0));
             req.setAttribute("tags", tagLocations);
 
+            // add location
             req.setAttribute("location", locations.get(0));
 
-            String photoUrl = getPhotoFromGoogle(locations.get(0));
 
-            req.setAttribute("photoUrl", photoUrl);
+        } else if (locations.size() < 1 && placeId != null && name != null) {
+            // Location isn't in Database --> add it
+            String escapedName = StringEscapeUtils.escapeJava(name);
+            LocationEntity location = new LocationEntity(escapedName, placeId);
+            Long id = locationDao.save(location);
+            location.setId(id);
 
+            req.setAttribute("location", location);
         } else {
 
             // TODO throw error? there shouldnt be more than 1 location with a single id
         }
         // google images, later - images
+        if (placeId != null && placeId.length() > 0) {
+            String photoUrl = locationPhoto.getPhotoFromGoogle(req.getParameter("placeId"));
 
-        log.info(session.getAttribute("user"));
+            req.setAttribute("photoUrl", photoUrl);
+        }
+
+        //log.info(session.getAttribute("user"));
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
         dispatcher.forward(req, resp);
     }
 
-    private String getPhotoFromGoogle(LocationEntity location) {
-        log.info("Id: " + location.getGoogleId());
-        URI baseURI = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + location.getGoogleId() + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();
-
-        Client client = ClientBuilder.newClient();
-
-        WebTarget target = client.target(baseURI);
-        //String allQuestions = target.path("JSON/all").request().accept(MediaType.APPLICATION_JSON).get(String.class);
-
-        String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
-        log.info(response);
-        String photoReference = "";
-
-
-        try {
-            JSONObject jsonObj = new JSONObject(response);
-            JSONObject result = jsonObj.getJSONObject("result");
-            JSONArray photos = result.getJSONArray("photos");
-            JSONObject firstPhoto = photos.getJSONObject(0);
-            photoReference = firstPhoto.getString("photo_reference");
-            // width & height
-            log.info(photoReference);
-
-        } catch (JSONException jsonException) {
-            jsonException.printStackTrace();
-        }
-
-        // TODO use url shortener to shorten url with below url, send url to page to appear as photo??
-
-        String photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=" + photoReference + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE";
-
-        return photoUrl;
-    }
 
 }

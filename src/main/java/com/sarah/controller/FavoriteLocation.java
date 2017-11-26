@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sarah on 11/21/2017.
@@ -40,8 +41,7 @@ public class FavoriteLocation extends HttpServlet {
         if (currentUser == null) {
             logger.info("no user");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("user.jsp");
-            dispatcher.forward(req, resp);
+            resp.sendRedirect("user.jsp");
         }
 
         String googleId = req.getParameter("placeId");
@@ -56,10 +56,19 @@ public class FavoriteLocation extends HttpServlet {
         if (locations.size() == 1) {
 
             UserDao userDao = new UserDao();
-            userDao.addSavedLocation(currentUser,locations.get(0));
+            currentUser = userDao.addSavedLocation(currentUser,locations.get(0));
+
+            //update session variable to update on users page
+            session.setAttribute("user", currentUser);
 
         } else {
             // TODO send error?
+            //add location to db
+            // need name
+            // and escape string
+            // break out check if exists and add to its own class or something
+            // used here add review and view details
+
         }
 
         req.setAttribute("placeId", googleId);
