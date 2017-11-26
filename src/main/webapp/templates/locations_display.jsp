@@ -1,7 +1,7 @@
 <div id="locations" class="col s12">
         <div class="row">
             <c:forEach items="${user.locations}" var="location">
-                <div class="col s12 m4">
+                <div class="col s12 m6 l4">
                     <div class="card sticky-action">
                         <div class="card-image">
                             <img src="${imageUrls[location.id]}" />

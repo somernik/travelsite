@@ -18,7 +18,7 @@
             <form class="col s12 m6 offset-m3" ACTION="j_security_check" METHOD="POST">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="username" type="text" name="j_username" class="validate">
+                        <input id="username" type="text" name="j_username" autofocus="autofocus" class="validate">
                         <label for="username">Username</label>
                     </div>
                 </div>

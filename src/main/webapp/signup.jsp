@@ -9,7 +9,7 @@
 <form class="col s12 m6 offset-m3" action="addUser">
     <div class="row">
         <div class="input-field col s6">
-            <input id="first_name" name="first_name" type="text" class="validate">
+            <input id="first_name" name="first_name" autofocus="autofocus" type="text" class="validate">
             <label for="first_name">First Name</label>
         </div>
         <div class="input-field col s6">
