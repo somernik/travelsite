@@ -106,6 +106,7 @@ public class AddReview extends HttpServlet {
         }
 
         // add review (which is optional) --  review, stars, date and location needed
+        // TODO require stars/review/date
         if (req.getParameter("review").length() > 0 && locationId > 0 && req.getParameter("date").length() > 0 && req.getParameter("rating").length() > 0) {
             ReviewEntity review = new ReviewEntity(req.getParameter("review"), date, currentUser, location, Integer.parseInt(req.getParameter("rating")));
             log.info(review.toString());

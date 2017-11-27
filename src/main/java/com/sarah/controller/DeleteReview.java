@@ -39,7 +39,6 @@ public class DeleteReview extends HttpServlet {
         String referrer = req.getParameter("referrer");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-        LocationPhoto locationPhoto = new LocationPhoto();
 
         if (referrer.isEmpty() || referrer.length() < 1) {
             referrer = "user.jsp";

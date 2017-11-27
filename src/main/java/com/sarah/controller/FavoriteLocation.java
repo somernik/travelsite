@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -72,6 +74,18 @@ public class FavoriteLocation extends HttpServlet {
         }
 
         req.setAttribute("placeId", googleId);
+
+        // TODO update session variables location images specifcally
+        LocationPhoto locationPhoto = new LocationPhoto();
+        Map<Long, String> locationImageURLs = new HashMap<Long, String>();
+
+        for (LocationEntity location : currentUser.getLocations()) {
+            String imageURL = locationPhoto.getPhotoFromGoogle(location.getGoogleId());
+            locationImageURLs.put(location.getId(), imageURL);
+        }
+
+        session.setAttribute("imageUrls", locationImageURLs);
+        session.setAttribute("user", currentUser);
 
         // TODO add abitility to favorite from search page as well
         RequestDispatcher dispatcher = req.getRequestDispatcher("viewDetails");

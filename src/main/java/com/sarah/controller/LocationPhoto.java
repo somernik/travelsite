@@ -33,7 +33,6 @@ public class LocationPhoto {
         log.info(response);
         String photoReference = "";
 
-
         try {
             JSONObject jsonObj = new JSONObject(response);
             JSONObject result = jsonObj.getJSONObject("result");
