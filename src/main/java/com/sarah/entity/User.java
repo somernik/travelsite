@@ -254,9 +254,7 @@ public class User extends BaseEntity<Long> {
         if (userid != user.userid) return false;
         if (!firstName.equals(user.firstName)) return false;
         if (!lastName.equals(user.lastName)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!password.equals(user.password)) return false;
-        return userName.equals(user.userName);
+        return email.equals(user.email) && password.equals(user.password) && userName.equals(user.userName);
     }
 
     private void createContributorPrivilege() {

@@ -66,8 +66,7 @@ public class TagEntity extends BaseEntity<Long>{
 
         TagEntity tagEntity = (TagEntity) o;
 
-        if (id != null ? !id.equals(tagEntity.id) : tagEntity.id != null) return false;
-        return name != null ? name.equals(tagEntity.name) : tagEntity.name == null;
+        return (id != null ? id.equals(tagEntity.id) : tagEntity.id == null) && (name != null ? name.equals(tagEntity.name) : tagEntity.name == null);
     }
 
     @Override

@@ -39,8 +39,7 @@ public class UserPrivilegeEntityPK implements Serializable {
 
         UserPrivilegeEntityPK that = (UserPrivilegeEntityPK) o;
 
-        if (!privilege.equals(that.privilege)) return false;
-        return user.equals(that.user);
+        return privilege.equals(that.privilege) && user.equals(that.user);
     }
 
     @Override
