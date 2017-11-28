@@ -1,6 +1,5 @@
 package com.sarah.persistence;
 
-import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.TagEntity;
 import com.sarah.utility.DatabaseCleaner;
 import org.apache.log4j.Logger;
@@ -9,11 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.text.html.HTML;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by sarah on 11/12/2017.

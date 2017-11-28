@@ -4,7 +4,7 @@
         <c:forEach var="review" items="${reviews}">
 
             <li class="collection-item avatar">
-                <img src="images/yuna.jpg" alt="" class="circle"><!-- or <i class="material-icons circle">folder</i> -->
+                <img src="images/background1.jpg" alt="" class="circle"><!-- or <i class="material-icons circle">folder</i> -->
                 <span class="title">
                 <c:forEach begin="1" end="${review.stars}" varStatus="loop">
                     <i class="material-icons star_icon">star</i>

@@ -35,7 +35,7 @@ public class GenericDao {
      */
     @SuppressWarnings("unchecked")
     public <T extends BaseEntity<PK>, PK extends Serializable> PK save(T entity) {
-        Long id = new Long(0);
+        Long id = 0L;
         Transaction transaction = null;
         Session session = null;
 

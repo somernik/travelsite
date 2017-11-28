@@ -40,7 +40,7 @@
                     <a class="waves-effect waves-light btn modal-trigger" href="#password">Change Password</a>
 
                     <h3>Delete Account</h3>
-                    <form class="col s12 m6 offset-m3" action="/deleteUser">
+                    <form class="col s12 m6 offset-m3" action="deleteUser">
                         <div class="row">
                             <div class="input-field col s12">
                                 <input id="id" type="text" value="" name="id" class="validate">

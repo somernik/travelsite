@@ -1,6 +1,5 @@
 package com.sarah.controller;
 
-import com.sarah.entity.LocationEntity;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +11,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
-import java.net.UnknownHostException;
 
 /**
  * Created by sarah on 11/21/2017.

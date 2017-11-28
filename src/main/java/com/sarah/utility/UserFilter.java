@@ -4,7 +4,6 @@ import com.sarah.controller.LocationPhoto;
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
-import com.sarah.persistence.LocationDao;
 import com.sarah.persistence.ReviewDao;
 import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
@@ -13,12 +12,10 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.tools.JavaFileManager;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by sarah on 10/22/2017.

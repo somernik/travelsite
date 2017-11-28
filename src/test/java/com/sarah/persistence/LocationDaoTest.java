@@ -46,7 +46,7 @@ public class LocationDaoTest {
 
     @Test
     public void insertLocation() throws Exception {
-        LocationEntity location = new LocationEntity(new Long(2),"place 1", "test id");
+        LocationEntity location = new LocationEntity(2L,"place 1", "test id");
 
         Long id = locationDao.save(location);
 
@@ -75,7 +75,7 @@ public class LocationDaoTest {
     @Test
     public void getLocationWithPrivilege() throws Exception {
         LocationEntity testLocation = new LocationEntity();
-        Long id = new Long(0);
+        Long id = 0L;
         List<LocationEntity> locations = locationDao.findAll(LocationEntity.class);
         for (LocationEntity location: locations) {
             id = location.getId();

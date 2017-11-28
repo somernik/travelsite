@@ -6,23 +6,13 @@ import com.sarah.entity.User;
 import com.sarah.utility.DatabaseCleaner;
 import javafx.util.converter.LocalDateStringConverter;
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -53,8 +43,8 @@ public class ReviewDaoTest {
         LocationDao locationDao = new LocationDao();
         locationDao.save(location);
 
-        firstReview = new ReviewEntity(new Long(1), "This is great!", dateConverter.fromString("10/01/17"), testUser, location, 5);
-        secondReview = new ReviewEntity(new Long(2), "This is not great :(", dateConverter.fromString("10/02/17"), testUser, location, 2);
+        firstReview = new ReviewEntity(1L, "This is great!", dateConverter.fromString("10/01/17"), testUser, location, 5);
+        secondReview = new ReviewEntity(2L, "This is not great :(", dateConverter.fromString("10/02/17"), testUser, location, 2);
 
         reviewDao.save(firstReview);
         reviewDao.save(secondReview);
@@ -87,7 +77,7 @@ public class ReviewDaoTest {
     @Test
     public void insertReview() throws Exception {
 
-        ReviewEntity newReview = new ReviewEntity(new Long(3),"This is meh", dateConverter.fromString("10/01/17"), testUser, location, 3);
+        ReviewEntity newReview = new ReviewEntity(3L,"This is meh", dateConverter.fromString("10/01/17"), testUser, location, 3);
 
         Long newId = reviewDao.save(newReview);
 

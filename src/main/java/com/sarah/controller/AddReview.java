@@ -14,12 +14,9 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.swing.text.html.HTML;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by sarah on 10/5/2017.
@@ -70,7 +67,7 @@ public class AddReview extends HttpServlet {
         // if not add review
         List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId", req.getParameter("placeId"), MatchMode.ANYWHERE);
         LocationEntity location = new LocationEntity();
-        Long locationId = new Long(0);
+        Long locationId = 0L;
 
         log.info(locationId);
 

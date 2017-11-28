@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ import static org.junit.Assert.assertNotNull;
  */
 public class GenericDaoTest {
     private UserDao userDao = new UserDao();
-    @Inject
+
     private GenericDao dao;
 
     private final Logger log = Logger.getLogger(this.getClass());

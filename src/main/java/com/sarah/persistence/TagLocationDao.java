@@ -1,6 +1,5 @@
 package com.sarah.persistence;
 
-import com.sarah.entity.BaseEntity;
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.TagEntity;
 import com.sarah.entity.TaglocationEntity;
@@ -9,7 +8,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -24,12 +22,6 @@ public class TagLocationDao extends GenericDao {
 
     private final Logger log = Logger.getLogger(this.getClass());
 
-    /**
-     * Finds entities by a String property specifying a MatchMode. This search
-     * is case insensitive.
-     *
-     * @return
-     */
     public TaglocationEntity getByLocationAndTag(LocationEntity location, TagEntity tag){
         Session session = null;
         List<TaglocationEntity> items = new ArrayList<TaglocationEntity>();

@@ -67,7 +67,7 @@
     }
 
     body {
-        background-image: url("images/admin_background.jpeg");
+        background-image: url("../images/admin_background.jpeg");
         background-size: cover;
     }
 

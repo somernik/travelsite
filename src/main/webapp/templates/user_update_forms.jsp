@@ -7,7 +7,7 @@
             <a href="#!" class="modal-action modal-close">
                 <i class="material-icons right">close</i></a>
         </div>
-        <form class="col s12 m6 offset-m3" action="/updateUser">
+        <form class="col s12 m6 offset-m3" action="<c:url value="updateUser"/>">
             <div class="row">
                 <h5>Current First Name: {user.firstName}</h5>
             </div>
@@ -33,7 +33,7 @@
             <a href="#!" class="modal-action modal-close">
                 <i class="material-icons right">close</i></a>
         </div>
-        <form class="col s12 m6 offset-m3" action="/updateUser">
+        <form class="col s12 m6 offset-m3" action="updateUser">
             <div class="row">
                 <h5>Current Last Name: {user.lastName}</h5>
             </div>
@@ -59,7 +59,7 @@
             <a href="#!" class="modal-action modal-close">
                 <i class="material-icons right">close</i></a>
         </div>
-        <form class="col s12 m6 offset-m3" action="/updateUser">
+        <form class="col s12 m6 offset-m3" action="updateUser">
             <div class="row">
                 <h5>Current UserName: {user.userName}</h5>
             </div>
@@ -85,7 +85,7 @@
             <a href="#!" class="modal-action modal-close">
                 <i class="material-icons right">close</i></a>
         </div>
-        <form class="col s12 m6 offset-m3" action="/updateUser">
+        <form class="col s12 m6 offset-m3" action="updateUser">
             <div class="row">
                 <h5>Current Email: {user.email}</h5>
             </div>
@@ -111,7 +111,7 @@
             <a href="#!" class="modal-action modal-close">
                 <i class="material-icons right">close</i></a>
         </div>
-        <form class="col s12 m6 offset-m3" action="/updateUser">
+        <form class="col s12 m6 offset-m3" action="updateUser">
 
             <div class="row">
                 <div class="input-field col s12">

@@ -10,7 +10,6 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -196,7 +195,7 @@ public class UserDao extends GenericDao {
             }
         }
 
-        for (int i = 0; i < ids.size(); i ++){
+        for (int i = 0; i < ids.size(); i++) {
             Long id = Long.parseLong(String.valueOf(ids.get(i)));
             User user = getUserById(id);
             adminUsers.add(user);
