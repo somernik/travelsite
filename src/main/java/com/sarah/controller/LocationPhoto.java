@@ -48,9 +48,7 @@ public class LocationPhoto {
 
         // TODO use url shortener to shorten url with below url, send url to page to appear as photo??
 
-        String photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=" + photoReference + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE";
-
-        return photoUrl;
+        return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=" + photoReference + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE";;
     }
 
 }
