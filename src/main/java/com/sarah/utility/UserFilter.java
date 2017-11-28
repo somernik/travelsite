@@ -29,6 +29,14 @@ public class UserFilter implements Filter {
 
     }
 
+    /**
+     * Filters when user logs in and adds user to session
+     * @param req the request
+     * @param res the response
+     * @param chain the chain
+     * @throws IOException the ioexception
+     * @throws ServletException the servletexception
+     */
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         String remoteUser = request.getRemoteUser();

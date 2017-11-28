@@ -9,6 +9,11 @@ import java.util.Locale;
  */
 public class DateFormatter {
 
+    /**
+     * Converts string to localdate
+     * @param dateString date that is a string
+     * @return LocalDate
+     */
     public LocalDate convertStringToLocalDate(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM, yyyy");
         formatter = formatter.withLocale(Locale.US);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH

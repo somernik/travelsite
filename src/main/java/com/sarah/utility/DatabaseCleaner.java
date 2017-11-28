@@ -12,6 +12,10 @@ import org.hibernate.Session;
 public class DatabaseCleaner {
     private final Logger log = Logger.getLogger(this.getClass());
 
+    /**
+     * Removes all entries and re-sets id value for each table.
+     * Used for cleaning test database.
+     */
     public void run() {
         Session session = null;
         try {
