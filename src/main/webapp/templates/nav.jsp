@@ -48,10 +48,10 @@ below css used to make forms in modals look nice with spacing and no scroll bar
 <style>
     form {
         color: black;
-        margin-bottom: 0em;
+        margin-bottom: 0;
     }
     .modal-content .row {
-        margin-bottom: 0em;
+        margin-bottom: 0;
     }
 
     .modal {

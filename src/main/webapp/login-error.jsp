@@ -9,7 +9,6 @@
 <c:set var = "title" value = "WWW Travel | Login Error"/>
 <html>
 <%@include file="templates/head.jsp" %>
-<body>
 <style>
     #errorContent {
         width: 50%;
@@ -17,6 +16,7 @@
         font-align: center;
     }
 </style>
+<body>
 <%@include file="templates/nav.jsp" %>
     <div id="errorContent">
         <h3>Your username or password was incorrect.</h3>

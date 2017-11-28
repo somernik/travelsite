@@ -25,7 +25,7 @@
     }
 
     form .in_table {
-        margin: 0px;
+        margin: 0;
     }
 
     img {
@@ -87,16 +87,18 @@
                 </div>
                 <div id="search">
                     <form action="searchUser">
-
-                        <select id="searchType" name="searchType">
+                        <label for="searchType">Search Type</label>
+                        <select id="searchType" name="searchType" title="searchType">
                             <option value="id">ID</option>
                             <option value="f_name">First Name</option>
                             <option value="l_name">Last Name</option>
                         </select>
+                        <label for="searchOperator">searchOperator</label>
                         <select id="searchOperator" name="searchOperator">
                             <option value="=">=</option>
                             <option value="LIKE">contains</option>
                         </select>
+                        <label for="searchValue">searchValue</label>
                         <input name="searchValue" id="searchValue" type="text" required />
                         <input type="submit" value="Search" />
                     </form>

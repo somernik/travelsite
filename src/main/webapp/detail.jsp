@@ -53,11 +53,6 @@
         max-width: 100%;
         /* just in case, to force correct aspect ratio */
         height: auto !important;
-        display: block; /* corrects small inline gap at bottom of containing div */
-        width: 100% /* corrects obscure Firefox bug */
-        max-width: 100%;
-        /* just in case, to force correct aspect ratio */
-        height: auto !important;
         /*width: auto\9;
         /* ie8+9 - use modernizr instead of this \9 hack */
         /* lt ie8 */

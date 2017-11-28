@@ -269,7 +269,7 @@
                     icon: icon,
                     title: place.name,
                     position: place.geometry.location
-                })
+                });
 
                 google.maps.event.addListener(marker, 'click', function() {
                     currentPlaceId = place.place_id;
@@ -449,7 +449,7 @@
 
     @media only screen and (max-width : 992px) {
         #slide-out {
-            margin-top: 0px;
+            margin-top: 0;
         }
     }
 
@@ -459,7 +459,7 @@
 
     @media only screen and (max-width : 992px) {
         #not_side_nav {
-            margin-left: 0px;
+            margin-left: 0;
         }
     }
 

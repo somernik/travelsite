@@ -20,7 +20,7 @@ import java.net.UnknownHostException;
 public class LocationPhoto {
     private final Logger log = Logger.getLogger(this.getClass());
 
-    public String getPhotoFromGoogle(String googleId) throws UnknownHostException {
+    public String getPhotoFromGoogle(String googleId){
         log.info("Id: " + googleId);
         URI baseURI = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + googleId + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();
 
@@ -48,7 +48,7 @@ public class LocationPhoto {
 
         // TODO use url shortener to shorten url with below url, send url to page to appear as photo??
 
-        return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=" + photoReference + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE";;
+        return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=" + photoReference + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE";
     }
 
 }

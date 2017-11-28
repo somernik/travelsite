@@ -138,10 +138,7 @@
 
     [type="radio"]:not(:checked) + label,
     [type="radio"]:checked + label {
-        padding-left: 0px;
+        padding-left: 0;
     }
 
-    .row {
-        max-height:
-    }
 </style>
