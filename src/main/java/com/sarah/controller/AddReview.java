@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * Adds a review
  * Created by sarah on 10/5/2017.
  */
 @WebServlet(
@@ -114,6 +115,12 @@ public class AddReview extends HttpServlet {
         resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId") + "&placeName=" + req.getParameter("placeName"));
     }
 
+    /**
+     * Processes the tag string sent from the form
+     * @param tagString the string with tags separated by ';'
+     * @param location the current location entity
+     * @param positive 'good' vs 'bad' tags
+     */
     private void processTagInput(String tagString, LocationEntity location, boolean positive) {
         TagDao tagDao = new TagDao();
         String[] tags = tagString.split("\\;");
@@ -130,6 +137,13 @@ public class AddReview extends HttpServlet {
         }
     }
 
+    /**
+     * Processes each tag, adding new ones to the database and saving them to a specific location
+     * @param location the Location entity
+     * @param tag the single tag name
+     * @param returnedTags any tags that match the current tag
+     * @param positive 'good' vs 'bad' tags
+     */
     private void processTag(LocationEntity location, String tag, List<TagEntity> returnedTags, boolean positive) {
         TagDao tagDao = new TagDao();
 

@@ -19,7 +19,6 @@ import java.util.List;
  * Deletes review
  * Created by sarah on 11/26/2017.
  */
-
 @WebServlet(
         urlPatterns = {"/deleteReview"}
 )

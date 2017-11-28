@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Prepares the details of a location for the jsp
  * Created by sarah on 10/29/2017.
  */
 @WebServlet(

@@ -16,7 +16,6 @@ import java.io.IOException;
  * Updates User
  * Created by sarah on 9/21/2017.
  */
-
 @WebServlet(
         urlPatterns = {"/updateUser"}
 )

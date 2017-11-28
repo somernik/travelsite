@@ -16,11 +16,9 @@ import java.io.IOException;
  * A simple servlet to add the user.
  * @author somernik
  */
-
 @WebServlet(
         urlPatterns = {"/addUser"}
 )
-
 public class AddUser extends HttpServlet {
     private final Logger logger = Logger.getLogger(this.getClass());
 

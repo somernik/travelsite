@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * Accesses locations values.
  * Created by sarah on 9/26/2017.
  */
 @Entity

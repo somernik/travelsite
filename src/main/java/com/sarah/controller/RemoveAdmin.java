@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Removes admin privilege
  * Created by sarah on 10/5/2017.
  */
 @WebServlet(

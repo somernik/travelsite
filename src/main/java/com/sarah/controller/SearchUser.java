@@ -15,14 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple servlet to welcome the user.
+ * Searches users based on input values.
  * @author somernik
  */
-
 @WebServlet(
         urlPatterns = {"/searchUser"}
 )
-
 public class SearchUser extends HttpServlet {
     private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -71,6 +69,11 @@ public class SearchUser extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
+    /**
+     * Searches users by specific id
+     * @param req the request
+     * @return User
+     */
     private User searchUserById(HttpServletRequest req) {
 
         User user;

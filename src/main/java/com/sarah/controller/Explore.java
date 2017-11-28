@@ -14,14 +14,12 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * A simple servlet to welcome the user.
+ * Prepares tags for explore page.
  * @author somernik
  */
-
 @WebServlet(
         urlPatterns = {"/explore"}
 )
-
 public class Explore extends HttpServlet {
     private final Logger logger = Logger.getLogger(this.getClass());
 

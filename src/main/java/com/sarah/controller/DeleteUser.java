@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Updates User
+ * Deletes User
  * Created by sarah on 9/21/2017.
  */
 

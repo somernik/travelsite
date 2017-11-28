@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Allows a user to save a location.
  * Created by sarah on 11/21/2017.
  */
-
 @WebServlet(
         urlPatterns = {"/favorite"}
 )

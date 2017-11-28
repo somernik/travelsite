@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * Directs user to user jsp page
  * Created by sarah on 10/22/2017.
  */
-
 @WebServlet(
         urlPatterns = {"/login"}
 )

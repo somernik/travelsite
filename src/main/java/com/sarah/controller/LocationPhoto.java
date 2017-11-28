@@ -13,11 +13,17 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
 /**
+ * Used to get photo from google api to display on jsp
  * Created by sarah on 11/21/2017.
  */
 public class LocationPhoto {
     private final Logger log = Logger.getLogger(this.getClass());
 
+    /**
+     * Uses google API to access photo based on location's placeId (used in google api)
+     * @param googleId the location's placeId
+     * @return the location's photo URL
+     */
     public String getPhotoFromGoogle(String googleId){
         log.info("Id: " + googleId);
         URI baseURI = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + googleId + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Grants admin privilege to a user
  * Created by sarah on 10/5/2017.
  */
 @WebServlet(
