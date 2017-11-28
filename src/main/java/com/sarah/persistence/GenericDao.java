@@ -30,7 +30,7 @@ public class GenericDao {
     /**
      * Saves an entity.
      *
-     * @param entity
+     * @param entity The entity
      * @return newly created id for the entity.
      */
     @SuppressWarnings("unchecked")
@@ -66,7 +66,7 @@ public class GenericDao {
     /**
      * Marges objects with the same identifier within a session into a newly created object.
      *
-     * @param entity
+     * @param entity The entity
      * @return a newly created instance merged.
      */
     @SuppressWarnings("unchecked")
@@ -102,8 +102,8 @@ public class GenericDao {
     /**
      * Deletes tne entity.
      *
-     * @param clazz
-     * @param id
+     * @param clazz The class used
+     * @param id The entity's id
      * @throws NotFoundException if the id does not exist.
      */
     public <T extends BaseEntity<PK>, PK extends Serializable> void delete(Class<T> clazz, PK id) {
@@ -137,9 +137,9 @@ public class GenericDao {
     /**
      * Find an entity by its identifier.
      *
-     * @param clazz
-     * @param id
-     * @return
+     * @param clazz The entity class
+     * @param id The entity's id
+     * @return entity
      */
     @SuppressWarnings("unchecked")
     public <T extends BaseEntity<?>> T find(Class<T> clazz, Serializable id) {
@@ -172,7 +172,7 @@ public class GenericDao {
      * @param clazz the entity class.
      * @param propertyName the property name.
      * @param value the value by which to find.
-     * @return
+     * @return List of entities
      */
     @SuppressWarnings("unchecked")
     public <T extends BaseEntity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) {
@@ -206,7 +206,7 @@ public class GenericDao {
      * @param propertyName the property name.
      * @param value the value to check against.
      * @param matchMode the match mode: EXACT, START, END, ANYWHERE.
-     * @return
+     * @return List of entities
      */
     @SuppressWarnings("unchecked")
     public <T extends BaseEntity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value, MatchMode matchMode){
@@ -236,7 +236,7 @@ public class GenericDao {
      * Finds all objects of an entity class.
      *
      * @param clazz the entity class.
-     * @return
+     * @return List of entities
      */
     @SuppressWarnings("unchecked")
     public <T extends BaseEntity<?>> List<T> findAll(Class<T> clazz) {

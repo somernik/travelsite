@@ -22,7 +22,7 @@ public class UserDao extends GenericDao {
 
     private final Logger log = Logger.getLogger(this.getClass());
 
-    /** Get a single user for the given id
+    /** Get a single user for the given id and intialize properties
      *
      * @param id user's id
      * @return User
@@ -52,6 +52,12 @@ public class UserDao extends GenericDao {
         return user;
     }
 
+    /**
+     * Add a location to user's list of locations
+     * @param user User
+     * @param location Location
+     * @return The updated user
+     */
     public User addSavedLocation(User user, LocationEntity location) {
 
         LocationDao locationDao = new LocationDao();
@@ -73,6 +79,12 @@ public class UserDao extends GenericDao {
 
     }
 
+    /**
+     * Remove a location from a user's list of locations
+     * @param user User
+     * @param location Location
+     * @return The updated User
+     */
     public User removeSavedLocation(User user, LocationEntity location) {
         User userWithLocations = this.getUserById(user.getId());
 
@@ -100,7 +112,7 @@ public class UserDao extends GenericDao {
         return this.getUserById(userWithLocations.getId());
     }
 
-    /** Get a single user for the given id
+    /** Get a single user for the given id and initialize properties
      *
      * @param username user's username
      * @return User
@@ -135,6 +147,10 @@ public class UserDao extends GenericDao {
         return user;
     }
 
+    /**
+     * Adding admin privilege to a user
+     * @param user User
+     */
     public void addAdmin(User user) {
 
         PrivilegeEntity privilege = new PrivilegeEntity(1, "Administrator");
@@ -146,6 +162,10 @@ public class UserDao extends GenericDao {
         this.update(user);
     }
 
+    /**
+     * Removes admin privilege from a user
+     * @param user User
+     */
     public void removeAdmin(User user) {
 
         Session session = null;
@@ -170,6 +190,10 @@ public class UserDao extends GenericDao {
         }
     }
 
+    /**
+     * Returns list of all admin users
+     * @return List of admin users
+     */
     public List<User> getAdminUsers() {
         List<User> adminUsers = new ArrayList<User>();
         List<Long> ids = new ArrayList<Long>();

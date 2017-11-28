@@ -12,6 +12,9 @@ public class SessionFactoryProvider {
 
     private static SessionFactory sessionFactory;
 
+    /**
+     * Creates session factory to be used throughout application
+     */
     private static void createSessionFactory() {
 
         Configuration configuration = new Configuration();
@@ -21,6 +24,10 @@ public class SessionFactoryProvider {
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
 
+    /**
+     * Returns the session factory
+     * @return The session factory
+     */
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             createSessionFactory();

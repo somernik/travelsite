@@ -17,7 +17,7 @@ public class ReviewDao extends GenericDao {
 
     private final Logger log = Logger.getLogger(this.getClass());
 
-    /** Get a single reviewEntity for the given id
+    /** Get a single reviewEntity for the given id and initialize properties
      *
      * @param id reviewEntity's id
      * @return ReviewEntity
@@ -44,6 +44,12 @@ public class ReviewDao extends GenericDao {
         return review;
     }
 
+    /** Get a single reviewEntity based on a single property and initialize properties
+     *
+     * @param propertyName The name of the property
+     * @param value The value of the property
+     * @return List<ReviewEntity> The list of returned entities
+     */
     public List<ReviewEntity> findByAndInitializeProperties (String propertyName, Object value) {
 
         Session session = null;

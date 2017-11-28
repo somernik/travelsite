@@ -22,6 +22,12 @@ public class TagLocationDao extends GenericDao {
 
     private final Logger log = Logger.getLogger(this.getClass());
 
+    /**
+     * Gets taglocations based on tag and location
+     * @param location Location
+     * @param tag Tag
+     * @return The taglocationentity
+     */
     public TaglocationEntity getByLocationAndTag(LocationEntity location, TagEntity tag){
         Session session = null;
         List<TaglocationEntity> items = new ArrayList<TaglocationEntity>();
@@ -52,6 +58,12 @@ public class TagLocationDao extends GenericDao {
         return entity;
     }
 
+    /**
+     * Find taglocation based on a single property and initialize properties
+     * @param propertyName The property name
+     * @param value the property value
+     * @return A list of tag locations
+     */
     public List<TaglocationEntity> findByAndInitializeTag (String propertyName, Object value) {
 
         Session session = null;

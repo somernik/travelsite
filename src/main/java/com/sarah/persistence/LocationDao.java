@@ -16,7 +16,7 @@ public class LocationDao extends GenericDao {
     /** Get a single location for the given id
      *
      * @param id location's id
-     * @return LocationEnity
+     * @return LocationEntity
      */
     public LocationEntity getLocationByIdWithReview(Long id) {
 
