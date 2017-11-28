@@ -90,7 +90,7 @@ public class AddReview extends HttpServlet {
         //log.info(req.getParameter("date"));
         LocalDate date = LocalDate.now();
         if (req.getParameter("date").length() > 0) {
-            date = formatter.convertStringToLocalDate((String) req.getParameter("date"));
+            date = formatter.convertStringToLocalDate(req.getParameter("date"));
         }
 
         // Process tags

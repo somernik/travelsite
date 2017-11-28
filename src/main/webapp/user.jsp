@@ -52,7 +52,7 @@
                     </form>
                 </div>
                 <!--<div id="test2" class="col s12">Test 2</div>-->
-                <c:set var="reviews" value="${userReviews}"></c:set>
+                <c:set var="reviews" value="${userReviews}" />
                 <%@include file="templates/reviews_display.jsp" %><!-- display of reviews -->
 
                 <div id="test3" class="col s12">Test 3

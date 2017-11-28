@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -114,7 +115,7 @@ public class LocationEntity extends BaseEntity<Long> {
         LocationEntity that = (LocationEntity) o;
 
         if (id != that.id) return false;
-        if (googleId != that.googleId) return false;
+        if (!Objects.equals(googleId, that.googleId)) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
