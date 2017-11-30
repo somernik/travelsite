@@ -34,7 +34,10 @@ public class LocationPhoto {
         //String allQuestions = target.path("JSON/all").request().accept(MediaType.APPLICATION_JSON).get(String.class);
 
         String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
-        log.info(response);
+        //log.info(response);
+        // place_id
+        // rating (for whole location)
+        // reviews.author_name, reviews[i].rating, reviews[i].text
         String photoReference = "";
 
         try {

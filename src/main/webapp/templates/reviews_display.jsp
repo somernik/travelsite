@@ -25,7 +25,7 @@
                 </c:if>
 
                 <c:if test="${user.userName == review.user.userName}"><!-- if user is review owner -->
-                      <a href="#!" class="secondary-content tooltipped" id="edit"
+                      <a href="prepareReview?id=${review.id}" class="secondary-content tooltipped" id="edit"
                          data-position="right" data-delay="50" data-tooltip="Edit Review">
                           <i class="material-icons comment_icon">create</i>
                       </a>

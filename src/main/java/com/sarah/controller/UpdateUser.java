@@ -52,6 +52,7 @@ public class UpdateUser extends HttpServlet {
             user.setEmail(StringEscapeUtils.escapeJava(email));
         }
 
+        // TODO get password working
         String newPassword = req.getParameter("passwordInput");
         String confirmPassword = req.getParameter("passwordConfirmInput");
         String oldPassword = req.getParameter("oldPasswordInput");

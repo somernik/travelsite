@@ -6,13 +6,9 @@
 
 <%@include file="templates/nav.jsp" %>
 <style>
-
-</style><!-- previous style is the same as on the index.jsp -->
-
-<style>
     form.filterForms p {
-       display: inline;
-       padding-top: 5px;
+        display: inline;
+        padding-top: 5px;
     }
 
     form.filterForms label {
@@ -20,131 +16,8 @@
     }
 
 </style>
-<div id="side_nav">
-    <!-- Side (Search) Nav -->
-    <!-- add search and determine what will be shown here -->
-    <ul id="slide-out" class="side-nav fixed collapsible" data-collapsible="expandable">
-        <li>
-            <!-- TODO search items here -->
-            <div class="collapsible-header"><i class="material-icons">directions_bike</i>This Month's Top Activites</div>
-            <div class="collapsible-body"><span><a href="#!">Hiking</a>Lorem ipsum dolor sit amet.</span></div>
-            <div class="collapsible-body"><span><a href="#!">Biking</a>Lorem ipsum dolor sit amet.</span></div>
-
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">location_on</i>Nearby Locations</div>
-            <div class="collapsible-body"><span><a href="#!">Nearby things here</a>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-    </ul>
-</div>
-
-<div id="not_side_nav">
-    <div class="section no-pad-bot" id="filterDiv">
-
-        <div id="filters">
-            <div class="row">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s2 disabled"><a href="#test3">Filters</a></li>
-                        <li class="tab col s2"><a href="#test1"><i class="material-icons">directions_bike</i>Activities</a>
-
-                        </li>
-                        <li class="tab col s2"><a href="#test2"><i class="material-icons">event</i>Month</a></li>
-                        <li class="tab col s2"><a href="#test3"><i class="material-icons">star</i>Rating</a></li>
-                    </ul>
-                </div>
-                <div id="test1" class="col s12">
-                    <form action="#" class="filterForms"><!-- pulled dynamically from DB -->
-                        <c:forEach items="${tags}" var="tag">
-                            <p>
-                                <input type="checkbox" id="${tag.name}" />
-                                <label for="${tag.name}">${tag.name}</label>
-                            </p>
-                        </c:forEach>
-                    </form>
-                    <div>
-                    When filtering by activities... top activities with a "best in: < month here >, location: < location here (restricted to what is visible in map) >" will appear ranked by ratings</div>
-                </div>
-                <div id="test2" class="col s12">
-                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB?     -->
-                        <p>
-                            <input type="checkbox" id="1" />
-                            <label for="1">Jan</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="2" />
-                            <label for="2">Feb</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" class="filled-in" id="3" />
-                            <label for="3">Mar</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="4" />
-                            <label for="4">Apr</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="5" />
-                            <label for="5">May</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="6" />
-                            <label for="6">Jun</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" class="filled-in" id="7" />
-                            <label for="7">Jul</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="8" />
-                            <label for="8">Aug</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="9" />
-                            <label for="9">Sept</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="10" />
-                            <label for="10">Oct</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" class="filled-in" id="11" />
-                            <label for="11">Nov</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="12" />
-                            <label for="12">Dec</label>
-                        </p>
-                    </form>
-                    When filtering by month... shows top activities given month(s) selected and location on map</div>
-                <div id="test3" class="col s12">only shows activities/locations with a given rating or higher</div>
-            </div>
-        </div>
-        <!-- Modals -->
-
-        <div id="new_review" class="modal">
-
-            <div class="modal-content">
-                <div class="row">
-                    <a href="#!" class="modal-action modal-close">
-                        <i class="material-icons right">close</i></a>
-                </div>
-
-                <%@include file="new_review.jsp" %>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="section no-pad-bot no-pad-top">
-
-
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <div id="map"></div>
-    </div>
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-    <a class="waves-effect waves-light btn modal-trigger" href="#new_review">New Review</a>
-    <a class="waves-effect waves-light btn modal-trigger" href="#">Location Details</a>
+<div>
+    <%@include file="templates/update_review_form.jsp" %>
 </div>
 
 
@@ -173,9 +46,9 @@
         currentLat = position.coords.latitude;
         currentLong = position.coords.longitude;
         /*
-        x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-            */
+         x.innerHTML = "Latitude: " + position.coords.latitude +
+         "<br>Longitude: " + position.coords.longitude;
+         */
         console.log(currentLat);
         console.log(currentLong);
     }
@@ -205,7 +78,7 @@
                 currentLat = position.coords.latitude;
                 currentLong = position.coords.longitude;
 
-                });
+            });
         } else {
             // User denied request oh well
             //x.innerHTML = "Geolocation is not supported by this browser.";
@@ -283,10 +156,10 @@
 
 
                     <c:if test="${not empty user}">
-                        var reviewForm = "<a class='waves-effect waves-light btn button_in_popup modal-trigger' href='#new_review'>New Review</a>";
+                    var reviewForm = "<a class='waves-effect waves-light btn button_in_popup modal-trigger' href='#new_review'>New Review</a>";
                     </c:if>
                     <c:if test="${empty user}">
-                        var reviewForm = "<p><a href='user.jsp'>Sign in</a> to add a review</p>";
+                    var reviewForm = "<p><a href='user.jsp'>Sign in</a> to add a review</p>";
                     </c:if>
 
                     ///////

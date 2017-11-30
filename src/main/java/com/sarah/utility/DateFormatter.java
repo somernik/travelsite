@@ -19,4 +19,14 @@ public class DateFormatter {
         formatter = formatter.withLocale(Locale.US);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
         return LocalDate.parse(dateString, formatter);
     }
+
+    /**
+     * Converts localdate to string
+     * @param date date that is a localdate
+     * @return String value
+     */
+    public String convertLocalDateToString(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM, yyyy");
+        return date.format(formatter);
+    }
 }
