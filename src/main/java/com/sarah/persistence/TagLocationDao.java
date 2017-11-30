@@ -42,9 +42,6 @@ public class TagLocationDao extends GenericDao {
 
         } catch (HibernateException he) {
             log.error("Error getting taglocation", he);
-        } catch (NullPointerException e) {
-            log.error("Error getting taglocation, does not exist: ", e);
-
         } finally {
             if (session != null) {
                 session.close();
@@ -77,9 +74,6 @@ public class TagLocationDao extends GenericDao {
             }
         } catch (HibernateException he) {
             log.error("Error initializing items", he);
-        } catch (NullPointerException e) {
-            log.error("Error initializing item (item does not exist): ", e);
-
         } finally {
             if (session != null) {
                 session.close();
@@ -87,6 +81,4 @@ public class TagLocationDao extends GenericDao {
         }
         return items;
     }
-
-
 }
