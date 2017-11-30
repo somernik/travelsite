@@ -2,6 +2,7 @@ package com.sarah.controller;
 
 import com.sarah.entity.User;
 import com.sarah.persistence.UserDao;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Updates User
@@ -37,28 +39,58 @@ public class UpdateUser extends HttpServlet {
         String userName = req.getParameter("userName");
         String email = req.getParameter("email");
 
-        if (firstName.length() > 0) {
-            user.setFirstName(firstName);
+        if (firstName != null && firstName.length() > 0) {
+            user.setFirstName(StringEscapeUtils.escapeJava(firstName));
         }
-        if (lastName.length() > 0) {
-            user.setLastName(lastName);
+        if (lastName != null && lastName.length() > 0) {
+            user.setLastName(StringEscapeUtils.escapeJava(lastName));
         }
-        if (userName.length() > 0) {
-            user.setUserName(userName);
+        if (userName != null && userName.length() > 0) {
+            user.setUserName(StringEscapeUtils.escapeJava(userName));
         }
-        if (email.length() > 0) {
-            user.setEmail(email);
+        if (email != null && email.length() > 0) {
+            user.setEmail(StringEscapeUtils.escapeJava(email));
+        }
+
+        String newPassword = req.getParameter("passwordInput");
+        String confirmPassword = req.getParameter("passwordConfirmInput");
+        String oldPassword = req.getParameter("oldPasswordInput");
+        logger.info(newPassword);
+        logger.info(confirmPassword);
+        logger.info(oldPassword);
+
+        if (newPassword != null && confirmPassword != null && oldPassword != null
+                && newPassword.length() > 5 && confirmPassword.length() > 5 && oldPassword.length() > 5
+                && newPassword.equals(confirmPassword)){
+            logger.info(newPassword);
+            List<User> users = userDao.findByProperty(User.class, "userName", user.getUserName());
+            if (users.size() == 1 && users.get(0).getPassword().equals(oldPassword)) {
+                logger.info(oldPassword);
+                user.setPassword(StringEscapeUtils.escapeJava(newPassword));
+                userDao.update(user);
+                req.setAttribute("message", "");
+            }else {
+                // send error message
+                // password doesnt match
+
+                req.setAttribute("message", "Invalid password.");
+            }
+
+        } else {
+            // Send error message
+            // passwords dont match  or not long enough
+            req.setAttribute("message", "New password and confirm password must be at least 5 characters and match");
+
         }
         logger.info(req.getParameter("firstName"));
         logger.info(req.getParameter("lastName"));
         logger.info(req.getParameter("userName"));
         logger.info(req.getParameter("email"));
-        //user.setUserName(req.getParameter("newUsername"));
         userDao.update(user);
 
         logger.info("Updated" + user);
 
-        req.setAttribute("user", user); // TODO add user to session
+        req.setAttribute("user", user);
         session.setAttribute("user", user);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/user.jsp");

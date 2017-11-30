@@ -104,7 +104,7 @@
 
 </div>
 
-<div id="password" class="modal">
+<div id="passwordUpdate" class="modal">
 
     <div class="modal-content">
         <div class="row">

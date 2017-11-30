@@ -37,14 +37,14 @@
                     <p>Username: ${user.userName}</p>
                     <a class="waves-effect waves-light btn modal-trigger" href="#userName">Edit</a>
                     <br />
-                    <a class="waves-effect waves-light btn modal-trigger" href="#password">Change Password</a>
-
-                    <h3>Delete Account</h3>
-                    <form class="col s12 m6 offset-m3" action="deleteUser">
+                    <a class="waves-effect waves-light btn modal-trigger" href="#passwordUpdate">Change Password</a>
+                    <p>${message}</p>
+                    <h5>Delete Account</h5>
+                    <form class="col s12 m6" action="deleteUser">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="id" type="text" value="" name="id" class="validate">
-                                <label for="id">User Id</label>
+                                <input id="passwordInput" type="text" name="passwordInput" class="validate">
+                                <label for="passwordInput">Password</label>
                             </div>
                         </div>
                         <button class="btn waves-effect waves-light" type="submit" name="action">Delete Account</button>
