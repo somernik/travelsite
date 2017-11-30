@@ -81,7 +81,7 @@ public class UpdateUser extends HttpServlet {
             // Send error message
             // passwords dont match  or not long enough
             req.setAttribute("message", "New password and confirm password must be at least 5 characters and match");
-
+            // TODO appears when updating other items
         }
         logger.info(req.getParameter("firstName"));
         logger.info(req.getParameter("lastName"));

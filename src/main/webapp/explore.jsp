@@ -214,7 +214,7 @@
         console.log(currentLat);
         console.log(currentLong);
         var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -33.8688, lng: 151.2195},
+            center: {lat: 43.0731, lng: -89.4012},
             zoom: 13,
             mapTypeId: 'roadmap'
         });
@@ -277,7 +277,7 @@
                     ///////
                     var detailForm = "<form action='viewDetails'>" +
                         "<input value='" + place.place_id + "' type='hidden' name='placeId' />" +
-                        "<input value='" + place.name + "' type='hidden' name='placeName' />" +
+                        '<input value="' + place.name + '" type="hidden" name="placeName" />' +
                         "<input type='submit' class='waves-effect waves-light btn button_in_popup' value='Details' />" +
                         "</form>";
 

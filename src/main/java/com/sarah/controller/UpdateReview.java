@@ -35,13 +35,13 @@ public class UpdateReview extends HttpServlet{
 
         HttpSession session = req.getSession();
         String id = req.getParameter("reviewId");
-        logger.info(id);
         User user = (User) session.getAttribute("user");
+
         if (validator.isStringNumeric(id)) {
-            logger.info("id is numeric");
             // get values
             ReviewDao reviewDao = new ReviewDao();
             ReviewEntity review = reviewDao.find(ReviewEntity.class, Long.parseLong(id));
+            boolean updated = false;
             String rating = req.getParameter("rating");
             String body = req.getParameter("review");
             String date = req.getParameter("date");
@@ -49,7 +49,7 @@ public class UpdateReview extends HttpServlet{
             logger.info("body: " + body);
             logger.info("date: " + date);
             logger.info("review: " + review.getId());
-            boolean updated = false;
+
             if (rating != null && validator.isStringNumeric(rating)) {
                 review.setStars(Integer.parseInt(rating));
                 updated = true;
@@ -64,24 +64,21 @@ public class UpdateReview extends HttpServlet{
                 review.setDate(localDate);
                 updated = true;
             }
-            logger.info("before update: " + review.getId());
+            logger.info("before update-if: " + review.getId());
             if (updated) {
 
                 reviewDao.update(review);
-                logger.info("before update: " + review.getId());
+                logger.info("after update: " + review.getId());
                 List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("user", user);
                 logger.info("all reviews: " + reviews);
+
+                // update users reviews in session
                 session.setAttribute("userReviews", reviews);
             }
         } else {
             // not valid id
         }
 
-        // TODO update user session
-
         resp.sendRedirect("user.jsp");
-
-        //RequestDispatcher dispatcher = req.getRequestDispatcher("user.jsp");
-        //dispatcher.forward(req, resp);
     }
 }

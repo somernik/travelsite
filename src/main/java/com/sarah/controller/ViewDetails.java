@@ -66,7 +66,9 @@ public class ViewDetails extends HttpServlet {
 
         } else if (locations.size() < 1 && placeId != null && name != null) {
             // Location isn't in Database --> add it
+            log.info("name: " + name);
             String escapedName = StringEscapeUtils.escapeJava(name);
+            log.info("escaped Name: " + escapedName);
             LocationEntity location = new LocationEntity(escapedName, placeId);
             Long id = locationDao.save(location);
             location.setId(id);
