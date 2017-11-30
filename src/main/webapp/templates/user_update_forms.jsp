@@ -9,7 +9,7 @@
         </div>
         <form class="col s12 m6 offset-m3" action="<c:url value="updateUser"/>">
             <div class="row">
-                <h5>Current First Name: {user.firstName}</h5>
+                <h5>Current First Name: ${user.firstName}</h5>
             </div>
 
             <div class="row">
@@ -35,7 +35,7 @@
         </div>
         <form class="col s12 m6 offset-m3" action="updateUser">
             <div class="row">
-                <h5>Current Last Name: {user.lastName}</h5>
+                <h5>Current Last Name: ${user.lastName}</h5>
             </div>
 
             <div class="row">
@@ -61,7 +61,7 @@
         </div>
         <form class="col s12 m6 offset-m3" action="updateUser">
             <div class="row">
-                <h5>Current UserName: {user.userName}</h5>
+                <h5>Current UserName: ${user.userName}</h5>
             </div>
 
             <div class="row">
@@ -87,7 +87,7 @@
         </div>
         <form class="col s12 m6 offset-m3" action="updateUser">
             <div class="row">
-                <h5>Current Email: {user.email}</h5>
+                <h5>Current Email: ${user.email}</h5>
             </div>
 
             <div class="row">
