@@ -116,7 +116,7 @@ public class ReviewDaoTest {
     }
 
     @Test
-    public void getReviewWithInfo () throws Exception {
+    public void getReviewWithInfoTest() throws Exception {
         ReviewEntity returnedReview = reviewDao.getReviewById(secondReview.getId());
         Assert.assertEquals("Id does not match", secondReview.getId(), returnedReview.getId());
         Assert.assertEquals("Body does not match", secondReview.getBody(), returnedReview.getBody());
@@ -126,86 +126,13 @@ public class ReviewDaoTest {
 
     }
 
-    // TODO test intialize function
     @Test
-    public void getLocationImage() throws Exception {
+    public void findByAndInitializePropertiesTest() throws Exception {
+        List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("body", secondReview.getBody());
 
-        /*
-        URI baseURI = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ_xkgOm1TBogRmEFIurX8DE4&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();
-
-        Client client = ClientBuilder.newClient();
-
-        WebTarget target = client.target(baseURI);
-        //String allQuestions = target.path("JSON/all").request().accept(MediaType.APPLICATION_JSON).get(String.class);
-
-        String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
-        //log.info(response);
-        String photoReference = "";
-
-        try {
-            JSONObject jsonObj = new JSONObject(response);
-            JSONObject result = jsonObj.getJSONObject("result");
-            JSONArray photos = result.getJSONArray("photos");
-            JSONObject firstPhoto = photos.getJSONObject(0);
-            photoReference = firstPhoto.getString("photo_reference");
-
-            log.info(photoReference);
-
-        } catch (JSONException jsonException) {
-            jsonException.printStackTrace();
+        for (ReviewEntity review : reviews) {
+            Assert.assertEquals("Review items not match", secondReview.getBody(), review.getBody());
         }
-        */
-       /*
-
-        URI baseURI2 = UriBuilder.fromUri("https://www.googleapis.com/urlshortener/v1/url").build();
-
-        Client client2 = ClientBuilder.newClient();
-
-        WebTarget target2 = client2.target(baseURI2);
-
-        String json = "{\"longUrl\": \""+photoUrl+"\",\"key\": \"" + "AIzaSyDKIZXqcFzdUdrVv6X6q2kXr6NwKW1jR6M" + "\"}";
-
-        Response response2 = target2.request().post(Entity.json(json));
-        String responseString = response2.readEntity(String.class);
-        response2.close();
-        log.info(responseString);
-
-        //https://www.googleapis.com/urlshortener/v1/url
-        //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=YOUR_API_KEY
-        try {
-            String json = "{\"longUrl\": \""+photoUrl+"\"}";
-            String apiURL = "https://www.googleapis.com/urlshortener/v1/url"+"?key=AIzaSyDKIZXqcFzdUdrVv6X6q2kXr6NwKW1jR6M";
-
-            HttpPost postRequest = new HttpPost(apiURL);
-            postRequest.setHeader("Content-Type", "application/json");
-            postRequest.setEntity(new StringEntity(json, "UTF-8"));
-
-            CloseableHttpClient httpClient = HttpClients.createDefault();
-            HttpResponse urlResponse = httpClient.execute(postRequest);
-            String responseText = EntityUtils.toString(urlResponse.getEntity());
-
-            Gson gson = new Gson();
-            @SuppressWarnings("unchecked")
-            HashMap<String, String> res = gson.fromJson(responseText, HashMap.class);
-
-            return res.get("id");
-
-        } catch (MalformedURLException e) {
-            return "error";
-        } catch (IOException e) {
-            return "error";
-        }
-
-//?key=AIzaSyDKIZXqcFzdUdrVv6X6q2kXr6NwKW1jR6M //shortener api key
-        String dataUrl = "longUrl=" + photoUrl;
-        String Data = dataUrl;
-        URL url = new URL("https://www.googleapis.com/urlshortener/v1/url");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("POST");
-        con.setDoOutput(true);
-        con.getOutputStream().write(Data.getBytes("UTF-8"));
-        con.getInputStream();
-        */
     }
 
 }

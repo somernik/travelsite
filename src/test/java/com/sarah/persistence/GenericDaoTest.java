@@ -3,9 +3,12 @@ package com.sarah.persistence;
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
+import com.sarah.entity.UserPrivilegeEntityPK;
 import com.sarah.utility.DatabaseCleaner;
 import javafx.util.converter.LocalDateStringConverter;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.QueryException;
 import org.hibernate.criterion.MatchMode;
 import org.junit.After;
 import org.junit.Assert;
@@ -13,7 +16,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -98,9 +103,7 @@ public class GenericDaoTest {
 
         List<User> users = dao.findAll(User.class);
 
-        //Assert.assertNull("User retrieved is not null", testUser);
         Assert.assertEquals("Incorrect number of users in database", allUsers.size() - 1, users.size());
-
     }
 
     @Test
@@ -135,4 +138,5 @@ public class GenericDaoTest {
 
         Assert.assertEquals("Incorrect # of reviews", 1, reviews.size());
     }
+
 }

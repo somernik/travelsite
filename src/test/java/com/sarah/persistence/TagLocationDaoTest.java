@@ -131,4 +131,10 @@ public class TagLocationDaoTest {
 
         Assert.assertTrue("Tag Locations not equal", tagLocation1.equals(returnedEntity));
     }
+
+    @Test
+    public void findByAndInitializeTagTest() throws Exception {
+        List<TaglocationEntity> tagLocations = dao.findByAndInitializeTag("tag", tag);
+        Assert.assertEquals("Wrong number of taglocations", tagLocations.size(), 1);
+    }
 }
