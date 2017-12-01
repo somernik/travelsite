@@ -80,15 +80,16 @@
                         <li><a class="btn-floating halfway-fab yellow darken-1" id="addPhoto"><i class="material-icons">add_a_photo</i></a></li>
                         <li><a class="btn-floating halfway-fab blue" id="allPhotos"><i class="material-icons">photo_library</i></a></li>
                         <li><a class="btn-floating halfway-fab green modal-trigger" id="addReview" href="#new_review"><i class="material-icons">add</i></a></li>
-                        <li><a class="btn-floating halfway-fab red" id="fav" href="favorite?placeId=${location.googleId}"><i class="material-icons">favorite</i></a></li>
+                        <li><a class="btn-floating halfway-fab red" id="fav" href="favorite?placeId=${location.googleId}&placeName=${location.name}"><i class="material-icons">favorite</i></a></li>
 
                     </ul>
                 </div>
             </div>
-            <!--
+            <c:if test="${not empty message}">
             <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-            </div>-->
+                <p>${message}</p>
+            </div>
+            </c:if>
         </div>
     </div>
 

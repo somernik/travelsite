@@ -111,6 +111,8 @@ public class AddReview extends HttpServlet {
             log.info(review.toString());
             ReviewDao reviewDao = new ReviewDao();
             Long id = reviewDao.save(review);
+        } else {
+            // TODO send error
         }
 
         req.setAttribute("placeId", req.getParameter("placeId"));

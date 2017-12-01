@@ -16,7 +16,7 @@ import java.net.URI;
  * Used to get photo from google api to display on jsp
  * Created by sarah on 11/21/2017.
  */
-public class LocationPhoto {
+public class GoogleAPIAccessor {
     private final Logger log = Logger.getLogger(this.getClass());
 
     /**

@@ -32,7 +32,7 @@ import java.util.List;
 )
 public class ViewDetails extends HttpServlet {
     private final Logger log = Logger.getLogger(this.getClass());
-    private LocationPhoto locationPhoto = new LocationPhoto();
+    private GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
 
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,6 +41,7 @@ public class ViewDetails extends HttpServlet {
         String placeId = req.getParameter("placeId");
         String name = req.getParameter("placeName");
         log.info("place: " + placeId);
+        log.info("name: " + name);
         // TODO handle no place Id
 
         // TODO Get locations info for detail page
@@ -82,7 +83,7 @@ public class ViewDetails extends HttpServlet {
         }
         // google images, later - images
         if (placeId != null && placeId.length() > 0) {
-            String photoUrl = locationPhoto.getPhotoFromGoogle(req.getParameter("placeId"));
+            String photoUrl = googleAPIAccessor.getPhotoFromGoogle(req.getParameter("placeId"));
 
             req.setAttribute("photoUrl", photoUrl);
         }
@@ -95,6 +96,10 @@ public class ViewDetails extends HttpServlet {
         req.setAttribute("tags", tags);
 
         req.setAttribute("referrer", "viewDetails");
+        if (req.getParameter("message") != null){
+
+            req.setAttribute("message", req.getParameter("message"));
+        }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
         dispatcher.forward(req, resp);

@@ -7,7 +7,6 @@ import com.sarah.persistence.UserDao;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,56 +37,62 @@ public class FavoriteLocation extends HttpServlet {
         // Get user from session
         User currentUser = (User) session.getAttribute("user");
 
+        req.setAttribute("message", "");
+        logger.info(currentUser);
         // if no user -> exit
         if (currentUser == null) {
             logger.info("no user");
+            // send error message
+            resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId")
+                    + "&placeName=" + req.getParameter("placeName")
+                    + "&message=" + "You must be logged in to add a review");
+        } else {
 
-            resp.sendRedirect("user.jsp");
-        }
+            String googleId = req.getParameter("placeId");
+            if (googleId.equals(null)) {
+                // no location passed
+                // TODO exit/error
+                req.setAttribute("message", "There was an error saving the location");
+            }
+            LocationDao locationDao = new LocationDao();
+            List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId", googleId, MatchMode.EXACT);
+            logger.info("locations: " + locations);
 
-        String googleId = req.getParameter("placeId");
-        if (googleId.equals(null)) {
-            // no location passed
-            // TODO exit/error
-        }
-        LocationDao locationDao = new LocationDao();
-        List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId" , googleId, MatchMode.EXACT);
-        logger.info("locations: " + locations);
+            if (locations.size() == 1) {
 
-        if (locations.size() == 1) {
+                UserDao userDao = new UserDao();
+                currentUser = userDao.addSavedLocation(currentUser, locations.get(0));
+                req.setAttribute("message", "Location saved!");
+                //update session variable to update on users page
+                session.setAttribute("user", currentUser);
 
-            UserDao userDao = new UserDao();
-            currentUser = userDao.addSavedLocation(currentUser,locations.get(0));
+            } else {
+                // TODO send error?
+                //add location to db
+                // need name
+                // and escape string
+                // break out check if exists and add to its own class or something
+                // used here add review and view details
 
-            //update session variable to update on users page
+            }
+
+            req.setAttribute("placeId", googleId);
+
+            // Update user and images
+            GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
+            Map<Long, String> locationImageURLs = new HashMap<Long, String>();
+
+            for (LocationEntity location : currentUser.getLocations()) {
+                String imageURL = googleAPIAccessor.getPhotoFromGoogle(location.getGoogleId());
+                locationImageURLs.put(location.getId(), imageURL);
+            }
+
+            session.setAttribute("imageUrls", locationImageURLs);
             session.setAttribute("user", currentUser);
 
-        } else {
-            // TODO send error?
-            //add location to db
-            // need name
-            // and escape string
-            // break out check if exists and add to its own class or something
-            // used here add review and view details
-
+            // TODO add abitility to favorite from search page as well?
+            resp.sendRedirect("viewDetails");
         }
-
-        req.setAttribute("placeId", googleId);
-
-        // TODO update session variables location images specifcally
-        LocationPhoto locationPhoto = new LocationPhoto();
-        Map<Long, String> locationImageURLs = new HashMap<Long, String>();
-
-        for (LocationEntity location : currentUser.getLocations()) {
-            String imageURL = locationPhoto.getPhotoFromGoogle(location.getGoogleId());
-            locationImageURLs.put(location.getId(), imageURL);
-        }
-
-        session.setAttribute("imageUrls", locationImageURLs);
-        session.setAttribute("user", currentUser);
-
-        // TODO add abitility to favorite from search page as well
-        resp.sendRedirect("viewDetails");
     }
 
 }
