@@ -79,7 +79,7 @@
                     <ul>
                         <li><a class="btn-floating halfway-fab yellow darken-1" id="addPhoto"><i class="material-icons">add_a_photo</i></a></li>
                         <li><a class="btn-floating halfway-fab blue" id="allPhotos"><i class="material-icons">photo_library</i></a></li>
-                        <li><a class="btn-floating halfway-fab green" id="addReview"><i class="material-icons">add</i></a></li>
+                        <li><a class="btn-floating halfway-fab green modal-trigger" id="addReview" href="#new_review"><i class="material-icons">add</i></a></li>
                         <li><a class="btn-floating halfway-fab red" id="fav" href="favorite?placeId=${location.googleId}"><i class="material-icons">favorite</i></a></li>
 
                     </ul>
@@ -112,6 +112,21 @@
         <div class="col s12 m3 l3"><!-- weather plugin? -->
             <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
 
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+
+    <div id="new_review" class="modal">
+
+        <div class="modal-content">
+            <div class="row">
+                <a href="#!" class="modal-action modal-close">
+                    <i class="material-icons right">close</i></a>
+            </div>
+
+            <%@include file="new_review.jsp" %>
         </div>
 
     </div>

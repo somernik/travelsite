@@ -13,6 +13,7 @@
         <input id="rating" type='hidden' name='rating' />
         <input id="goodTags" type='hidden' name='goodTags' />
         <input id="badTags" type='hidden' name='badTags' />
+        <input type="hidden" name="referrer" value="${referrer}">
 
         <span class="rating">
             <input type="radio" class="rating-input"

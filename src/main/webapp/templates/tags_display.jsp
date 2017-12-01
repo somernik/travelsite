@@ -4,12 +4,12 @@
     <c:if test="${empty tags}">
         <p>No tags yet!</p>
     </c:if>
-    <c:if test="${not empty tags}">
+    <c:if test="${not empty tagLocations}">
         <ul class="collection">
             <li class="collection-item">
                 <span class="title">Recommended Activities</span><br />
 
-                <c:forEach var="taglocation" items="${tags}">
+                <c:forEach var="taglocation" items="${tagLocations}">
                     <c:if test="${taglocation.rank > 0}">
                         <div class="chip positive">
                                 ${taglocation.tag.name}
@@ -23,7 +23,7 @@
             <li class="collection-item">
                 <span class="title">Activities Not Recommended</span><br />
 
-                <c:forEach var="taglocation" items="${tags}">
+                <c:forEach var="taglocation" items="${tagLocations}">
                     <c:if test="${taglocation.negativeRank > 0}">
                         <div class="chip negative">
                                 ${taglocation.tag.name}

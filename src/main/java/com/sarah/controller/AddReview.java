@@ -39,6 +39,7 @@ public class AddReview extends HttpServlet {
         log.info(session.getAttribute("user"));
         // Get user from session
         User currentUser = (User) session.getAttribute("user");
+        String referrer = req.getParameter("referrer");
 
         // TODO validate input
         // if no user -> exit
@@ -53,7 +54,7 @@ public class AddReview extends HttpServlet {
         if (req.getParameter("placeId") == null || req.getParameter("placeName") == null) {
             log.info("null properties");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("explore");
+            RequestDispatcher dispatcher = req.getRequestDispatcher(referrer);
             dispatcher.forward(req, resp);
         }
 
@@ -112,7 +113,10 @@ public class AddReview extends HttpServlet {
             Long id = reviewDao.save(review);
         }
 
-        resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId") + "&placeName=" + req.getParameter("placeName"));
+        req.setAttribute("placeId", req.getParameter("placeId"));
+        req.setAttribute("placeName", req.getParameter("placeName"));
+
+        resp.sendRedirect(referrer);
     }
 
     /**

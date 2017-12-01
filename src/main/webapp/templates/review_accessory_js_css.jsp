@@ -1,5 +1,5 @@
 <script>
-
+    console.log("here");
     var tags = {};
 
     // from database!

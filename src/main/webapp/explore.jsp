@@ -66,7 +66,7 @@
                     When filtering by activities... top activities with a "best in: < month here >, location: < location here (restricted to what is visible in map) >" will appear ranked by ratings</div>
                 </div>
                 <div id="test2" class="col s12">
-                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB?     -->
+                    <form action="#" class="filterForms">
                         <p>
                             <input type="checkbox" id="1" />
                             <label for="1">Jan</label>
@@ -183,9 +183,6 @@
 
     //////////////////////////////////////////////////////////
 
-
-
-
     //https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
 
     // This example adds a search box to a map, using the Google Place Autocomplete
@@ -275,7 +272,7 @@
                     currentPlaceId = place.place_id;
                     currentPlaceName = place.name;
                     ///////
-                    var detailForm = "<form action='viewDetails'>" +
+                    var detailForm = "<form action='viewDetails' id='detailForm'>" +
                         "<input value='" + place.place_id + "' type='hidden' name='placeId' />" +
                         '<input value="' + place.name + '" type="hidden" name="placeName" />' +
                         "<input type='submit' class='waves-effect waves-light btn button_in_popup' value='Details' />" +
@@ -435,6 +432,16 @@
 
     #filterDiv {
         padding-top: 3px;
+    }
+
+    .button_in_popup {
+        padding: 0.5em;
+        line-height: 20px;
+        margin-right: 0.5em;
+    }
+
+    #detailForm {
+        display: inline-block;
     }
 
 </style>

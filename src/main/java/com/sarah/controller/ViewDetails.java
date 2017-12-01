@@ -2,9 +2,11 @@ package com.sarah.controller;
 
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.ReviewEntity;
+import com.sarah.entity.TagEntity;
 import com.sarah.entity.TaglocationEntity;
 import com.sarah.persistence.LocationDao;
 import com.sarah.persistence.ReviewDao;
+import com.sarah.persistence.TagDao;
 import com.sarah.persistence.TagLocationDao;
 import org.apache.log4j.Logger;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -58,7 +60,7 @@ public class ViewDetails extends HttpServlet {
             // add tags
             TagLocationDao tagLocationDao = new TagLocationDao();
             List<TaglocationEntity> tagLocations = tagLocationDao.findByAndInitializeTag("location", locations.get(0));
-            req.setAttribute("tags", tagLocations);
+            req.setAttribute("tagLocations", tagLocations);
 
             // add location
             req.setAttribute("location", locations.get(0));
@@ -87,7 +89,12 @@ public class ViewDetails extends HttpServlet {
 
         //log.info(session.getAttribute("user"));
 
-        req.setAttribute("referrer", "detail.jsp");
+        TagDao tagDao = new TagDao();
+        List<TagEntity> tags = tagDao.findAll(TagEntity.class);
+
+        req.setAttribute("tags", tags);
+
+        req.setAttribute("referrer", "viewDetails");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
         dispatcher.forward(req, resp);
