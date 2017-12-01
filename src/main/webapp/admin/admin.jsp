@@ -34,7 +34,6 @@
         width: 100%;
     }
     #addadmin, table {
-        background-color:darkslategray;
         width: 100%;
     }
     #formDiv {
@@ -48,11 +47,6 @@
     #grantFormInput2 {
         margin-right: 15%;
     }
-
-    form p, table {
-        color: white;
-    }
-
 
     .formHeader {
         text-align: center;
@@ -103,42 +97,25 @@
                         <input type="submit" value="Search" />
                     </form>
 
-                    <c:if test="${empty users}"><p>Enter an id to search!</p></c:if>
-                    <c:if test="${not empty users}">
-                    <div class="container-fluid">
-                        <h5>Search: ${type} ${operator} ${value} <c:if test="${empty value}">all</c:if></h5>
-                        <h5>Search Results: </h5>
-                        <c:if test="${empty users}"><p>No Results!</p></c:if>
-                        <table>
-                            <tr><th>Id</th><th>First Name</th><th>Last Name</th></tr>
-                            <c:forEach var="user" items="${users}">
-                                <tr><td>${user.userid}</td><td>${user.firstName}</td><td>${user.lastName}</td></tr>
-                            </c:forEach>
-                        </table>
-                    </div>
-                    </c:if>
                 </div>
                 <div id="privileges">
 
                     <div class="container-fluid">
                         <c:if test="${empty adminUsers}"><p>No Admin Users!</p></c:if>
                         <c:if test="${not empty adminUsers}">
-                        <table>
-                            <tr><th>Username</th><th>First Name</th><th>Last Name</th><th>Privileges</th></tr>
-                            <c:forEach var="user" items="${adminUsers}">
-                                <tr><td>${user.userName}</td><td>${user.firstName}</td><td>${user.lastName}</td><td>
-                                    <c:forEach var="priv" items="${user.userPrivileges}">
-                                        ${priv.pk.privilege.value}
-                                    </c:forEach>
-                                    <form class="in_table" action="removeAdmin">
+                            <table>
+                                <tr><th>Username</th><th>First Name</th><th>Last Name</th><th>Privileges</th></tr>
+                                <c:forEach var="adminUser" items="${adminUsers}">
+                                    <tr><td>${adminUser.userName}</td><td>${adminUser.firstName}</td><td>${adminUser.lastName}</td><td>
 
-                                        <input type="hidden" name="removeId" value="${user.userid}"/>
-                                        <button type="submit" class="btn waves-effect waves-light" value="Remove Admin">Remove Admin</button>
-                                    </form>
+                                        <form class="in_table" action="removeAdmin">
 
-                                </td></tr>
-                            </c:forEach>
-                        </table>
+                                            <input type="hidden" name="removeId" value="${adminUser.id}"/>
+                                            <button type="submit" class="btn waves-effect waves-light" value="Remove Admin">Remove Admin</button>
+                                        </form>
+                                    </td></tr>
+                                </c:forEach>
+                            </table>
                         </c:if>
                     </div>
                     <div id="formDiv">

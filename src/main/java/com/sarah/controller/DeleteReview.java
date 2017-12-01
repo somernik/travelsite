@@ -50,7 +50,7 @@ public class DeleteReview extends HttpServlet {
 
         session.setAttribute("userReviews", reviews);
         session.setAttribute("user", updatedUser);
-
+        // TODO fix on detail page
         resp.sendRedirect(referrer);
     }
 }

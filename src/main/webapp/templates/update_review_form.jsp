@@ -5,7 +5,12 @@
   Time: 4:48 PM
   To change this template use File | Settings | File Templates.
 --%>
-
+<style>
+    .row {
+        width: 50%;
+        margin: auto;
+    }
+</style>
 <div class="row">
     <form class="col s12" action='updateReview' onsubmit="prepareInputs()">
         <!--<input id="placeId" type='hidden' name='placeId' />

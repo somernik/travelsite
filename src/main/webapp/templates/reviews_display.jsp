@@ -1,7 +1,6 @@
 <div id="reviews" class="col s12"><!-- display of reviews -->
-    <p>${reviews.length}</p>
-    <c:if test="${reviews.length < 1}">
-        <p>There are no reviews yet!</p>
+    <c:if test="${empty reviews}">
+        <p>No reviews yet!</p>
     </c:if>
     <ul class="collection">
         <c:forEach var="review" items="${reviews}">

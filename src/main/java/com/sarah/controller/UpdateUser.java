@@ -94,7 +94,6 @@ public class UpdateUser extends HttpServlet {
         req.setAttribute("user", user);
         session.setAttribute("user", user);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user.jsp");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect("/user.jsp");
     }
 }

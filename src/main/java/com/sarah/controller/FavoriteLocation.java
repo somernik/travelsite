@@ -87,8 +87,7 @@ public class FavoriteLocation extends HttpServlet {
         session.setAttribute("user", currentUser);
 
         // TODO add abitility to favorite from search page as well
-        RequestDispatcher dispatcher = req.getRequestDispatcher("viewDetails");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect("viewDetails");
     }
 
 }
