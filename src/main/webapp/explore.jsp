@@ -76,7 +76,7 @@
                             <label for="2">Feb</label>
                         </p>
                         <p>
-                            <input type="checkbox" class="filled-in" id="3" />
+                            <input type="checkbox"id="3" />
                             <label for="3">Mar</label>
                         </p>
                         <p>
@@ -92,7 +92,7 @@
                             <label for="6">Jun</label>
                         </p>
                         <p>
-                            <input type="checkbox" class="filled-in" id="7" />
+                            <input type="checkbox"id="7" />
                             <label for="7">Jul</label>
                         </p>
                         <p>
@@ -108,7 +108,7 @@
                             <label for="10">Oct</label>
                         </p>
                         <p>
-                            <input type="checkbox" class="filled-in" id="11" />
+                            <input type="checkbox"id="11" />
                             <label for="11">Nov</label>
                         </p>
                         <p>

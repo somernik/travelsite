@@ -62,7 +62,15 @@ public class FavoriteLocation extends HttpServlet {
 
                 UserDao userDao = new UserDao();
                 currentUser = userDao.addSavedLocation(currentUser, locations.get(0));
-                req.setAttribute("message", "Location saved!");
+
+                GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
+                Map<Long, String> locationImageURLs = (Map<Long, String>) session.getAttribute("imageUrls");
+
+                String imageURL = googleAPIAccessor.getPhotoFromGoogle(locations.get(0).getGoogleId());
+                locationImageURLs.put(locations.get(0).getId(), imageURL);
+
+
+                session.setAttribute("imageUrls", locationImageURLs);
                 //update session variable to update on users page
                 session.setAttribute("user", currentUser);
 
@@ -79,19 +87,12 @@ public class FavoriteLocation extends HttpServlet {
             req.setAttribute("placeId", googleId);
 
             // Update user and images
-            GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
-            Map<Long, String> locationImageURLs = new HashMap<Long, String>();
-
-            for (LocationEntity location : currentUser.getLocations()) {
-                String imageURL = googleAPIAccessor.getPhotoFromGoogle(location.getGoogleId());
-                locationImageURLs.put(location.getId(), imageURL);
-            }
-
-            session.setAttribute("imageUrls", locationImageURLs);
             session.setAttribute("user", currentUser);
 
             // TODO add abitility to favorite from search page as well?
-            resp.sendRedirect("viewDetails");
+            resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId")
+                    + "&placeName=" + req.getParameter("placeName")
+                    + "&message=" + "Location saved!");
         }
     }
 
