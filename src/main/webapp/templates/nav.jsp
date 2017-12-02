@@ -9,8 +9,9 @@
         <ul id="userOptions" class="dropdown-content">
             <li><a href="user.jsp#favorites">favorites</a></li>
             <li><a href="user.jsp#reviews">reviews</a></li>
-            <li class="divider"></li>
             <li><a href="user.jsp#profile">profile</a></li>
+            <li class="divider"></li>
+            <li><a href="logout">logout</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
             <c:if test="${empty user}">
@@ -33,8 +34,9 @@
                 <li class="divider"></li>
                 <li><a href="#!">${user.userName}'s favorites</a></li>
                 <li><a href="#!">${user.userName}'s reviews</a></li>
-                <li class="divider"></li>
                 <li><a href="#!">${user.userName}'s profile</a></li>
+                <li class="divider"></li>
+            <li><a href="logout">logout</a></li>
             </c:if>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse iconLinks"><i class="material-icons teal">menu</i></a>

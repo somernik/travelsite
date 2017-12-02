@@ -16,10 +16,10 @@
         position: inherit;
     }
 
-    #fav {
+    #fav, #favNotLoggedIn {
         right: 21px;
     }
-    #addReview {
+    #addReview, #addReviewNotLoggedIn {
         right: 67px;
     }
     #addPhoto {
@@ -79,9 +79,14 @@
                     <ul>
                         <li><a class="btn-floating halfway-fab yellow darken-1" id="addPhoto"><i class="material-icons">add_a_photo</i></a></li>
                         <li><a class="btn-floating halfway-fab blue" id="allPhotos"><i class="material-icons">photo_library</i></a></li>
-                        <li><a class="btn-floating halfway-fab green modal-trigger" id="addReview" href="#new_review"><i class="material-icons">add</i></a></li>
-                        <li><a class="btn-floating halfway-fab red" id="fav" href="favorite?placeId=${location.googleId}&placeName=${location.name}"><i class="material-icons">favorite</i></a></li>
-
+                        <c:if test="${not empty user}">
+                            <li><a class="btn-floating halfway-fab green modal-trigger" id="addReview" href="#new_review"><i class="material-icons">add</i></a></li>
+                            <li><a class="btn-floating halfway-fab red" id="fav" href="favorite?placeId=${location.googleId}&placeName=${location.name}"><i class="material-icons">favorite</i></a></li>
+                        </c:if>
+                        <c:if test="${empty user}">
+                            <li><a class="btn-floating halfway-fab green modal-trigger" id="addReviewNotLoggedIn" href="#pleaseLogIn"><i class="material-icons">add</i></a></li>
+                            <li><a class="btn-floating halfway-fab red modal-trigger" id="favNotLoggedIn" href="#pleaseLogIn"><i class="material-icons">favorite</i></a></li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -131,6 +136,22 @@
         </div>
 
     </div>
+
+    <div id="pleaseLogIn" class="modal"><!-- display of reviews -->
+
+        <div class="modal-content">
+            <div class="row">
+                <a href="#!" class="modal-action modal-close">
+                    <i class="material-icons right">close</i></a>
+            </div>
+
+            <div class="col s12">
+                <p>You must be logged in to do that. Login <a href="user.jsp">here</a></p>
+
+            </div>
+        </div>
+    </div>
+    <!-- END MODALS -->
 </div>
 
 </div>

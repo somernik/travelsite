@@ -53,7 +53,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="review" class="materialize-textarea" name="review" data-length="120"></textarea>
+                <textarea id="review" class="materialize-textarea" name="review" data-length="255"></textarea>
                 <label for="review">Review</label>
             </div>
         </div>
