@@ -13,7 +13,7 @@
     #errorContent {
         width: 50%;
         margin: auto;
-        font-align: center;
+        text-align: center;
     }
 </style>
 <body>

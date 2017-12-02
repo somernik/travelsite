@@ -1,5 +1,4 @@
 <script>
-    console.log("here");
     var tags = {};
 
     // from database!
@@ -67,7 +66,27 @@
         }
     }
 
+    function checkDate() {
+        var date = document.getElementById("date");
+        if (date.value == '') {
+            date.classList.add('invalid');
+            return false; // dont submit the form
+        } else {
+            date.classList.remove('invalid');
+            return true;
+        }
+    }
+
+    $("#date").change(function() {
+        checkDate();
+    });
+
     function prepareInputs() {
+        if (!checkDate()) {
+            console.log("checkdate failed");
+            return false;
+        }
+
         document.getElementById("placeId").value = currentPlaceId;
         document.getElementById("placeName").value = currentPlaceName;
 
@@ -93,7 +112,7 @@
         document.getElementById("goodTags").value = processTags('good');
 
         document.getElementById("badTags").value = processTags('bad');
-
+        return true;
     }
 
     function processTags(inputId) {
@@ -103,8 +122,6 @@
         var string = "";
 
         tags.forEach(function(e, i) {
-            //console.log(e.tag);
-            //console.log(i);
             string += e.tag + ";";
         });
 

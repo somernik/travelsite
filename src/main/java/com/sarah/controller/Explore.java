@@ -32,6 +32,8 @@ public class Explore extends HttpServlet {
         req.setAttribute("referrer", "explore");
         // TODO add any search criteria to google map
 
+        logger.info("in explore");
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("explore.jsp");
         dispatcher.forward(req, resp);
     }

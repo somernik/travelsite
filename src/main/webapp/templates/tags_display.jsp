@@ -1,7 +1,7 @@
 
 <!-- display of all tags -->
 <div id="allTags" class="col s12">
-    <c:if test="${empty tags}">
+    <c:if test="${empty tagLocations}">
         <p>No tags yet!</p>
     </c:if>
     <c:if test="${not empty tagLocations}">

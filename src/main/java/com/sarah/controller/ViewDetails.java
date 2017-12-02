@@ -101,6 +101,8 @@ public class ViewDetails extends HttpServlet {
             req.setAttribute("message", req.getParameter("message"));
         }
 
+        log.info("in viewdetail");
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("detail.jsp");
         dispatcher.forward(req, resp);
     }

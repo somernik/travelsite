@@ -32,9 +32,9 @@
             </c:if>
             <c:if test="${not empty user}">
                 <li class="divider"></li>
-                <li><a href="#!">${user.userName}'s favorites</a></li>
-                <li><a href="#!">${user.userName}'s reviews</a></li>
-                <li><a href="#!">${user.userName}'s profile</a></li>
+                <li><a href="user.jsp#favorites">${user.userName}'s favorites</a></li>
+                <li><a href="user.jsp#reviews">${user.userName}'s reviews</a></li>
+                <li><a href="user.jsp#profile">${user.userName}'s profile</a></li>
                 <li class="divider"></li>
             <li><a href="logout">logout</a></li>
             </c:if>
