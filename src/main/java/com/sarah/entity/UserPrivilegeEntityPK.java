@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Embeddable
 public class UserPrivilegeEntityPK implements Serializable {
 
-
     private PrivilegeEntity privilege;
     private User user;
 

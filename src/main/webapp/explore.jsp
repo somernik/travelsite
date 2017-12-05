@@ -66,7 +66,7 @@
                     When filtering by activities... top activities with a "best in: < month here >, location: < location here (restricted to what is visible in map) >" will appear ranked by ratings</div>
                 </div>
                 <div id="test2" class="col s12">
-                    <form action="#" class="filterForms"><!-- TODO pull dynamically from DB?     -->
+                    <form action="#" class="filterForms">
                         <p>
                             <input type="checkbox" id="1" />
                             <label for="1">Jan</label>
@@ -76,7 +76,7 @@
                             <label for="2">Feb</label>
                         </p>
                         <p>
-                            <input type="checkbox" class="filled-in" id="3" />
+                            <input type="checkbox"id="3" />
                             <label for="3">Mar</label>
                         </p>
                         <p>
@@ -92,7 +92,7 @@
                             <label for="6">Jun</label>
                         </p>
                         <p>
-                            <input type="checkbox" class="filled-in" id="7" />
+                            <input type="checkbox"id="7" />
                             <label for="7">Jul</label>
                         </p>
                         <p>
@@ -108,7 +108,7 @@
                             <label for="10">Oct</label>
                         </p>
                         <p>
-                            <input type="checkbox" class="filled-in" id="11" />
+                            <input type="checkbox"id="11" />
                             <label for="11">Nov</label>
                         </p>
                         <p>
@@ -153,6 +153,7 @@
     var currentPlaceName = '';
     var currentLat = '';
     var currentLong = '';
+    var ids = "";
 
     //////////////////////////////////////////////////////////
     // Get user location
@@ -183,9 +184,6 @@
 
     //////////////////////////////////////////////////////////
 
-
-
-
     //https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
 
     // This example adds a search box to a map, using the Google Place Autocomplete
@@ -214,7 +212,7 @@
         console.log(currentLat);
         console.log(currentLong);
         var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -33.8688, lng: 151.2195},
+            center: {lat: 43.0731, lng: -89.4012},
             zoom: 13,
             mapTypeId: 'roadmap'
         });
@@ -250,8 +248,7 @@
             // For each place, get the icon, name and location.
             var bounds = new google.maps.LatLngBounds();
             places.forEach(function(place) {
-                console.log(place);
-
+                ids += place.place_id + ",";
                 if (!place.geometry) {
                     console.log("Returned place contains no geometry");
                     return;
@@ -275,9 +272,9 @@
                     currentPlaceId = place.place_id;
                     currentPlaceName = place.name;
                     ///////
-                    var detailForm = "<form action='viewDetails'>" +
+                    var detailForm = "<form action='viewDetails' id='detailForm'>" +
                         "<input value='" + place.place_id + "' type='hidden' name='placeId' />" +
-                        "<input value='" + place.name + "' type='hidden' name='placeName' />" +
+                        '<input value="' + place.name + '" type="hidden" name="placeName" />' +
                         "<input type='submit' class='waves-effect waves-light btn button_in_popup' value='Details' />" +
                         "</form>";
 
@@ -435,6 +432,16 @@
 
     #filterDiv {
         padding-top: 3px;
+    }
+
+    .button_in_popup {
+        padding: 0.5em;
+        line-height: 20px;
+        margin-right: 0.5em;
+    }
+
+    #detailForm {
+        display: inline-block;
     }
 
 </style>

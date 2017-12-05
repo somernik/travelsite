@@ -7,16 +7,17 @@
 --%>
 
 <div class="row">
-    <form class="col s12" action='addReview' onsubmit="prepareInputs()">
+    <form class="col s12" action='addReview' onsubmit="return prepareInputs()">
         <input id="placeId" type='hidden' name='placeId' />
         <input id="placeName" type='hidden' name='placeName' />
         <input id="rating" type='hidden' name='rating' />
         <input id="goodTags" type='hidden' name='goodTags' />
         <input id="badTags" type='hidden' name='badTags' />
+        <input type="hidden" name="referrer" value="${referrer}">
 
         <span class="rating">
             <input type="radio" class="rating-input"
-                   id="rating-input-1-1" name="rating-input-1">
+                   id="rating-input-1-1" name="rating-input-1" required>
             <label for="rating-input-1-1" class="rating-star"><i class="material-icons" id="1">star_border</i></label>
             <input type="radio" class="rating-input"
                    id="rating-input-1-2" name="rating-input-1">
@@ -46,14 +47,16 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <input id="date" type="text" class="datepicker" name="date">
-                <label for="date">Date Visited</label>
+                <input id="date" type="text" class="datepicker" name="date" pattern=""
+                       data-error="Please select a date" data-success="Date Selected" required>
+                <label for="date">Date Visited (Required)</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="review" class="materialize-textarea" name="review" data-length="120"></textarea>
-                <label for="review">Review</label>
+                <textarea id="review" class="materialize-textarea" name="review" maxlength="255"
+                          data-length="255" required></textarea>
+                <label for="review">Review (Required)</label>
             </div>
         </div>
 
@@ -61,4 +64,25 @@
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit <i class="material-icons right">send</i></button>
     </form>
 </div>
+<script>
+
+    var currentPlaceId = '';
+    var currentPlaceName = '';
+    var referrer = '${referrer}';
+
+    if (referrer == "viewDetails") {
+        // We are on the view details page and need to set the placeid/name in the form
+        var id = document.getElementById("placeId");
+        var name = document.getElementById("placeName");
+        var locationId = '${location.googleId}';
+        var locationPlace = '${location.name}';
+
+        id.value = locationId;
+        name.value = locationPlace;
+
+        currentPlaceId = locationId;
+        currentPlaceName = locationPlace;
+    }
+</script>
+
 <%@include file="templates/review_accessory_js_css.jsp" %>

@@ -4,10 +4,10 @@ import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
 import com.sarah.persistence.LocationDao;
 import com.sarah.persistence.UserDao;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +28,7 @@ import java.util.Map;
 )
 public class FavoriteLocation extends HttpServlet {
     private final Logger logger = Logger.getLogger(this.getClass());
+    private GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,57 +39,73 @@ public class FavoriteLocation extends HttpServlet {
         // Get user from session
         User currentUser = (User) session.getAttribute("user");
 
+        req.setAttribute("message", "");
+        logger.info(currentUser);
         // if no user -> exit
         if (currentUser == null) {
             logger.info("no user");
+            // send error message
+            resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId")
+                    + "&placeName=" + req.getParameter("placeName")
+                    + "&message=" + "You must be logged in to add a review");
+        } else {
 
-            resp.sendRedirect("user.jsp");
-        }
+            String googleId = req.getParameter("placeId");
+            if (googleId.equals(null)) {
+                // no location passed
+                // TODO exit/error
+                req.setAttribute("message", "There was an error saving the location");
+            }
+            LocationDao locationDao = new LocationDao();
+            List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId", googleId, MatchMode.EXACT);
+            logger.info("locations: " + locations);
 
-        String googleId = req.getParameter("placeId");
-        if (googleId.equals(null)) {
-            // no location passed
-            // TODO exit/error
-        }
-        LocationDao locationDao = new LocationDao();
-        List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId" , googleId, MatchMode.EXACT);
-        logger.info("locations: " + locations);
+            if (locations.size() == 1) {
 
-        if (locations.size() == 1) {
+                UserDao userDao = new UserDao();
+                currentUser = userDao.addSavedLocation(currentUser, locations.get(0));
 
-            UserDao userDao = new UserDao();
-            currentUser = userDao.addSavedLocation(currentUser,locations.get(0));
+                GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
+                Map<Long, String> locationImageURLs = (Map<Long, String>) session.getAttribute("imageUrls");
 
-            //update session variable to update on users page
+                String imageURL = googleAPIAccessor.getPhotoFromGoogle(locations.get(0).getGoogleId());
+                locationImageURLs.put(locations.get(0).getId(), imageURL);
+
+
+                session.setAttribute("imageUrls", locationImageURLs);
+                //update session variable to update on users page
+                session.setAttribute("user", currentUser);
+
+            } else {
+                // TODO send error?
+                //add location to db
+                // need name
+                // and escape string
+                // break out check if exists and add to its own class or something
+                // used here add review and view details
+                // Location isn't in Database --> add it
+                String escapedName = StringEscapeUtils.escapeJava(req.getParameter("placeName"));
+                logger.info("escaped Name: " + escapedName);
+                LocationEntity location = new LocationEntity(escapedName, req.getParameter("placeId"));
+                String photoReference = googleAPIAccessor.getPhotoFromGoogle(req.getParameter("placeId"));
+                location.setPhotoReference(photoReference);
+                Long id = locationDao.save(location);
+                location.setId(id);
+
+                req.setAttribute("location", location);
+
+            }
+
+            req.setAttribute("placeId", googleId);
+
+            // Update user and images
             session.setAttribute("user", currentUser);
 
-        } else {
-            // TODO send error?
-            //add location to db
-            // need name
-            // and escape string
-            // break out check if exists and add to its own class or something
-            // used here add review and view details
-
+            // TODO add abitility to favorite from search page as well?
+            resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId")
+                    + "&placeName=" + req.getParameter("placeName")
+                    + "&message=" + "Location saved!");
         }
-
-        req.setAttribute("placeId", googleId);
-
-        // TODO update session variables location images specifcally
-        LocationPhoto locationPhoto = new LocationPhoto();
-        Map<Long, String> locationImageURLs = new HashMap<Long, String>();
-
-        for (LocationEntity location : currentUser.getLocations()) {
-            String imageURL = locationPhoto.getPhotoFromGoogle(location.getGoogleId());
-            locationImageURLs.put(location.getId(), imageURL);
-        }
-
-        session.setAttribute("imageUrls", locationImageURLs);
-        session.setAttribute("user", currentUser);
-
-        // TODO add abitility to favorite from search page as well
-        RequestDispatcher dispatcher = req.getRequestDispatcher("viewDetails");
-        dispatcher.forward(req, resp);
     }
 
 }

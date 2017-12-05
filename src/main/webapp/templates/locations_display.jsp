@@ -4,14 +4,15 @@
                 <div class="col s12 m6 l4">
                     <div class="card sticky-action">
                         <div class="card-image">
-                            <img src="${imageUrls[location.id]}" />
+
+                            <!--<img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />-->
                             <span class="card-title">${location.name}</span>
                             <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-delay="50" data-tooltip="Un-favorite this location"><i class="material-icons">favorite</i></a>
                             <!-- TODO remove location from saved values -->
                         </div>
                         <div class="card-content">
                         <span class="activator grey-text text-darken-4"><i class="material-icons right">more_vert</i>
-                        I am a very simple card.</span>
+                        ${location.photoReference}</span>
                         </div>
 
                         <div class="card-action">

@@ -1,6 +1,6 @@
 package com.sarah.utility;
 
-import com.sarah.controller.LocationPhoto;
+import com.sarah.controller.GoogleAPIAccessor;
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.ReviewEntity;
 import com.sarah.entity.User;
@@ -23,7 +23,7 @@ import java.util.Map;
 @WebFilter("/*")
 public class UserFilter implements Filter {
     private final Logger log = Logger.getLogger(this.getClass());
-    private LocationPhoto locationPhoto = new LocationPhoto();
+    private GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
 
     public void init(FilterConfig config) {
 
@@ -53,14 +53,15 @@ public class UserFilter implements Filter {
                 List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("user", user);
                 //LocationDao locationDao = new LocationDao();
                 //List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class,"user", user);
+                /* part of location entity now
                 Map<Long, String> locationImageURLs = new HashMap<Long, String>();
 
                 for (LocationEntity location : user.getLocations()) {
-                    String imageURL = locationPhoto.getPhotoFromGoogle(location.getGoogleId());
+                    String imageURL = googleAPIAccessor.getPhotoFromGoogle(location.getGoogleId());
                     locationImageURLs.put(location.getId(), imageURL);
                 }
 
-                session.setAttribute("imageUrls", locationImageURLs);
+                session.setAttribute("imageUrls", locationImageURLs); */
                 session.setAttribute("userReviews", reviews);
                 session.setAttribute("user", user);
             }

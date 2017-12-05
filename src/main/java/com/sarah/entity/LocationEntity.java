@@ -17,6 +17,7 @@ public class LocationEntity extends BaseEntity<Long> {
     private Long id;
     private String name;
     private String googleId;
+    private String photoReference;
     private Set<ReviewEntity> reviews = new HashSet<ReviewEntity>();
     private Set<User> users = new HashSet<User>();
     private Set<TaglocationEntity> tagLocations = new HashSet<TaglocationEntity>();
@@ -106,6 +107,16 @@ public class LocationEntity extends BaseEntity<Long> {
 
     public void setTagLocations(Set<TaglocationEntity> tagLocations) {
         this.tagLocations = tagLocations;
+    }
+
+    @Basic
+    @Column(name = "photoReference")
+    public String getPhotoReference() {
+        return photoReference;
+    }
+
+    public void setPhotoReference(String photoReference) {
+        this.photoReference = photoReference;
     }
 
     @Override

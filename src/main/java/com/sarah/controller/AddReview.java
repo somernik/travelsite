@@ -27,7 +27,7 @@ import java.util.List;
 )
 public class AddReview extends HttpServlet {
     private final Logger log = Logger.getLogger(this.getClass());
-
+    private GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
     private DateFormatter formatter = new DateFormatter();
 
     @Override
@@ -39,6 +39,7 @@ public class AddReview extends HttpServlet {
         log.info(session.getAttribute("user"));
         // Get user from session
         User currentUser = (User) session.getAttribute("user");
+        String referrer = req.getParameter("referrer");
 
         // TODO validate input
         // if no user -> exit
@@ -50,50 +51,51 @@ public class AddReview extends HttpServlet {
         }
 
         // somehow no location properties -> exit
-        if (req.getParameter("placeId") == null || req.getParameter("placeName") == null) {
-            log.info("null properties");
+        if (req.getParameter("placeId") == null || req.getParameter("placeName") == null
+                || req.getParameter("placeId").length() < 1 || req.getParameter("placeName").length() < 1) {
+            log.info("null or empty properties");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("explore");
+            RequestDispatcher dispatcher = req.getRequestDispatcher(referrer);
             dispatcher.forward(req, resp);
-        }
-
-        log.info(req.getParameter("placeId"));
-        log.info(req.getParameter("placeName"));
-        log.info(req.getParameter("review"));
-        log.info(req.getParameter("rating"));
-        log.info(req.getParameter("goodTags"));
-        log.info(req.getParameter("badTags"));
-
-        // check if place exists based on placeid
-        // if not add review
-        List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId", req.getParameter("placeId"), MatchMode.ANYWHERE);
-        LocationEntity location = new LocationEntity();
-        Long locationId = 0L;
-
-        log.info(locationId);
-
-        // TODO NEW METHOD get location
-        if (locations.size() == 1) {
-            location = locations.get(0);
-            locationId = location.getId();
-        } else if (locations.size() == 0 || locations == null) {
-            String escapedName = StringEscapeUtils.escapeJava(req.getParameter("placeName"));
-            location = new LocationEntity(escapedName, req.getParameter("placeId"));
-            locationId = locationDao.save(location);
-            location.setId(locationId);
         } else {
-            // TODO error with location -> exit
-            // TODO figure out how to add error message and save search
-            RequestDispatcher dispatcher = req.getRequestDispatcher("explore");
-            dispatcher.forward(req, resp);
-        }
 
-        //log.info(req.getParameter("date"));
-        LocalDate date = LocalDate.now();
-        if (req.getParameter("date").length() > 0) {
-            date = formatter.convertStringToLocalDate(req.getParameter("date"));
-        }
+            log.info(req.getParameter("placeId"));
+            log.info(req.getParameter("placeName"));
+            log.info(req.getParameter("review"));
+            log.info(req.getParameter("rating"));
+            log.info(req.getParameter("goodTags"));
+            log.info(req.getParameter("badTags"));
 
+            // check if place exists based on placeid
+            // if not add review
+            List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class, "googleId", req.getParameter("placeId"), MatchMode.ANYWHERE);
+            LocationEntity location = new LocationEntity();
+            Long locationId = 0L;
+
+            log.info(locationId);
+
+            // TODO NEW METHOD get location
+            if (locations.size() == 1) {
+                location = locations.get(0);
+                locationId = location.getId();
+            } else if (locations.size() == 0 || locations == null) {
+                String escapedName = StringEscapeUtils.escapeJava(req.getParameter("placeName"));
+                location = new LocationEntity(escapedName, req.getParameter("placeId"));
+                log.info("escaped Name: " + escapedName);
+                String photoReference = googleAPIAccessor.getPhotoFromGoogle(req.getParameter("placeId"));
+                location.setPhotoReference(photoReference);
+                locationId = locationDao.save(location);
+                location.setId(locationId);
+
+                req.setAttribute("location", location);
+            } else {
+                // TODO error with location -> exit
+                // TODO figure out how to add error message and save search
+                //RequestDispatcher dispatcher = req.getRequestDispatcher("explore");
+                //dispatcher.forward(req, resp);
+            }
+
+<<<<<<< HEAD
         // Process tags
         if (req.getParameter("badTags").length() > 0) {
             processTagInput(currentUser, req.getParameter("badTags"), location, false, date);
@@ -102,17 +104,44 @@ public class AddReview extends HttpServlet {
         if (req.getParameter("goodTags").length() > 0) {
             processTagInput(currentUser, req.getParameter("goodTags"), location, true, date);
         }
+=======
+            //log.info(req.getParameter("date"));
+            LocalDate date = LocalDate.now();
+            if (req.getParameter("date").length() > 0) {
+                date = formatter.convertStringToLocalDate(req.getParameter("date"));
+            }
 
-        // add review (which is optional) --  review, stars, date and location needed
-        // TODO require stars/review/date
-        if (req.getParameter("review").length() > 0 && locationId > 0 && req.getParameter("date").length() > 0 && req.getParameter("rating").length() > 0) {
-            ReviewEntity review = new ReviewEntity(req.getParameter("review"), date, currentUser, location, Integer.parseInt(req.getParameter("rating")));
-            log.info(review.toString());
+            // Process tags
+            if (req.getParameter("badTags").length() > 0) {
+                processTagInput(req.getParameter("badTags"), location, false);
+            }
+>>>>>>> master
+
+            if (req.getParameter("goodTags").length() > 0) {
+                processTagInput(req.getParameter("goodTags"), location, true);
+            }
+
+            // add review (which is optional) --  review, stars, date and location needed
+            // TODO require stars/review/date
+            // TODO check body length (255)
+            if (req.getParameter("review").length() > 0 && locationId > 0 && req.getParameter("date").length() > 0 && req.getParameter("rating").length() > 0) {
+                ReviewEntity review = new ReviewEntity(req.getParameter("review"), date, currentUser, location, Integer.parseInt(req.getParameter("rating")));
+                log.info(review.toString());
+                ReviewDao reviewDao = new ReviewDao();
+                Long id = reviewDao.save(review);
+            } else {
+                // TODO send error
+                // dont have review/star/date
+            }
+
+            // update session with users reviews
             ReviewDao reviewDao = new ReviewDao();
-            Long id = reviewDao.save(review);
-        }
+            List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("user", currentUser);
+            session.setAttribute("userReviews", reviews);
 
-        resp.sendRedirect("viewDetails?placeId=" + req.getParameter("placeId") + "&placeName=" + req.getParameter("placeName"));
+            log.info(referrer);
+            resp.sendRedirect(referrer + "?placeId=" + req.getParameter("placeId") + "&placeName=" + req.getParameter("placeName"));
+        }
     }
 
     /**
