@@ -3,6 +3,7 @@ package com.sarah.persistence;
 import com.sarah.entity.LocationEntity;
 import com.sarah.entity.TagEntity;
 import com.sarah.entity.TaglocationEntity;
+import com.sarah.entity.User;
 import com.sarah.utility.DatabaseCleaner;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -10,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +19,25 @@ import java.util.List;
  * Created by sarah on 11/12/2017.
  */
 public class TagLocationDaoTest {
+
     private final Logger log = Logger.getLogger(this.getClass());
+
     TagLocationDao dao = new TagLocationDao();
 
     List<TaglocationEntity> allTagLocations = new ArrayList<TaglocationEntity>();
     LocationEntity location = new LocationEntity("Madison", "123");
     TagEntity tag = new TagEntity("hiking");
     TagEntity tag2 = new TagEntity("biking");
+    User user = new User("123", "231", "213", "1231", "dfsf");
+    LocalDate date = LocalDate.now();
 
-    TaglocationEntity tagLocation1 = new TaglocationEntity(1, 2, location, tag);
-    TaglocationEntity tagLocation2 = new TaglocationEntity(3, 1, location, tag2);
+
+    TaglocationEntity tagLocation1 = new TaglocationEntity(user, location, tag, true, date);
+    TaglocationEntity tagLocation2 = new TaglocationEntity(user, location, tag2, false, date);
 
     @Before
     public void setUp() throws Exception {
+        dao.save(user);
         allTagLocations.add(tagLocation1);
         allTagLocations.add(tagLocation2);
 
@@ -73,7 +81,7 @@ public class TagLocationDaoTest {
         TagEntity tag = new TagEntity("boating");
         dao.save(tag);
 
-        TaglocationEntity tagLocation2 = new TaglocationEntity(1, 2, location, tag);
+        TaglocationEntity tagLocation2 = new TaglocationEntity(user, location, tag, true, date);
 
         Long newId = dao.save(tagLocation2);
 
@@ -96,7 +104,7 @@ public class TagLocationDaoTest {
 
     @Test
     public void updateTag() throws Exception {
-        tagLocation1.setRank(2);
+        tagLocation1.setTag(tag2);
         dao.update(tagLocation1);
 
         TaglocationEntity returnedTagLocation = dao.find(TaglocationEntity.class, tagLocation1.getId());
@@ -123,9 +131,6 @@ public class TagLocationDaoTest {
     @Test
     public void getRankByLocationAndTagTest() throws Exception {
 
-        tagLocation1.setRank(3);
-        dao.update(tagLocation1);
-
         TaglocationEntity returnedEntity = dao.getByLocationAndTag(location, tag);
         log.info(returnedEntity);
 
@@ -137,4 +142,5 @@ public class TagLocationDaoTest {
         List<TaglocationEntity> tagLocations = dao.findByAndInitializeTag("tag", tag);
         Assert.assertEquals("Wrong number of taglocations", tagLocations.size(), 1);
     }
+
 }

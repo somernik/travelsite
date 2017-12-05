@@ -1,8 +1,10 @@
 package com.sarah.entity;
 
+import com.sarah.utility.LocalDateAttributeConverter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,20 +21,22 @@ public class TaglocationEntity extends BaseEntity<Long> {
     @Column(name = "id")
     private Long id;
 
-    @Basic
-    @Column(name = "rank")
-    private int rank;
-
-    @Basic
-    @Column(name = "negativeRank")
-    private int negativeRank;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Location_id", nullable = false)
     private LocationEntity location;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "taglocations")
-    private Set<User> users = new HashSet<User>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "User_id", nullable = false)
+    private User user;
+
+    @Basic
+    @Column(name = "Date")
+    @Convert(converter = LocalDateAttributeConverter.class)
+    private LocalDate date;
+
+    @Basic
+    @Column(name = "Positive")
+    private boolean positive;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Tag_id", nullable = false)
@@ -40,16 +44,12 @@ public class TaglocationEntity extends BaseEntity<Long> {
 
     public TaglocationEntity() {}
 
-    public TaglocationEntity(int rank, LocationEntity location) {
-        this.rank = rank;
-        this.location = location;
-    }
-
-    public TaglocationEntity(int rank, int negativeRank, LocationEntity location, TagEntity tag) {
-        this.rank = rank;
-        this.negativeRank = negativeRank;
+    public TaglocationEntity(User user, LocationEntity location, TagEntity tag, boolean positive, LocalDate date) {
+        this.user = user;
         this.location = location;
         this.tag = tag;
+        this.positive = positive;
+        this.date = date;
     }
 
     public Long getId() {
@@ -60,36 +60,12 @@ public class TaglocationEntity extends BaseEntity<Long> {
         this.id = id;
     }
 
-    public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public int getNegativeRank() {
-        return negativeRank;
-    }
-
-    public void setNegativeRank(int negativeRank) {
-        this.negativeRank = negativeRank;
-    }
-
     public LocationEntity getLocation() {
         return location;
     }
 
     public void setLocation(LocationEntity location) {
         this.location = location;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     public TagEntity getTag() {
@@ -100,6 +76,30 @@ public class TaglocationEntity extends BaseEntity<Long> {
         this.tag = tag;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public boolean getPositive() {
+        return positive;
+    }
+
+    public void setPositive(boolean positive) {
+        this.positive = positive;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,7 +108,6 @@ public class TaglocationEntity extends BaseEntity<Long> {
         TaglocationEntity that = (TaglocationEntity) o;
 
         if (id != that.id) return false;
-        if (rank != that.rank) return false;
 
         return true;
     }

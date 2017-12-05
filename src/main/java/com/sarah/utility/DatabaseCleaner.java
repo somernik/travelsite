@@ -34,15 +34,15 @@ public class DatabaseCleaner {
             query = session.createSQLQuery(sql);
             query.executeUpdate();
 
-            sql = "DELETE FROM user";
-            query = session.createSQLQuery(sql);
-            query.executeUpdate();
-
             sql = "DELETE FROM taglocationuser";
             query = session.createSQLQuery(sql);
             query.executeUpdate();
 
             sql = "DELETE FROM taglocation";
+            query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
+            sql = "DELETE FROM user";
             query = session.createSQLQuery(sql);
             query.executeUpdate();
 

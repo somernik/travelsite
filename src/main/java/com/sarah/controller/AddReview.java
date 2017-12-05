@@ -96,11 +96,11 @@ public class AddReview extends HttpServlet {
 
         // Process tags
         if (req.getParameter("badTags").length() > 0) {
-            processTagInput(req.getParameter("badTags"), location, false);
+            processTagInput(currentUser, req.getParameter("badTags"), location, false, date);
         }
 
         if (req.getParameter("goodTags").length() > 0) {
-            processTagInput(req.getParameter("goodTags"), location, true);
+            processTagInput(currentUser, req.getParameter("goodTags"), location, true, date);
         }
 
         // add review (which is optional) --  review, stars, date and location needed
@@ -121,7 +121,7 @@ public class AddReview extends HttpServlet {
      * @param location the current location entity
      * @param positive 'good' vs 'bad' tags
      */
-    private void processTagInput(String tagString, LocationEntity location, boolean positive) {
+    private void processTagInput(User user, String tagString, LocationEntity location, boolean positive, LocalDate date) {
         TagDao tagDao = new TagDao();
         String[] tags = tagString.split("\\;");
 
@@ -132,7 +132,7 @@ public class AddReview extends HttpServlet {
             List<TagEntity> returnedTags = tagDao.findByProperty(TagEntity.class, "name", tag, MatchMode.ANYWHERE);
             log.info("returned tags: " + returnedTags);
             log.info("returned tags length: " + returnedTags.size());
-            processTag(location, tag, returnedTags, positive);
+            processTag(user, location, tag, returnedTags, positive, date);
 
         }
     }
@@ -144,12 +144,12 @@ public class AddReview extends HttpServlet {
      * @param returnedTags any tags that match the current tag
      * @param positive 'good' vs 'bad' tags
      */
-    private void processTag(LocationEntity location, String tag, List<TagEntity> returnedTags, boolean positive) {
+    private void processTag(User user, LocationEntity location, String tag, List<TagEntity> returnedTags, boolean positive, LocalDate date) {
         TagDao tagDao = new TagDao();
 
         TagLocationDao tagLocationDao = new TagLocationDao();
 
-        if (returnedTags.size() == 0) {
+        //if (returnedTags.size() == 0) {
             // tag doesn't exist so add it
             TagEntity tagObj = new TagEntity(tag);
             Long id = tagDao.save(tagObj);
@@ -157,18 +157,19 @@ public class AddReview extends HttpServlet {
             TaglocationEntity taglocation;
 
             log.info("line 144: process tag " + tagObj);
-            // add taglocation
+            // add taglocation each 'vote'
             if (positive) {
 
-                taglocation = new TaglocationEntity(1, 0, location, tagObj);
+                taglocation = new TaglocationEntity(user, location, tagObj, true, date);
+
             } else {
-                taglocation = new TaglocationEntity(0, 1, location, tagObj);
+                taglocation = new TaglocationEntity(user, location, tagObj, false, date);
             }
             tagLocationDao.save(taglocation);
 
             log.info(taglocation);
 
-        } else {
+        /*} else {
             // update taglocation
             tagLocationDao = new TagLocationDao();
 
@@ -186,6 +187,7 @@ public class AddReview extends HttpServlet {
             log.info(taglocation);
 
         }
+        */
     }
 
     @Override

@@ -6,10 +6,9 @@
             <span class="title">Recommended Activities</span><br />
 
             <c:forEach var="taglocation" items="${tags}">
-                <c:if test="${taglocation.rank > 0}">
+                <c:if test="${taglocation.positive}">
                     <div class="chip positive">
                             ${taglocation.tag.name}
-                            ${taglocation.rank}
                         <i class="add material-icons">add</i>
                     </div>
                 </c:if>
@@ -20,10 +19,9 @@
             <span class="title">Activities Not Recommended</span><br />
 
             <c:forEach var="taglocation" items="${tags}">
-                <c:if test="${taglocation.negativeRank > 0}">
+                <c:if test="${not taglocation.positive}">
                     <div class="chip negative">
                             ${taglocation.tag.name}
-                            ${taglocation.negativeRank}
                         <i class="add material-icons">add</i>
                     </div>
                 </c:if>
