@@ -95,16 +95,6 @@ public class AddReview extends HttpServlet {
                 //dispatcher.forward(req, resp);
             }
 
-<<<<<<< HEAD
-        // Process tags
-        if (req.getParameter("badTags").length() > 0) {
-            processTagInput(currentUser, req.getParameter("badTags"), location, false, date);
-        }
-
-        if (req.getParameter("goodTags").length() > 0) {
-            processTagInput(currentUser, req.getParameter("goodTags"), location, true, date);
-        }
-=======
             //log.info(req.getParameter("date"));
             LocalDate date = LocalDate.now();
             if (req.getParameter("date").length() > 0) {
@@ -113,12 +103,11 @@ public class AddReview extends HttpServlet {
 
             // Process tags
             if (req.getParameter("badTags").length() > 0) {
-                processTagInput(req.getParameter("badTags"), location, false);
+                processTagInput(currentUser, req.getParameter("badTags"), location, false, date);
             }
->>>>>>> master
 
             if (req.getParameter("goodTags").length() > 0) {
-                processTagInput(req.getParameter("goodTags"), location, true);
+                processTagInput(currentUser, req.getParameter("goodTags"), location, true, date);
             }
 
             // add review (which is optional) --  review, stars, date and location needed
