@@ -4,6 +4,7 @@ import com.sarah.entity.LocationEntity;
 import com.sarah.entity.User;
 import com.sarah.persistence.LocationDao;
 import com.sarah.persistence.UserDao;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 
@@ -27,6 +28,7 @@ import java.util.Map;
 )
 public class FavoriteLocation extends HttpServlet {
     private final Logger logger = Logger.getLogger(this.getClass());
+    private GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -81,6 +83,16 @@ public class FavoriteLocation extends HttpServlet {
                 // and escape string
                 // break out check if exists and add to its own class or something
                 // used here add review and view details
+                // Location isn't in Database --> add it
+                String escapedName = StringEscapeUtils.escapeJava(req.getParameter("placeName"));
+                logger.info("escaped Name: " + escapedName);
+                LocationEntity location = new LocationEntity(escapedName, req.getParameter("placeId"));
+                String photoReference = googleAPIAccessor.getPhotoFromGoogle(req.getParameter("placeId"));
+                location.setPhotoReference(photoReference);
+                Long id = locationDao.save(location);
+                location.setId(id);
+
+                req.setAttribute("location", location);
 
             }
 

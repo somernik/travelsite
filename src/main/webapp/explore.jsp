@@ -153,6 +153,7 @@
     var currentPlaceName = '';
     var currentLat = '';
     var currentLong = '';
+    var ids = "";
 
     //////////////////////////////////////////////////////////
     // Get user location
@@ -247,8 +248,7 @@
             // For each place, get the icon, name and location.
             var bounds = new google.maps.LatLngBounds();
             places.forEach(function(place) {
-                console.log(place);
-
+                ids += place.place_id + ",";
                 if (!place.geometry) {
                     console.log("Returned place contains no geometry");
                     return;

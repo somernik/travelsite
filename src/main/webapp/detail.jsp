@@ -2,8 +2,104 @@
 <c:set var = "title" value = "Location Detail | WWW Travel"/>
 <html>
 <%@include file="templates/head.jsp" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
+<script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 <body>
+<style>
+
+    #weather {
+        margin: 0px auto;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    i {
+        color: #fff;
+        font-family: weather;
+        font-size: 150px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.0;
+        text-transform: none;
+    }
+
+    .icon-0:before { content: ":"; }
+    .icon-1:before { content: "p"; }
+    .icon-2:before { content: "S"; }
+    .icon-3:before { content: "Q"; }
+    .icon-4:before { content: "S"; }
+    .icon-5:before { content: "W"; }
+    .icon-6:before { content: "W"; }
+    .icon-7:before { content: "W"; }
+    .icon-8:before { content: "W"; }
+    .icon-9:before { content: "I"; }
+    .icon-10:before { content: "W"; }
+    .icon-11:before { content: "I"; }
+    .icon-12:before { content: "I"; }
+    .icon-13:before { content: "I"; }
+    .icon-14:before { content: "I"; }
+    .icon-15:before { content: "W"; }
+    .icon-16:before { content: "I"; }
+    .icon-17:before { content: "W"; }
+    .icon-18:before { content: "U"; }
+    .icon-19:before { content: "Z"; }
+    .icon-20:before { content: "Z"; }
+    .icon-21:before { content: "Z"; }
+    .icon-22:before { content: "Z"; }
+    .icon-23:before { content: "Z"; }
+    .icon-24:before { content: "E"; }
+    .icon-25:before { content: "E"; }
+    .icon-26:before { content: "3"; }
+    .icon-27:before { content: "a"; }
+    .icon-28:before { content: "A"; }
+    .icon-29:before { content: "a"; }
+    .icon-30:before { content: "A"; }
+    .icon-31:before { content: "6"; }
+    .icon-32:before { content: "1"; }
+    .icon-33:before { content: "6"; }
+    .icon-34:before { content: "1"; }
+    .icon-35:before { content: "W"; }
+    .icon-36:before { content: "1"; }
+    .icon-37:before { content: "S"; }
+    .icon-38:before { content: "S"; }
+    .icon-39:before { content: "S"; }
+    .icon-40:before { content: "M"; }
+    .icon-41:before { content: "W"; }
+    .icon-42:before { content: "I"; }
+    .icon-43:before { content: "W"; }
+    .icon-44:before { content: "a"; }
+    .icon-45:before { content: "S"; }
+    .icon-46:before { content: "U"; }
+    .icon-47:before { content: "S"; }
+
+    #weather h2 {
+        margin: 0 0 8px;
+        color: #26a69a;
+        font-size: 100px;
+        font-weight: 300;
+        text-align: center;
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    #weather ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    #weather li {
+        background: #fff;
+        background: rgba(255,255,255,0.90);
+        padding: 20px;
+        display: inline-block;
+        border-radius: 5px;
+    }
+
+    #weather .currently {
+        margin: 0 20px;
+    }
+</style>
 <style>
     .btn-floating.btn-large.halfway-fab {
          bottom: -15px;
@@ -69,7 +165,8 @@
         <div class="card" id="imageContent">
             <div class="card-image">
                 <div class="crop-height">
-                <img src="${photoUrl}" class="scale"><!-- TODO pull first google image -->
+                    <!--<img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />-->
+                    <img src="images/background1.jpg" class="scale">
                 </div>
                 <span class="card-title">${location.name} + stars here</span>
                 <div class="fixed-action-btn horizontal click-to-toggle">
@@ -116,8 +213,7 @@
 
         </div>
         <div class="col s12 m3 l3"><!-- weather plugin? -->
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-
+            <div id="weather"></div>
         </div>
 
     </div>
@@ -155,3 +251,30 @@
 </div>
 
 </div>
+<script>
+    // v3.1.0
+    //Docs at http://simpleweatherjs.com
+    $(document).ready(function() {
+        $.simpleWeather({
+            location: '${location.name}',
+            woeid: '',
+            unit: 'f',
+            success: function(weather) {
+                html = '<h2>';
+                //html += '<i class="icon-'+weather.code+'"></i> ';
+                html += weather.temp+'&deg;'+weather.units.temp+'</h2>';
+                html += '<ul>';
+                html+= '<li>Current Weather</li>';
+                //html+= '<li>'+weather.city+', '+weather.region+'</li>';
+                html += '<li class="currently">'+weather.currently+'</li>';
+                html += '<li>'+weather.wind.direction+' '+weather.wind.speed+' '+weather.units.speed+'</li></ul>';
+
+                $("#weather").html(html);
+            },
+            error: function(error) {
+                $("#weather").html('<p>'+error+'</p>');
+            }
+        });
+    });
+
+</script>

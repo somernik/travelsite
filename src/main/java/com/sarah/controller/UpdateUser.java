@@ -94,6 +94,6 @@ public class UpdateUser extends HttpServlet {
         req.setAttribute("user", user);
         session.setAttribute("user", user);
 
-        resp.sendRedirect("/user.jsp");
+        resp.sendRedirect("user.jsp");
     }
 }

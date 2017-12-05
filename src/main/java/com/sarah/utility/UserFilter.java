@@ -53,6 +53,7 @@ public class UserFilter implements Filter {
                 List<ReviewEntity> reviews = reviewDao.findByAndInitializeProperties("user", user);
                 //LocationDao locationDao = new LocationDao();
                 //List<LocationEntity> locations = locationDao.findByProperty(LocationEntity.class,"user", user);
+                /* part of location entity now
                 Map<Long, String> locationImageURLs = new HashMap<Long, String>();
 
                 for (LocationEntity location : user.getLocations()) {
@@ -60,7 +61,7 @@ public class UserFilter implements Filter {
                     locationImageURLs.put(location.getId(), imageURL);
                 }
 
-                session.setAttribute("imageUrls", locationImageURLs);
+                session.setAttribute("imageUrls", locationImageURLs); */
                 session.setAttribute("userReviews", reviews);
                 session.setAttribute("user", user);
             }

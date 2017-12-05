@@ -2,13 +2,30 @@ package com.sarah.persistence;
 
 import com.sarah.entity.TagEntity;
 import com.sarah.utility.DatabaseCleaner;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -100,6 +117,63 @@ public class TagDaoTest {
         List<TagEntity> expectedAllTags = dao.findAll(TagEntity.class);
 
         Assert.assertEquals("Incorrect number of tags in database", expectedAllTags.size(), allTags.size());
+
+    }
+
+    @Test
+    public void getReviews() throws Exception {
+        List<String> ids = new ArrayList<>(Arrays.asList());
+        for (String id : ids) {
+            URI baseURI = UriBuilder.fromUri("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE").build();
+
+            Client client = ClientBuilder.newClient();
+
+            WebTarget target = client.target(baseURI);
+
+            String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+            log.info(response);
+            // place_id
+            // rating (for whole location)
+            // reviews.author_name, reviews[i].rating, reviews[i].text
+
+            try {
+                JSONObject jsonObj = new JSONObject(response);
+                JSONObject result = jsonObj.getJSONObject("result");
+
+                String placeId = result.getString("place_id");
+                JSONArray reviews = result.getJSONArray("reviews");
+
+                for (int i = 0; i < reviews.length(); i++) {
+                    String body = reviews.getJSONObject(i).getString("text");
+
+                    String cleanBody = StringUtils.remove(body, "'");
+                    String rating = reviews.getJSONObject(i).getString("rating");
+                    String author = StringUtils.remove(reviews.getJSONObject(i).getString("author_name"), "'");
+
+                    String sql = "INSERT INTO googleReviews (placeId, body, rating, author) VALUES ('" + placeId + "','" + cleanBody + "','" + rating + "', '" + author + "')";
+                    log.info(sql);
+
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("googleReviews.sql", true));
+                    writer.append(sql);
+                    writer.newLine();
+
+                    writer.close();
+                }
+
+            } catch (JSONException e) {
+                log.error("JSON Exception: ", e);
+
+            } catch (HibernateException he) {
+                log.error("Error adding reviews: ", he);
+
+            } catch (FileNotFoundException he) {
+                log.error("File not found: ", he);
+
+            } catch (IOException he) {
+                log.error("Error writing sql to page: ", he);
+
+            }
+        }
 
     }
 

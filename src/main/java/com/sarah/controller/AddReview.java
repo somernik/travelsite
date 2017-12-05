@@ -27,7 +27,7 @@ import java.util.List;
 )
 public class AddReview extends HttpServlet {
     private final Logger log = Logger.getLogger(this.getClass());
-
+    private GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
     private DateFormatter formatter = new DateFormatter();
 
     @Override
@@ -81,8 +81,13 @@ public class AddReview extends HttpServlet {
             } else if (locations.size() == 0 || locations == null) {
                 String escapedName = StringEscapeUtils.escapeJava(req.getParameter("placeName"));
                 location = new LocationEntity(escapedName, req.getParameter("placeId"));
+                log.info("escaped Name: " + escapedName);
+                String photoReference = googleAPIAccessor.getPhotoFromGoogle(req.getParameter("placeId"));
+                location.setPhotoReference(photoReference);
                 locationId = locationDao.save(location);
                 location.setId(locationId);
+
+                req.setAttribute("location", location);
             } else {
                 // TODO error with location -> exit
                 // TODO figure out how to add error message and save search
