@@ -16,6 +16,8 @@ public class DateFormatter {
      */
     public LocalDate convertStringToLocalDate(String dateString) {
         char myChar = dateString.charAt(1);
+
+        // Handle string dates like "5 December, 2017", they should be "05 December, 2017" to work
         if (!Character.isDigit(myChar)) {
             dateString = "0" + dateString;
         }
