@@ -15,6 +15,11 @@ public class DateFormatter {
      * @return LocalDate
      */
     public LocalDate convertStringToLocalDate(String dateString) {
+        char myChar = dateString.charAt(1);
+        if (!Character.isDigit(myChar)) {
+            dateString = "0" + dateString;
+        }
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM, yyyy");
         formatter = formatter.withLocale(Locale.US);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
         return LocalDate.parse(dateString, formatter);
