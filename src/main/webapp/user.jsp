@@ -11,10 +11,10 @@
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s3"><a href="#profile">Profile</a></li>
-                        <li class="tab col s3"><a href="#reviews">Reviews</a></li>
-                        <li class="tab col s3"><a href="#test3">Photos</a></li>
-                        <li class="tab col s3"><a href="#locations">Favorites</a></li>
+                        <li class="tab col s4"><a href="#profile">Profile</a></li>
+                        <li class="tab col s4"><a href="#reviews">Reviews</a></li>
+                        <!--<li class="tab col s3"><a href="#test3">Photos</a></li>-->
+                        <li class="tab col s4"><a href="#locations">Favorites</a></li>
 
                     </ul>
                 </div>
@@ -39,6 +39,7 @@
                     <br />
                     <a class="waves-effect waves-light btn modal-trigger" href="#passwordUpdate">Change Password</a>
                     <p>${message}</p>
+                    <!-- Currently not working
                     <h5>Delete Account</h5>
                     <form class="col s12 m6" action="deleteUser">
                         <div class="row">
@@ -50,15 +51,17 @@
                         <button class="btn waves-effect waves-light" type="submit" name="action">Delete Account</button>
 
                     </form>
+                    -->
                 </div>
                 <!--<div id="test2" class="col s12">Test 2</div>-->
                 <c:set var="reviews" value="${userReviews}" />
                 <%@include file="templates/reviews_display.jsp" %><!-- display of reviews -->
 
-                <div id="test3" class="col s12">Test 3
-                    <c:set value="hi" var="test"/>
-                    ${test}
+                <!-- No photos yest
+                <div id="test3" class="col s12">
+
                 </div>
+                -->
 
                 <%@include file="templates/locations_display.jsp" %><!-- display of all favorited locations -->
             </div>

@@ -5,9 +5,6 @@
 <body>
 
 <%@include file="templates/nav.jsp" %>
-<style>
-
-</style><!-- previous style is the same as on the index.jsp -->
 
 <style>
     form.filterForms p {
@@ -19,6 +16,10 @@
         padding: 0 20px;
     }
 
+    #filters .row {
+        margin-bottom: 0;
+    }
+
 </style>
 <div id="side_nav">
     <!-- Side (Search) Nav -->
@@ -27,13 +28,16 @@
         <li>
             <!-- TODO search items here -->
             <div class="collapsible-header"><i class="material-icons">directions_bike</i>This Month's Top Activites</div>
+            <!--
             <div class="collapsible-body"><span><a href="#!">Hiking</a>Lorem ipsum dolor sit amet.</span></div>
             <div class="collapsible-body"><span><a href="#!">Biking</a>Lorem ipsum dolor sit amet.</span></div>
-
+            -->
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">location_on</i>Nearby Locations</div>
+            <!--
             <div class="collapsible-body"><span><a href="#!">Nearby things here</a>Lorem ipsum dolor sit amet.</span></div>
+            -->
         </li>
     </ul>
 </div>
@@ -63,7 +67,13 @@
                         </c:forEach>
                     </form>
                     <div>
-                    When filtering by activities... top activities with a "best in: < month here >, location: < location here (restricted to what is visible in map) >" will appear ranked by ratings</div>
+                    <!--
+                    When filtering by activities...
+                    top activities with a "best in: < month here >,
+                    location: < location here (restricted to what is visible in map) >"
+                    will appear ranked by ratings
+                    -->
+                    </div>
                 </div>
                 <div id="test2" class="col s12">
                     <form action="#" class="filterForms">
@@ -116,8 +126,14 @@
                             <label for="12">Dec</label>
                         </p>
                     </form>
-                    When filtering by month... shows top activities given month(s) selected and location on map</div>
-                <div id="test3" class="col s12">only shows activities/locations with a given rating or higher</div>
+                    <!--
+                        When filtering by month...
+                        shows top activities given month(s) selected and location on map
+                        -->
+                </div>
+                <div id="test3" class="col s12">
+                    <!--only shows activities/locations with a given rating or higher-->
+                </div>
             </div>
         </div>
         <!-- Modals -->
@@ -137,14 +153,14 @@
 
     </div>
     <div class="section no-pad-bot no-pad-top">
-
-
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <input id="pac-input" class="controls" type="text" autofocus="autofocus" placeholder="Search Box">
         <div id="map"></div>
     </div>
+    <!--
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
     <a class="waves-effect waves-light btn modal-trigger" href="#new_review">New Review</a>
     <a class="waves-effect waves-light btn modal-trigger" href="#">Location Details</a>
+    -->
 </div>
 
 
@@ -426,7 +442,7 @@
         background-color: #26a69a;
     }
 
-    .tabs .tab a:hover, .tabs .tab a.active {
+    .tabs .tab a:hover, .tabs .tab a.active, .tabs .tab.disabled a:hover {
         color: #26a69a;
     }
 

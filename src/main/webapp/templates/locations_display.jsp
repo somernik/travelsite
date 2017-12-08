@@ -1,3 +1,8 @@
+<style>
+    #cardBody {
+        font-size: 20px;
+    }
+</style>
 <div id="locations" class="col s12">
         <div class="row">
             <c:forEach items="${user.locations}" var="location">
@@ -5,14 +10,14 @@
                     <div class="card sticky-action">
                         <div class="card-image">
 
-                            <!--<img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />-->
-                            <span class="card-title">${location.name}</span>
+                            <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />
+                            <span class="card-title"><!-- Previously location name --></span>
                             <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-delay="50" data-tooltip="Un-favorite this location"><i class="material-icons">favorite</i></a>
                             <!-- TODO remove location from saved values -->
                         </div>
                         <div class="card-content">
-                        <span class="activator grey-text text-darken-4"><i class="material-icons right">more_vert</i>
-                        ${location.photoReference}</span>
+                        <span class="activator grey-text text-darken-4" id="cardBody"><i class="material-icons right">more_vert</i>
+                        ${location.name}</span>
                         </div>
 
                         <div class="card-action">
@@ -21,7 +26,7 @@
 
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">${location.name}<i class="material-icons right">close</i></span>
-                            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            <p>${location.name} is great! Visit soon!</p>
                         </div>
                     </div>
                 </div>

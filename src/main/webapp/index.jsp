@@ -19,9 +19,9 @@
         <div class="container">
             <br><br>
 
-            <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
+            <h1 class="header center teal-text text-lighten-2">Travel the World</h1>
             <div class="row center">
-                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                <h5 class="header col s12 light">Discover the where, what and when of your next trip!</h5>
             </div>
             <div class="row center">
                 <form>
@@ -30,7 +30,7 @@
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
-                    <a href="#" class="btn-large waves-effect waves-light teal lighten-1">Search</a>
+                    <a href="explore" class="btn-large waves-effect waves-light teal lighten-1">Search</a>
                 </form>
             </div>
             <br><br>

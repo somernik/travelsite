@@ -15,8 +15,11 @@ import org.hibernate.criterion.MatchMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,11 +31,11 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Prepares the details of a location for the jsp
@@ -94,13 +97,26 @@ public class ViewDetails extends HttpServlet {
             // TODO throw error? there shouldnt be more than 1 location with a single id
         }
         // google images, later - images
-        /*
+        // GET recommended Places
+        List<String> recommendedPlaces = new ArrayList<>();
+        Map<String, String> recommendedLocationsMap = new HashMap<>();
         if (placeId != null && placeId.length() > 0) {
-            String photoUrl = googleAPIAccessor.getPhotoFromGoogle(req.getParameter("placeId"));
-
-            req.setAttribute("photoUrl", photoUrl); // --> will now be put together in front end
+            log.info("here");
+            recommendedPlaces = getRecommendedPlaces(name, req);
+            if (recommendedPlaces.size() > 0) {
+                log.info("here2");
+                for (String place: recommendedPlaces) {
+                    log.info("here3");
+                    List<LocationEntity> recommendedLocations = locationDao.findByProperty(LocationEntity.class, "name", place, MatchMode.ANYWHERE);
+                    for (LocationEntity currentLocation: recommendedLocations) {
+                        log.info("here4");
+                        recommendedLocationsMap.put(currentLocation.getName(), "viewDetails?placeId=" + currentLocation.getGoogleId() + "&placeName=" + currentLocation.getName());
+                    }
+                }
+            }
         }
-        */
+        log.info(recommendedLocationsMap);
+        req.setAttribute("recommendedLocations", recommendedLocationsMap);
 
         //log.info(session.getAttribute("user"));
 
@@ -155,6 +171,41 @@ public class ViewDetails extends HttpServlet {
         }
 
         return weatherStuff;
+    }
+
+    public List<String> getRecommendedPlaces(String placeName, HttpServletRequest req) {
+        JSONParser parser = new JSONParser();
+        List<String> recommendedPlaces = new ArrayList<>();
+
+        ServletContext context = req.getServletContext();
+        String path = context.getRealPath("/");
+        String contextPath = context.getContextPath();
+        log.info(path);
+        log.info(contextPath);
+        try {
+            org.json.simple.JSONObject data = (org.json.simple.JSONObject) parser.parse(new FileReader("/home/ubuntu/data.txt"));
+            org.json.simple.JSONArray recommendations = (org.json.simple.JSONArray) data.get(placeName);
+            Iterator<String> iterator = recommendations.iterator();
+            int count = 0;
+            while (iterator.hasNext()) {
+                recommendedPlaces.add(iterator.next());
+                count ++;
+                if (count == 3) {
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            log.error("File not found: ", e);
+        } catch (ParseException e) {
+            log.error("Parsing issue: ", e);
+        } catch (NullPointerException e) {
+            log.info("No recommendations: " , e);
+        } catch (IOException e) {
+            log.error("IO e: ", e);
+        }
+
+        log.info(recommendedPlaces);
+        return recommendedPlaces;
     }
 
 

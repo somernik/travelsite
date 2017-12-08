@@ -10,6 +10,9 @@
         width: 50%;
         margin: auto;
     }
+    .divFormInput {
+        width: 100%;
+    }
 </style>
 <div class="row">
     <form class="col s12" action='updateReview' onsubmit="prepareInputs()">
@@ -38,13 +41,13 @@
             <label for="rating-input-1-5" class="rating-star"><i class="material-icons" id="5">star_border</i></label>
         </span>
 
-        <div class="row">
+        <div class="row divFormInput">
             <div class="input-field col s12">
                 <input id="date" type="text" class="datepicker" name="date" value="${date}">
                 <label for="date">Date Visited</label>
             </div>
         </div>
-        <div class="row">
+        <div class="row divFormInput">
             <div class="input-field col s12">
                 <textarea id="review" class="materialize-textarea" name="review" data-length="120">${body}</textarea>
                 <label for="review">Review</label>

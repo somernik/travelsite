@@ -9,15 +9,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.script.*;
 import javax.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.*;
+import java.nio.file.Paths;
+import java.util.*;
 
 import static org.junit.Assert.*;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 /**
  * Created by sarah on 9/21/2017.
  */
@@ -151,7 +153,6 @@ public class UserDaoTest {
         }
 
         Assert.assertEquals("Location not removed correctly", 0, firstUser.getLocations().size());
-
 
     }
 

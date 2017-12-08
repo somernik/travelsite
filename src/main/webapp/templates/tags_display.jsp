@@ -13,7 +13,9 @@
                     <c:if test="${taglocation.positive}">
                         <div class="chip positive">
                                 ${taglocation.tag.name}
+                            <!-- DOESNT DO ANYTHING
                             <i class="add material-icons">add</i>
+                            -->
                         </div>
                     </c:if>
 

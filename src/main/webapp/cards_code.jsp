@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col s12 center">
                 <h3><i class="mdi-content-send brown-text"></i></h3>
-                <h4>Top Ranked Locations</h4>
+                <!--<h4>Top Ranked Locations</h4>-->
             </div>
         </div>
         <!--   Image Section   -->

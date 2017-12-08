@@ -15,7 +15,7 @@
         text-transform: uppercase;
     }
 
-    i {
+    i.weatherIcon {
         color: #fff;
         font-family: weather;
         font-size: 150px;
@@ -91,7 +91,7 @@
     #weather li {
         background: #fff;
         background: rgba(255,255,255,0.90);
-        padding: 20px;
+        padding: 10px;
         display: inline-block;
         border-radius: 5px;
     }
@@ -156,6 +156,10 @@
         /* optionally force a minimum size if img src size is known: */
         /* min-height: 320px; /* max-height of .crop-height */
         /* min-width: 480px; /* proportional to above */ }
+
+    #displayName {
+        text-shadow: 2px 0 0 black, -2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+    }
 </style>
 <%@include file="templates/nav.jsp" %>
 
@@ -165,10 +169,10 @@
         <div class="card" id="imageContent">
             <div class="card-image">
                 <div class="crop-height">
-                    <!--<img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />-->
-                    <img src="images/background1.jpg" class="scale">
+                    <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />
+                    <!--<img src="images/background1.jpg" class="scale">-->
                 </div>
-                <span class="card-title">${location.name} + stars here</span>
+                <span class="card-title" id="displayName">${location.name}</span>
                 <div class="fixed-action-btn horizontal click-to-toggle">
                     <a class="btn-floating halfway-fab btn-large">
                         <i class="large material-icons">menu</i>
@@ -199,14 +203,21 @@
         <div class="col s12 m9 l9"><!-- reviews/photos/all tags -->
             <ul class="tabs tabs-fixed-width">
                 <li class="tab col s3"><a href="#reviews" >Reviews</a></li>
-                <li class="tab col s3"><a href="#photos">Photos</a></li>
+                <li class="tab col s3"><a href="#photos">Recommended</a></li>
                 <li class="tab col s3"><a href="#allTags">All Tags</a></li>
             </ul>
 
             <%@include file="templates/reviews_display.jsp" %><!-- display of reviews -->
 
             <div id="photos" class="col s12"><!-- display of photos -->
-                Test
+                <c:if test="${empty recommendedLocations}">
+                    There are no recommended locations.
+                </c:if>
+                <c:if test="${not empty recommendedLocations}">
+                    <c:forEach var="recommended" items="${recommendedLocations}">
+                        <a href="${recommended.value}" />${recommended.key}</a><br />
+                    </c:forEach>
+                </c:if>
             </div>
 
             <%@include file="templates/tags_display.jsp" %><!-- display of all tags -->
@@ -261,14 +272,16 @@
             unit: 'f',
             success: function(weather) {
                 html = '<h2>';
-                //html += '<i class="icon-'+weather.code+'"></i> ';
+                //html += '<i class="weatherIcon icon-'+weather.code+'"></i> ';
                 html += weather.temp+'&deg;'+weather.units.temp+'</h2>';
                 html += '<ul>';
                 html+= '<li>Current Weather</li>';
                 //html+= '<li>'+weather.city+', '+weather.region+'</li>';
                 html += '<li class="currently">'+weather.currently+'</li>';
                 html += '<li>'+weather.wind.direction+' '+weather.wind.speed+' '+weather.units.speed+'</li></ul>';
-
+                for(var i=0;i<weather.forecast.length;i++) {
+                    html += '<p>'+weather.forecast[i].day+': '+weather.forecast[i].high+'</p>';
+                }
                 $("#weather").html(html);
             },
             error: function(error) {

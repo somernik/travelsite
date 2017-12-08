@@ -137,7 +137,6 @@ public class ReviewEntity extends BaseEntity<Long>{
                 ", date=" + date +
                 ", user=" + user +
                 ", location=" + location +
-                ", created=" + created +
                 ", stars=" + stars +
                 '}';
     }

@@ -237,7 +237,7 @@ public class User extends BaseEntity<Long> {
         return "User{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", userid='" + userid + '\'' +
+                ", userid=" + userid +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
@@ -260,8 +260,8 @@ public class User extends BaseEntity<Long> {
     private void createContributorPrivilege() {
         PrivilegeEntity privilegeEntity = new PrivilegeEntity(2, "Contributor");
 
-        UserPrivilegeEntity userPrivilege = new UserPrivilegeEntity(this.getUserName(), this, privilegeEntity);
+        UserPrivilegeEntity userPrivilege = new UserPrivilegeEntity(userName, this, privilegeEntity);
 
-        this.getUserPrivileges().add(userPrivilege);
+        userPrivileges.add(userPrivilege);
     }
 }
