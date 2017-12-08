@@ -10,9 +10,9 @@
                 <span class="title">Recommended Activities</span><br />
 
                 <c:forEach var="taglocation" items="${tagLocations}">
-                    <c:if test="${taglocation.positive}">
+                    <c:if test="${taglocation.key.positive}">
                         <div class="chip positive">
-                                ${taglocation.tag.name}
+                                ${taglocation.key.tag.name} - ${taglocation.value}
                             <!-- DOESNT DO ANYTHING
                             <i class="add material-icons">add</i>
                             -->
@@ -28,7 +28,9 @@
                     <c:if test="${not taglocation.positive}">
                         <div class="chip negative">
                                 ${taglocation.tag.name}
+                            <!-- DOESNT DO ANYTHING
                             <i class="add material-icons">add</i>
+                            -->
                         </div>
                     </c:if>
 

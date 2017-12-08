@@ -10,8 +10,9 @@
                     <div class="card sticky-action">
                         <div class="card-image">
 
-                            <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />
-                            <span class="card-title"><!-- Previously location name --></span>
+                            <!--<img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=5000&photoreference=${location.photoReference}&key=AIzaSyA_wVJfh8Ov9cLUZDxSNhOpzw3OEx6y3HE" />
+                            -->
+                            <img src="images/background1.jpg" alt="for testing"><span class="card-title"><!-- Previously location name --></span>
                             <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-delay="50" data-tooltip="Un-favorite this location"><i class="material-icons">favorite</i></a>
                             <!-- TODO remove location from saved values -->
                         </div>

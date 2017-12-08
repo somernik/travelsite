@@ -35,6 +35,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -75,7 +76,11 @@ public class ViewDetails extends HttpServlet {
             // add tags
             TagLocationDao tagLocationDao = new TagLocationDao();
             List<TaglocationEntity> tagLocations = tagLocationDao.findByAndInitializeTag("location", locations.get(0));
-            req.setAttribute("tagLocations", tagLocations);
+            Map<TaglocationEntity, String> tagLocationMap = new HashMap<>();
+            for (TaglocationEntity currentTagLocation: tagLocations) {
+                tagLocationMap.put(currentTagLocation, currentTagLocation.getDate().getMonth().name());
+            }
+            req.setAttribute("tagLocations", tagLocationMap);
 
             // add location
             req.setAttribute("location", locations.get(0));

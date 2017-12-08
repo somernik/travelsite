@@ -211,7 +211,7 @@
 
             <div id="photos" class="col s12"><!-- display of photos -->
                 <c:if test="${empty recommendedLocations}">
-                    There are no recommended locations.
+                    There are no recommended locations yet, stay tuned!
                 </c:if>
                 <c:if test="${not empty recommendedLocations}">
                     <c:forEach var="recommended" items="${recommendedLocations}">

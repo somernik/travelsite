@@ -31,7 +31,7 @@ public class DeleteReview extends HttpServlet {
         String referrer = req.getParameter("referrer");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-
+        // TODO delete from detail fails
         if (referrer.isEmpty() || referrer.length() < 1) {
             referrer = "user.jsp";
         }
