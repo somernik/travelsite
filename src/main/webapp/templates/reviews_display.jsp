@@ -81,4 +81,8 @@
     .extra_info {
         font-size: small;
     }
+
+    a#report {
+        right: 55px;
+    }
 </style>

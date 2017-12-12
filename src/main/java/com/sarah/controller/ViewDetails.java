@@ -189,6 +189,7 @@ public class ViewDetails extends HttpServlet {
         log.info(contextPath);
         try {
             org.json.simple.JSONObject data = (org.json.simple.JSONObject) parser.parse(new FileReader("/home/ubuntu/data.txt"));
+            //org.json.simple.JSONObject data = (org.json.simple.JSONObject) parser.parse(new FileReader("/Users/sarah/amazon/data.txt"));
             org.json.simple.JSONArray recommendations = (org.json.simple.JSONArray) data.get(placeName);
             Iterator<String> iterator = recommendations.iterator();
             int count = 0;

@@ -65,14 +65,6 @@ public class FavoriteLocation extends HttpServlet {
                 UserDao userDao = new UserDao();
                 currentUser = userDao.addSavedLocation(currentUser, locations.get(0));
 
-                GoogleAPIAccessor googleAPIAccessor = new GoogleAPIAccessor();
-                Map<Long, String> locationImageURLs = (Map<Long, String>) session.getAttribute("imageUrls");
-
-                String imageURL = googleAPIAccessor.getPhotoFromGoogle(locations.get(0).getGoogleId());
-                locationImageURLs.put(locations.get(0).getId(), imageURL);
-
-
-                session.setAttribute("imageUrls", locationImageURLs);
                 //update session variable to update on users page
                 session.setAttribute("user", currentUser);
 

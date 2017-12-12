@@ -25,9 +25,9 @@
                 <span class="title">Activities Not Recommended</span><br />
 
                 <c:forEach var="taglocation" items="${tagLocations}">
-                    <c:if test="${not taglocation.positive}">
+                    <c:if test="${not taglocation.key.positive}">
                         <div class="chip negative">
-                                ${taglocation.tag.name}
+                                ${taglocation.key.tag.name} - ${taglocation.value}
                             <!-- DOESNT DO ANYTHING
                             <i class="add material-icons">add</i>
                             -->
