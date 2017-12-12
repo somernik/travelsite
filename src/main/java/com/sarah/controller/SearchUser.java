@@ -35,36 +35,15 @@ public class SearchUser extends HttpServlet {
 
         List<User> users = new ArrayList<User>();
         if (req.getParameter("searchValue") != null) {
-            if (req.getParameter("searchType").equals("id")) {
-                User user = searchUserById(req);
-                users.add(user);
-
-            }
-
-            String type;
-            String operator;
-
-            if (req.getParameter("searchType").equals("f_name")) {
-                type = "first name";
-            } else if (req.getParameter("searchType").equals("l_name")) {
-                type = "last name";
-            } else {
-                type = req.getParameter("searchType");
-            }
-
-            if (req.getParameter("searchOperator").equals("LIKE")) {
-                operator = "contains";
-            } else {
-                operator = req.getParameter("searchOperator");
-            }
-
-            req.setAttribute("type", type);
-            req.setAttribute("value", req.getParameter("searchValue"));
-            req.setAttribute("operator", operator);
+            User user = searchUserById(req);
+            users.add(user);
+        } else {
+            UserDao dao = new UserDao();
+            users = dao.findAll(User.class);
         }
+
         logger.info(users);
         req.setAttribute("users", users);
-        //RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
         RequestDispatcher dispatcher = req.getRequestDispatcher("admin/admin.jsp");
         dispatcher.forward(req, resp);
     }

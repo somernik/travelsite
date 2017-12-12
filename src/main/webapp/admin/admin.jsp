@@ -73,14 +73,14 @@
             <div class="row">
                 <div class="col s12" id="tabsFilters">
                     <ul class="tabs">
-                        <li class="tab col s3"><a href="#search">Search Users</a></li>
-                        <li class="tab col s3"><a href="#privileges">Privileges</a></li>
-                        <li class="tab col s3"><a href="#reported">Reported Items</a></li>
-                        <li class="tab col s3"><a href="#other">Other Things</a></li>
+                        <li class="tab col s4"><a href="#search">Search Users</a></li>
+                        <li class="tab col s4"><a href="#privileges">Privileges</a></li>
+                        <li class="tab col s4"><a href="#reported">Reported Items</a></li>
                     </ul>
                 </div>
                 <div id="search">
                     <form action="searchUser">
+                        <!--
                         <label for="searchType">Search Type</label>
                         <select id="searchType" name="searchType" title="searchType">
                             <option value="id">ID</option>
@@ -92,10 +92,25 @@
                             <option value="=">=</option>
                             <option value="LIKE">contains</option>
                         </select>
-                        <label for="searchValue">searchValue</label>
+                        -->
+                        <label for="searchValue">Id</label>
                         <input name="searchValue" id="searchValue" type="text" required />
                         <input type="submit" value="Search" />
                     </form>
+
+                    <div class="container-fluid">
+                        <h5>Search Results: </h5>
+                        <c:if test="${empty users}"><p>No Results!</p></c:if>
+                        <c:if test="${not empty users}">
+                            <table>
+                                <tr><th>Id</th><th>First Name</th><th>Last Name</th></tr>
+                                <c:forEach var="user" items="${users}">
+                                    <tr><td>${user.id}</td><td>${user.firstName}</td><td>${user.lastName}</td></tr>
+                                </c:forEach>
+                            </table>
+
+                        </c:if>
+                    </div>
 
                 </div>
                 <div id="privileges">
@@ -136,8 +151,10 @@
                     </div>
                 </div>
                 <div id="reported">
-                    <p>list of reported reviews, images, users?</p>
-                    <p>Delete Account</p><!-- TODO -->
+                    <p>No reported items yet!</p>
+                    <!-- TODO -->
+                    <!--
+                    <p>Delete Account</p>
                     <form class="col s12 m6 offset-m3" action="deleteUser">
                         <div class="row">
                             <div class="input-field col s12">
@@ -148,10 +165,8 @@
 
                         <button type="submit" class="btn waves-effect waves-light" value="Delete Account">Delete Account</button>
                     </form>
+                    -->
 
-                </div>
-                <div id="other">
-                    <p>nothing here yet</p>
                 </div>
             </div>
         </div>
