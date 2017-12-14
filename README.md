@@ -13,7 +13,7 @@ Sometimes you just don't know what activities to plan for a given location and t
 * Hosting - AWS
 * Testing - JUnit
 * Design - Materialize Design (CSS & JS Framework)
-* Independent Research Project - Jenkins?
+* Independent Research Project - Machine Learning with Graphlab
 
 ### [Time Log](/TimeLog.md)
 ### [Weekly Plan](/weeklyPlan.md)
