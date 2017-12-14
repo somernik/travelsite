@@ -17,4 +17,4 @@ Sometimes you just don't know what activities to plan for a given location and t
 
 ### [Time Log](/TimeLog.md)
 ### [Weekly Plan](/weeklyPlan.md)
-### [PowerPoint](https://docs.google.com/presentation/d/1b3sqcEvYz_4DqGbXiZc7_A2Zyss3zSx11RrMn7iZXS0/edit?usp=sharing)
+### [PowerPoint Presentation](https://docs.google.com/presentation/d/1b3sqcEvYz_4DqGbXiZc7_A2Zyss3zSx11RrMn7iZXS0/edit?usp=sharing)
